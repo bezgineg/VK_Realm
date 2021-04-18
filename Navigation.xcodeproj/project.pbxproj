@@ -44,6 +44,16 @@
 		A3A8167926012D2200F95B40 /* Planet.swift in Sources */ = {isa = PBXBuildFile; fileRef = A3A8167826012D2200F95B40 /* Planet.swift */; };
 		A3C12A5A260BC2F90026ACC0 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = A3C12A59260BC2F90026ACC0 /* GoogleService-Info.plist */; };
 		A3C12AE8262C70710026ACC0 /* Coordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = A3C12AE7262C70700026ACC0 /* Coordinator.swift */; };
+		A3C12AEE262C72780026ACC0 /* FavoriteCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = A3C12AED262C72780026ACC0 /* FavoriteCoordinator.swift */; };
+		A3C12AF4262C72DA0026ACC0 /* FavoritePostStorage.swift in Sources */ = {isa = PBXBuildFile; fileRef = A3C12AF3262C72DA0026ACC0 /* FavoritePostStorage.swift */; };
+		A3C12AFA262C735B0026ACC0 /* FavoritePostModel.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = A3C12AF8262C735B0026ACC0 /* FavoritePostModel.xcdatamodeld */; };
+		A3C12AFF262C74050026ACC0 /* FavoritePost+CoreDataClass.swift in Sources */ = {isa = PBXBuildFile; fileRef = A3C12AFD262C74050026ACC0 /* FavoritePost+CoreDataClass.swift */; };
+		A3C12B00262C74050026ACC0 /* FavoritePost+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = A3C12AFE262C74050026ACC0 /* FavoritePost+CoreDataProperties.swift */; };
+		A3C12B04262C74190026ACC0 /* CoreDataStack.swift in Sources */ = {isa = PBXBuildFile; fileRef = A3C12B03262C74190026ACC0 /* CoreDataStack.swift */; };
+		A3C12B08262C743C0026ACC0 /* CoreDataManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = A3C12B07262C743C0026ACC0 /* CoreDataManager.swift */; };
+		A3C12B0D262C74F00026ACC0 /* FavoriteViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A3C12B0C262C74F00026ACC0 /* FavoriteViewController.swift */; };
+		A3C12B11262C75360026ACC0 /* FavoritePostTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = A3C12B10262C75360026ACC0 /* FavoritePostTableViewCell.swift */; };
+		A3C12B19262C758A0026ACC0 /* FavoritePostTableViewCellViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = A3C12B18262C758A0026ACC0 /* FavoritePostTableViewCellViewModel.swift */; };
 		A3E518492595F63C008B6465 /* FeedViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 060782B5250CE27700A87020 /* FeedViewController.swift */; };
 		A3E5184A2595F63C008B6465 /* ProfileTableHeaderView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5967809D2562AF1B00C9E10B /* ProfileTableHeaderView.swift */; };
 		A3E5184B2595F63C008B6465 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 060782B1250CE27700A87020 /* AppDelegate.swift */; };
@@ -113,6 +123,16 @@
 		A3A8167826012D2200F95B40 /* Planet.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Planet.swift; sourceTree = "<group>"; };
 		A3C12A59260BC2F90026ACC0 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
 		A3C12AE7262C70700026ACC0 /* Coordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Coordinator.swift; sourceTree = "<group>"; };
+		A3C12AED262C72780026ACC0 /* FavoriteCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FavoriteCoordinator.swift; sourceTree = "<group>"; };
+		A3C12AF3262C72DA0026ACC0 /* FavoritePostStorage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FavoritePostStorage.swift; sourceTree = "<group>"; };
+		A3C12AF9262C735B0026ACC0 /* FavoritePostModel.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = FavoritePostModel.xcdatamodel; sourceTree = "<group>"; };
+		A3C12AFD262C74050026ACC0 /* FavoritePost+CoreDataClass.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "FavoritePost+CoreDataClass.swift"; sourceTree = "<group>"; };
+		A3C12AFE262C74050026ACC0 /* FavoritePost+CoreDataProperties.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "FavoritePost+CoreDataProperties.swift"; sourceTree = "<group>"; };
+		A3C12B03262C74190026ACC0 /* CoreDataStack.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CoreDataStack.swift; sourceTree = "<group>"; };
+		A3C12B07262C743C0026ACC0 /* CoreDataManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CoreDataManager.swift; sourceTree = "<group>"; };
+		A3C12B0C262C74F00026ACC0 /* FavoriteViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FavoriteViewController.swift; sourceTree = "<group>"; };
+		A3C12B10262C75360026ACC0 /* FavoritePostTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FavoritePostTableViewCell.swift; sourceTree = "<group>"; };
+		A3C12B18262C758A0026ACC0 /* FavoritePostTableViewCellViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FavoritePostTableViewCellViewModel.swift; sourceTree = "<group>"; };
 		A3E518622595F63C008B6465 /* Navigation copy.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Navigation copy.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		A3E518632595F63C008B6465 /* Navigation copy-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; name = "Navigation copy-Info.plist"; path = "/Users/pobegutsolga/Desktop/Navigation/ProjectStructure/Navigation copy-Info.plist"; sourceTree = "<absolute>"; };
 		A3E518B925AB3B4B008B6465 /* RealmDataProvider.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RealmDataProvider.swift; sourceTree = "<group>"; };
@@ -169,6 +189,7 @@
 			children = (
 				A3773B2B25FCEE4E009955E4 /* Managers */,
 				A38D8CE92552EAAE00864FEE /* ProfileFlow */,
+				A3C12B0B262C74830026ACC0 /* FavoriteFlow */,
 				A38D8D6A255ED38F00864FEE /* Storage */,
 				A38D8D65255ED2E200864FEE /* Model */,
 				060782B1250CE27700A87020 /* AppDelegate.swift */,
@@ -279,6 +300,7 @@
 		A36473D925B365DC0037082B /* TabBarCoordinators */ = {
 			isa = PBXGroup;
 			children = (
+				A3C12AED262C72780026ACC0 /* FavoriteCoordinator.swift */,
 				A36473C125B33DED0037082B /* FeedCoordinator.swift */,
 				A36473C725B3471C0037082B /* LoginCoordinator.swift */,
 				A36473EC25B38EAF0037082B /* FeedCoordinators */,
@@ -309,6 +331,7 @@
 			isa = PBXGroup;
 			children = (
 				A3773B2E25FCEE62009955E4 /* NetworkManager.swift */,
+				A3C12AF7262C73100026ACC0 /* CoreDataManager */,
 			);
 			path = Managers;
 			sourceTree = "<group>";
@@ -338,8 +361,31 @@
 			children = (
 				A38D8D6B255ED3A100864FEE /* PostStorage.swift */,
 				59EC7CC32565566D00A12046 /* PhotosStorage.swift */,
+				A3C12AF3262C72DA0026ACC0 /* FavoritePostStorage.swift */,
 			);
 			path = Storage;
+			sourceTree = "<group>";
+		};
+		A3C12AF7262C73100026ACC0 /* CoreDataManager */ = {
+			isa = PBXGroup;
+			children = (
+				A3C12AFD262C74050026ACC0 /* FavoritePost+CoreDataClass.swift */,
+				A3C12AFE262C74050026ACC0 /* FavoritePost+CoreDataProperties.swift */,
+				A3C12AF8262C735B0026ACC0 /* FavoritePostModel.xcdatamodeld */,
+				A3C12B03262C74190026ACC0 /* CoreDataStack.swift */,
+				A3C12B07262C743C0026ACC0 /* CoreDataManager.swift */,
+			);
+			path = CoreDataManager;
+			sourceTree = "<group>";
+		};
+		A3C12B0B262C74830026ACC0 /* FavoriteFlow */ = {
+			isa = PBXGroup;
+			children = (
+				A3C12B0C262C74F00026ACC0 /* FavoriteViewController.swift */,
+				A3C12B10262C75360026ACC0 /* FavoritePostTableViewCell.swift */,
+				A3C12B18262C758A0026ACC0 /* FavoritePostTableViewCellViewModel.swift */,
+			);
+			path = FavoriteFlow;
 			sourceTree = "<group>";
 		};
 		D167708DCDC1C16FB647E2C6 /* Frameworks */ = {
@@ -532,14 +578,22 @@
 				060782B2250CE27700A87020 /* AppDelegate.swift in Sources */,
 				BBAED41D2625C7F500D710D1 /* DataProvider.swift in Sources */,
 				A38D8D6C255ED3A100864FEE /* PostStorage.swift in Sources */,
+				A3C12AEE262C72780026ACC0 /* FavoriteCoordinator.swift in Sources */,
+				A3C12B00262C74050026ACC0 /* FavoritePost+CoreDataProperties.swift in Sources */,
 				060782C6250CEB0A00A87020 /* InfoViewController.swift in Sources */,
+				A3C12B0D262C74F00026ACC0 /* FavoriteViewController.swift in Sources */,
 				A3A8167926012D2200F95B40 /* Planet.swift in Sources */,
+				A3C12B08262C743C0026ACC0 /* CoreDataManager.swift in Sources */,
 				A3E518BA25AB3B4B008B6465 /* RealmDataProvider.swift in Sources */,
 				A3773B3325FCEEB8009955E4 /* AppConfiguration.swift in Sources */,
+				A3C12AF4262C72DA0026ACC0 /* FavoritePostStorage.swift in Sources */,
 				A364747A25C2B4210037082B /* ProfileTableHeaderViewModel.swift in Sources */,
+				A3C12B04262C74190026ACC0 /* CoreDataStack.swift in Sources */,
 				A38D8CF12553037F00864FEE /* Extensions.swift in Sources */,
 				A364747625C2B3E50037082B /* PhotosTableViewCellViewModel.swift in Sources */,
+				A3C12B11262C75360026ACC0 /* FavoritePostTableViewCell.swift in Sources */,
 				E413A04A25937F8D001CD6AD /* TabBarController.swift in Sources */,
+				A3C12B19262C758A0026ACC0 /* FavoritePostTableViewCellViewModel.swift in Sources */,
 				A36473C225B33DED0037082B /* FeedCoordinator.swift in Sources */,
 				A38D8CEE2552EB1F00864FEE /* ProfileViewController.swift in Sources */,
 				597DC857255C09FB0038FFDF /* LogInViewController.swift in Sources */,
@@ -551,6 +605,7 @@
 				A364747225C2B3BF0037082B /* PostTableViewCellViewModel.swift in Sources */,
 				060782C8250CEE5D00A87020 /* PostViewController.swift in Sources */,
 				59EC7CC0256555D400A12046 /* PhotosCollectionViewCell.swift in Sources */,
+				A3C12AFA262C735B0026ACC0 /* FavoritePostModel.xcdatamodeld in Sources */,
 				A3C12AE8262C70710026ACC0 /* Coordinator.swift in Sources */,
 				59EC7CC42565566D00A12046 /* PhotosStorage.swift in Sources */,
 				59EC7CBD256554E300A12046 /* PhotosViewController.swift in Sources */,
@@ -559,6 +614,7 @@
 				5967809625629B0F00C9E10B /* PostTableViewCell.swift in Sources */,
 				A36473FD25B48C740037082B /* PhotosCoordinator.swift in Sources */,
 				A3A8167526012BB200F95B40 /* User.swift in Sources */,
+				A3C12AFF262C74050026ACC0 /* FavoritePost+CoreDataClass.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -848,6 +904,19 @@
 			productName = iOSIntPackage;
 		};
 /* End XCSwiftPackageProductDependency section */
+
+/* Begin XCVersionGroup section */
+		A3C12AF8262C735B0026ACC0 /* FavoritePostModel.xcdatamodeld */ = {
+			isa = XCVersionGroup;
+			children = (
+				A3C12AF9262C735B0026ACC0 /* FavoritePostModel.xcdatamodel */,
+			);
+			currentVersion = A3C12AF9262C735B0026ACC0 /* FavoritePostModel.xcdatamodel */;
+			path = FavoritePostModel.xcdatamodeld;
+			sourceTree = "<group>";
+			versionGroupType = wrapper.xcdatamodel;
+		};
+/* End XCVersionGroup section */
 	};
 	rootObject = 060782A6250CE27700A87020 /* Project object */;
 }

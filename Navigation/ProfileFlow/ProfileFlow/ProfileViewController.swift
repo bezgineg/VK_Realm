@@ -4,7 +4,7 @@ import UIKit
 class ProfileViewController: UIViewController {
     
     var coordinator: ProfileCoordinator?
-    
+    private var favoritePost: Post?
     private let tableView = UITableView(frame: .zero, style: .grouped)
     private let headerView = ProfileHeaderView()
     private let tableHeaderViewModel: ProfileTableHeaderViewModel
@@ -107,6 +107,27 @@ class ProfileViewController: UIViewController {
 
     }
     
+    @objc private func cellTapped() {
+        guard let post = favoritePost else { return }
+        getCoreData(post)
+        coordinator?.showAlert(with: "Post added", with: "")
+        
+    }
+    
+    private func getCoreData(_ post: Post) {
+        let task = CoreDataManager.manager.createObject(from: FavoritePost.self)
+        task.author = post.author
+        task.descript = post.description
+        task.image = post.image
+        task.likes = Int64(post.likes)
+        task.views = Int64(post.view)
+
+        let context = CoreDataManager.manager.getContext()
+        CoreDataManager.manager.save(context: context)
+
+        FavoritesPostStorage.posts = CoreDataManager.manager.fetchData(for: FavoritePost.self)
+    }
+    
     private func avatarAnimate() {
         let tapAvatarGestureRecognizer = UITapGestureRecognizer(target: self, action: #selector(avatarTapped))
         headerView.avatarImageView.isUserInteractionEnabled = true
@@ -198,9 +219,15 @@ extension ProfileViewController: UITableViewDataSource {
 extension ProfileViewController: UITableViewDelegate {
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        guard indexPath.section == 0 else { return }
-        
-        coordinator?.pushPhotosVC()
+        if indexPath.section == 0 {
+            coordinator?.pushPhotosVC()
+        } else {
+            let post = PostStorage.posts[1][indexPath.row]
+            favoritePost = post
+            let tapCellGestureRecognizer = UITapGestureRecognizer(target: self, action: #selector(cellTapped))
+            tapCellGestureRecognizer.numberOfTapsRequired = 2
+            tableView.addGestureRecognizer(tapCellGestureRecognizer)
+        }
     }
     
     func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
