@@ -12,8 +12,8 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         window?.makeKeyAndVisible()
         
         let tabBarController = TabBarController()
-        let mainCoordinator = MainCoordinator(tabBarNavigator: tabBarController)
-        window?.rootViewController = mainCoordinator.tabBarNavigator
+
+        window?.rootViewController = tabBarController
     
         let appConfiguration = AppConfiguration.allCases.randomElement()
         

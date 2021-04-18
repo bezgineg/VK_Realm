@@ -3,18 +3,28 @@ import UIKit
 class LoginCoordinator: Coordinator {
     
     var childCoordinators =  [Coordinator]()
-    weak var parentCoordinator: MainCoordinator?
-
-    var navigationController: UINavigationController?
-    private let loginViewController: LogInViewController
+    var navigationController: UINavigationController
+    
     let dataProvider: DataProvider = RealmDataProvider()
         
-    init() {
-        
-        loginViewController = LogInViewController()
-        
-        navigationController = UINavigationController(rootViewController: loginViewController)
+    init(navigationController: UINavigationController) {
+        self.navigationController = navigationController
+    }
+    
+    func start() {
+        let loginViewController = LogInViewController()
         loginViewController.coordinator = self
+        
+        if #available(iOS 13.0, *) {
+            loginViewController.tabBarItem.image = UIImage(systemName: "person.fill")
+            loginViewController.tabBarItem.selectedImage = UIImage(systemName: "person.fill")
+            
+        } else {
+            // Fallback on earlier versions
+        }
+        
+        loginViewController.tabBarItem.title = "Profile"
+        navigationController.show(loginViewController, sender: self)
         
         checkCurrentUser()
     }
@@ -27,9 +37,8 @@ class LoginCoordinator: Coordinator {
     }
     
     func pushProfileVC() {
-        guard let navigator = navigationController else { return }
-        let profileCoordinator = ProfileCoordinator()
-        profileCoordinator.navigationController = navigator
+        let profileCoordinator = ProfileCoordinator(navigationController: navigationController)
+        profileCoordinator.navigationController = navigationController
         childCoordinators.append(profileCoordinator)
         profileCoordinator.parentCoordinator = self
         profileCoordinator.start()

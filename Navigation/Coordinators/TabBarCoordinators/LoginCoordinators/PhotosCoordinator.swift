@@ -1,17 +1,20 @@
 import UIKit
 
 class PhotosCoordinator: Coordinator {
+    
+    weak var parentCoordinator: ProfileCoordinator?
 
     var childCoordinators =  [Coordinator]()
-    weak var parentCoordinator: ProfileCoordinator?
+    var navigationController: UINavigationController
     
-    weak var navigationController: UINavigationController?
+    init(navigationController: UINavigationController) {
+        self.navigationController = navigationController
+    }
     
     func start() {
         let photosViewController = PhotosViewController()
         photosViewController.coordinator = self
-        guard let navigator = navigationController else { return }
-        navigator.show(photosViewController, sender: self)
+        navigationController.show(photosViewController, sender: self)
     }
     
     func didFinishPhotos() {
@@ -22,8 +25,7 @@ class PhotosCoordinator: Coordinator {
         let alertController = UIAlertController(title: title, message: message, preferredStyle: .alert)
         let okAction = UIAlertAction(title: "OK", style: .cancel, handler: nil)
         alertController.addAction(okAction)
-        guard let navigator = navigationController else { return }
-        navigator.present(alertController, animated: false, completion: nil)
+        navigationController.present(alertController, animated: false, completion: nil)
     }
     
 }

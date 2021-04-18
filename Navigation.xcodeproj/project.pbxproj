@@ -24,7 +24,6 @@
 		59EC7CC42565566D00A12046 /* PhotosStorage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 59EC7CC32565566D00A12046 /* PhotosStorage.swift */; };
 		81B0AF2E63B9BA547A8F0820 /* Pods_Navigation_copy.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = E963D9D2EB8580F5942162AD /* Pods_Navigation_copy.framework */; };
 		A364739525AF715B0037082B /* ButtonView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A364739425AF715B0037082B /* ButtonView.swift */; };
-		A36473A825B32B540037082B /* MainCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = A36473A725B32B540037082B /* MainCoordinator.swift */; };
 		A36473C225B33DED0037082B /* FeedCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = A36473C125B33DED0037082B /* FeedCoordinator.swift */; };
 		A36473C825B3471C0037082B /* LoginCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = A36473C725B3471C0037082B /* LoginCoordinator.swift */; };
 		A36473E125B372430037082B /* PostCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = A36473E025B372430037082B /* PostCoordinator.swift */; };
@@ -44,6 +43,7 @@
 		A3A8167526012BB200F95B40 /* User.swift in Sources */ = {isa = PBXBuildFile; fileRef = A3A8167426012BB200F95B40 /* User.swift */; };
 		A3A8167926012D2200F95B40 /* Planet.swift in Sources */ = {isa = PBXBuildFile; fileRef = A3A8167826012D2200F95B40 /* Planet.swift */; };
 		A3C12A5A260BC2F90026ACC0 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = A3C12A59260BC2F90026ACC0 /* GoogleService-Info.plist */; };
+		A3C12AE8262C70710026ACC0 /* Coordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = A3C12AE7262C70700026ACC0 /* Coordinator.swift */; };
 		A3E518492595F63C008B6465 /* FeedViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 060782B5250CE27700A87020 /* FeedViewController.swift */; };
 		A3E5184A2595F63C008B6465 /* ProfileTableHeaderView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5967809D2562AF1B00C9E10B /* ProfileTableHeaderView.swift */; };
 		A3E5184B2595F63C008B6465 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 060782B1250CE27700A87020 /* AppDelegate.swift */; };
@@ -94,7 +94,6 @@
 		93D2C21FAF4FE66F16904342 /* Pods-Navigation.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Navigation.release.xcconfig"; path = "Target Support Files/Pods-Navigation/Pods-Navigation.release.xcconfig"; sourceTree = "<group>"; };
 		9D641B20035EA534A2E366E1 /* Pods-Navigation.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Navigation.debug.xcconfig"; path = "Target Support Files/Pods-Navigation/Pods-Navigation.debug.xcconfig"; sourceTree = "<group>"; };
 		A364739425AF715B0037082B /* ButtonView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ButtonView.swift; sourceTree = "<group>"; };
-		A36473A725B32B540037082B /* MainCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainCoordinator.swift; sourceTree = "<group>"; };
 		A36473C125B33DED0037082B /* FeedCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FeedCoordinator.swift; sourceTree = "<group>"; };
 		A36473C725B3471C0037082B /* LoginCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginCoordinator.swift; sourceTree = "<group>"; };
 		A36473E025B372430037082B /* PostCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PostCoordinator.swift; sourceTree = "<group>"; };
@@ -113,6 +112,7 @@
 		A3A8167426012BB200F95B40 /* User.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = User.swift; sourceTree = "<group>"; };
 		A3A8167826012D2200F95B40 /* Planet.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Planet.swift; sourceTree = "<group>"; };
 		A3C12A59260BC2F90026ACC0 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
+		A3C12AE7262C70700026ACC0 /* Coordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Coordinator.swift; sourceTree = "<group>"; };
 		A3E518622595F63C008B6465 /* Navigation copy.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Navigation copy.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		A3E518632595F63C008B6465 /* Navigation copy-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; name = "Navigation copy-Info.plist"; path = "/Users/pobegutsolga/Desktop/Navigation/ProjectStructure/Navigation copy-Info.plist"; sourceTree = "<absolute>"; };
 		A3E518B925AB3B4B008B6465 /* RealmDataProvider.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RealmDataProvider.swift; sourceTree = "<group>"; };
@@ -270,7 +270,7 @@
 		A36473D225B347510037082B /* Coordinators */ = {
 			isa = PBXGroup;
 			children = (
-				A36473A725B32B540037082B /* MainCoordinator.swift */,
+				A3C12AE7262C70700026ACC0 /* Coordinator.swift */,
 				A36473D925B365DC0037082B /* TabBarCoordinators */,
 			);
 			path = Coordinators;
@@ -532,7 +532,6 @@
 				060782B2250CE27700A87020 /* AppDelegate.swift in Sources */,
 				BBAED41D2625C7F500D710D1 /* DataProvider.swift in Sources */,
 				A38D8D6C255ED3A100864FEE /* PostStorage.swift in Sources */,
-				A36473A825B32B540037082B /* MainCoordinator.swift in Sources */,
 				060782C6250CEB0A00A87020 /* InfoViewController.swift in Sources */,
 				A3A8167926012D2200F95B40 /* Planet.swift in Sources */,
 				A3E518BA25AB3B4B008B6465 /* RealmDataProvider.swift in Sources */,
@@ -552,6 +551,7 @@
 				A364747225C2B3BF0037082B /* PostTableViewCellViewModel.swift in Sources */,
 				060782C8250CEE5D00A87020 /* PostViewController.swift in Sources */,
 				59EC7CC0256555D400A12046 /* PhotosCollectionViewCell.swift in Sources */,
+				A3C12AE8262C70710026ACC0 /* Coordinator.swift in Sources */,
 				59EC7CC42565566D00A12046 /* PhotosStorage.swift in Sources */,
 				59EC7CBD256554E300A12046 /* PhotosViewController.swift in Sources */,
 				A38D8D67255ED2EF00864FEE /* Post.swift in Sources */,

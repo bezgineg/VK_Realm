@@ -1,24 +1,26 @@
 import UIKit
 
 class ProfileCoordinator: Coordinator {
+    
+    weak var parentCoordinator: LoginCoordinator?
 
     var childCoordinators =  [Coordinator]()
-    weak var parentCoordinator: LoginCoordinator?
+    var navigationController: UINavigationController
     
-    weak var navigationController: UINavigationController?
+    init(navigationController: UINavigationController) {
+        self.navigationController = navigationController
+    }
     
     func start() {
         let tableHeaderViewModel = ProfileTableHeaderViewModel()
         let profileViewController = ProfileViewController(tableHeaderViewModel: tableHeaderViewModel)
         profileViewController.coordinator = self
-        guard let navigator = navigationController else { return }
-        navigator.show(profileViewController, sender: self)
+        navigationController.show(profileViewController, sender: self)
     }
     
     func pushPhotosVC() {
-        guard let navigator = navigationController else { return }
-        let photosCoordinator = PhotosCoordinator()
-        photosCoordinator.navigationController = navigator
+        let photosCoordinator = PhotosCoordinator(navigationController: navigationController)
+        photosCoordinator.navigationController = navigationController
         childCoordinators.append(photosCoordinator)
         photosCoordinator.parentCoordinator = self
         photosCoordinator.start()
@@ -41,13 +43,12 @@ class ProfileCoordinator: Coordinator {
         let alertController = UIAlertController(title: title, message: message, preferredStyle: .alert)
         let okAction = UIAlertAction(title: "OK", style: .cancel, handler: nil)
         alertController.addAction(okAction)
-        guard let navigator = navigationController else { return }
-        navigator.present(alertController, animated: false, completion: nil)
+        navigationController.present(alertController, animated: false, completion: nil)
     }
     
     func logOut() {
         parentCoordinator?.logOut()
-        parentCoordinator?.navigationController?.popViewController(animated: true)
+        parentCoordinator?.navigationController.popViewController(animated: true)
     }
 
 }

@@ -2,22 +2,24 @@ import UIKit
 
 class PostCoordinator: Coordinator {
 
-    var childCoordinators =  [Coordinator]()
     weak var parentCoordinator: FeedCoordinator?
     
-    weak var navigationController: UINavigationController?
+    var childCoordinators =  [Coordinator]()
+    var navigationController: UINavigationController
+    
+    init(navigationController: UINavigationController) {
+        self.navigationController = navigationController
+    }
     
     func start() {
         let postViewController = PostViewController()
         postViewController.coordinator = self
-        guard let navigator = navigationController else { return }
-        navigator.show(postViewController, sender: self)
+        navigationController.show(postViewController, sender: self)
     }
     
     func present() {
-        guard let navigator = navigationController else { return }
-        let infoCoordinator = InfoCoordinator()
-        infoCoordinator.navigationController = navigator
+        let infoCoordinator = InfoCoordinator(navigationController: navigationController)
+        infoCoordinator.navigationController = navigationController
         childCoordinators.append(infoCoordinator)
         infoCoordinator.parentCoordinator = self
         infoCoordinator.start()
