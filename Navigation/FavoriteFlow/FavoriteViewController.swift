@@ -4,10 +4,12 @@ import UIKit
 class FavoriteViewController: UIViewController {
     
     var coordinator: FavoriteCoordinator?
+    private var isFiltered: Bool = false
+    private var inputTextField: UITextField?
     
     private let tableView = UITableView(frame: .zero, style: .grouped)
     private let photoView = UIView()
-    
+    private let context = CoreDataManager.manager.getContext()
     
     private var reuseID: String {
         return String(describing: FavoritePostTableViewCell.self)
@@ -16,16 +18,74 @@ class FavoriteViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        FavoritesPostStorage.posts = CoreDataManager.manager.fetchData(for: FavoritePost.self)
-        
+        setupNavigationBar()
         setupLayout()
         setupTableView()
-        
     }
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
-        tableView.reloadData()
+        refreshTableView()
+    }
+    
+    private func refreshTableView() {
+        if isFiltered {
+            if let authorName = inputTextField?.text {
+                FavoritesPostStorage.posts = CoreDataManager.manager.filterData(for: FavoritePost.self, authorName: authorName)
+                tableView.reloadData()
+            }
+        } else {
+            FavoritesPostStorage.posts = CoreDataManager.manager.fetchData(for: FavoritePost.self)
+            tableView.reloadData()
+        }
+    }
+    
+    private func setupNavigationBar() {
+        navigationController?.navigationBar.backgroundColor = .white
+        
+        if #available(iOS 13.0, *) {
+            let filterButtonImage = UIImage(systemName: "magnifyingglass")
+            let clearPostButtonImage = UIImage(systemName: "xmark.seal.fill")
+            let filterButton = UIBarButtonItem(image: filterButtonImage, style: .plain, target: self, action: #selector(addFilter))
+            let clearPostButton = UIBarButtonItem(image: clearPostButtonImage, style: .plain, target: self, action: #selector(clearFilter))
+            navigationItem.rightBarButtonItems = [filterButton, clearPostButton]
+        } else {}
+        
+    }
+    
+    @objc private func addFilter() {
+        
+        let alertController = UIAlertController(title: "Add filter", message: "Enter author", preferredStyle: .alert)
+        alertController.addTextField { [weak self] textField in
+            textField.placeholder = "Enter author"
+            if let self = self {
+                self.inputTextField = textField
+            }
+        }
+
+        let saveAction = UIAlertAction(title: "Save", style: .default) { [weak self] _ in
+            
+            if let self = self {
+                if let authorName = self.inputTextField?.text {
+                    FavoritesPostStorage.posts = CoreDataManager.manager.filterData(for: FavoritePost.self, authorName: authorName)
+                }
+                self.tableView.reloadData()
+                self.isFiltered = true
+            }
+        }
+            
+        let cancelAction = UIAlertAction(title: "Cancel", style: .cancel) { _ in }
+        
+            
+            alertController.addAction(saveAction)
+            alertController.addAction(cancelAction)
+            
+            present(alertController, animated: true, completion: nil)
+    }
+    
+    @objc private func clearFilter() {
+        isFiltered = false
+        refreshTableView()
     }
     
     private func setupTableView() {
@@ -76,6 +136,21 @@ extension FavoriteViewController: UITableViewDataSource {
 }
 
 extension FavoriteViewController: UITableViewDelegate {
+    
+    func tableView(_ tableView: UITableView, trailingSwipeActionsConfigurationForRowAt indexPath: IndexPath) -> UISwipeActionsConfiguration? {
+        let contextItem = UIContextualAction(style: .destructive, title: "Удалить") { (contextualAction, view, boolValue) in
+            let item = FavoritesPostStorage.posts[indexPath.row]
+            CoreDataManager.manager.delete(object: item)
+            FavoritesPostStorage.posts.remove(at: indexPath.row)
+                    tableView.performBatchUpdates {
+                        tableView.deleteRows(at: [indexPath], with: .fade)
+                    }
+        }
+        
+        return UISwipeActionsConfiguration(actions: [contextItem])
+    }
+    
+      
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         guard indexPath.section == 0 else { return }

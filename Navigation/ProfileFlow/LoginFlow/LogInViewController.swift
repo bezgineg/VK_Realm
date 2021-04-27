@@ -89,7 +89,6 @@ class LogInViewController: UIViewController {
         view.backgroundColor = .white
         
         setupLayout()
-        //checkCurrentUser()
         
     }
     

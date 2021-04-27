@@ -115,17 +115,15 @@ class ProfileViewController: UIViewController {
     }
     
     private func getCoreData(_ post: Post) {
-        let task = CoreDataManager.manager.createObject(from: FavoritePost.self)
-        task.author = post.author
-        task.descript = post.description
-        task.image = post.image
-        task.likes = Int64(post.likes)
-        task.views = Int64(post.view)
-
-        let context = CoreDataManager.manager.getContext()
+        let context = CoreDataManager.manager.getBackgroundContext()
+        let favoritePost = CoreDataManager.manager.createObject(from: FavoritePost.self, context: context)
+        favoritePost.author = post.author
+        favoritePost.descript = post.description
+        favoritePost.image = post.image
+        favoritePost.likes = Int64(post.likes)
+        favoritePost.views = Int64(post.view)
+        
         CoreDataManager.manager.save(context: context)
-
-        FavoritesPostStorage.posts = CoreDataManager.manager.fetchData(for: FavoritePost.self)
     }
     
     private func avatarAnimate() {

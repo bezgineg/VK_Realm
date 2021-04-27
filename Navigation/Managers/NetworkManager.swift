@@ -12,7 +12,7 @@ struct NetworkManager {
                 return
             }
             
-            if let httpResponse = response as? HTTPURLResponse {
+            if let _ = response as? HTTPURLResponse {
                 //print(httpResponse.allHeaderFields)
                 //print(httpResponse.statusCode)
             }
