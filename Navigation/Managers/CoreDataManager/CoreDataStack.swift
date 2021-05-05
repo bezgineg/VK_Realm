@@ -19,6 +19,16 @@ final class CoreDataStack {
         return container
     }()
     
+    lazy var fetchResultController: NSFetchedResultsController<FavoritePost>  = {
+        
+        let request = FavoritePost.fetchRequest() as NSFetchRequest<FavoritePost>
+        let context = getContext()
+        let nameSort = NSSortDescriptor(key: #keyPath(FavoritePost.author), ascending: true)
+        request.sortDescriptors = [nameSort]
+        let fetchedResultsController = NSFetchedResultsController(fetchRequest: request, managedObjectContext: context, sectionNameKeyPath: nil, cacheName: nil)
+        return fetchedResultsController
+    }()
+    
     func getContext()  -> NSManagedObjectContext {
         persistentStoreContainer.viewContext
     }
@@ -40,6 +50,15 @@ final class CoreDataStack {
         }
     }
     
+    func performResultController() {
+        do {
+            fetchResultController.fetchRequest.predicate = nil
+            try fetchResultController.performFetch()
+        } catch {
+            assertionFailure()
+        }
+    }
+    
     func createObject<T: NSManagedObject> (from entity: T.Type, context: NSManagedObjectContext) -> T {
         let object = NSEntityDescription.insertNewObject(forEntityName: String(describing: entity), into: context) as! T
         return object
@@ -55,7 +74,7 @@ final class CoreDataStack {
         let context = getContext()
         let request = entity.fetchRequest() as! NSFetchRequest<T>
         request.fetchLimit = 10
-        request.fetchBatchSize = 1
+        request.fetchBatchSize = 5
         do {
             return try context.fetch(request)
         } catch {
@@ -63,15 +82,10 @@ final class CoreDataStack {
         }
     }
     
-    func filterData<T: NSManagedObject>(for entity: T.Type, authorName: String) -> [T] {
-        let context = getContext()
-        
+    func filterData(authorName: String) {
         do {
-            let request = entity.fetchRequest() as! NSFetchRequest<T>
-            request.predicate = NSPredicate(format: "author CONTAINS[c] %@", authorName)
-            request.fetchLimit = 5
-            request.fetchBatchSize = 1
-            return try context.fetch(request)
+            fetchResultController.fetchRequest.predicate = NSPredicate(format: "author CONTAINS[c] %@", authorName)
+            try fetchResultController.performFetch()
         } catch {
             fatalError()
         }

@@ -1,5 +1,6 @@
 
 import UIKit
+import CoreData
 
 class FavoriteViewController: UIViewController {
     
@@ -10,6 +11,7 @@ class FavoriteViewController: UIViewController {
     private let tableView = UITableView(frame: .zero, style: .grouped)
     private let photoView = UIView()
     private let context = CoreDataManager.manager.getContext()
+    private let fetchResultController = CoreDataManager.manager.fetchResultController
     
     private var reuseID: String {
         return String(describing: FavoritePostTableViewCell.self)
@@ -21,6 +23,7 @@ class FavoriteViewController: UIViewController {
         setupNavigationBar()
         setupLayout()
         setupTableView()
+        fetchResultController.delegate = self
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -31,11 +34,11 @@ class FavoriteViewController: UIViewController {
     private func refreshTableView() {
         if isFiltered {
             if let authorName = inputTextField?.text {
-                FavoritesPostStorage.posts = CoreDataManager.manager.filterData(for: FavoritePost.self, authorName: authorName)
+                CoreDataManager.manager.filterData(authorName: authorName)
                 tableView.reloadData()
             }
         } else {
-            FavoritesPostStorage.posts = CoreDataManager.manager.fetchData(for: FavoritePost.self)
+            CoreDataManager.manager.performResultController()
             tableView.reloadData()
         }
     }
@@ -67,7 +70,7 @@ class FavoriteViewController: UIViewController {
             
             if let self = self {
                 if let authorName = self.inputTextField?.text {
-                    FavoritesPostStorage.posts = CoreDataManager.manager.filterData(for: FavoritePost.self, authorName: authorName)
+                    CoreDataManager.manager.filterData(authorName: authorName)
                 }
                 self.tableView.reloadData()
                 self.isFiltered = true
@@ -117,19 +120,18 @@ extension FavoriteViewController: UITableViewDataSource {
     }
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        if FavoritesPostStorage.posts.isEmpty {
-            return .zero
-        } else {
-            return FavoritesPostStorage.posts.count
+        guard let posts = fetchResultController.fetchedObjects else {
+            return 0
         }
+        return posts.count
     }
 
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
 
+        let post = fetchResultController.object(at: indexPath)
         let cell: FavoritePostTableViewCell = tableView.dequeueReusableCell(withIdentifier: reuseID, for: indexPath) as! FavoritePostTableViewCell
         
-        let post: FavoritePost = FavoritesPostStorage.posts[indexPath.row]
-        cell.configure(with: FavoritePostTableViewCellViewModel(with: post))
+        cell.configure(with: post)
         cell.delegate = self
         return cell
     }
@@ -138,23 +140,14 @@ extension FavoriteViewController: UITableViewDataSource {
 extension FavoriteViewController: UITableViewDelegate {
     
     func tableView(_ tableView: UITableView, trailingSwipeActionsConfigurationForRowAt indexPath: IndexPath) -> UISwipeActionsConfiguration? {
-        let contextItem = UIContextualAction(style: .destructive, title: "Удалить") { (contextualAction, view, boolValue) in
-            let item = FavoritesPostStorage.posts[indexPath.row]
-            CoreDataManager.manager.delete(object: item)
-            FavoritesPostStorage.posts.remove(at: indexPath.row)
-                    tableView.performBatchUpdates {
-                        tableView.deleteRows(at: [indexPath], with: .fade)
-                    }
+        let contextItem = UIContextualAction(style: .destructive, title: "Удалить") { [ weak self ] contextualAction, view, boolValue in
+            if let self = self {
+                let post = self.fetchResultController.object(at: indexPath)
+                CoreDataManager.manager.delete(object: post)
+            }
         }
         
         return UISwipeActionsConfiguration(actions: [contextItem])
-    }
-    
-      
-    
-    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        guard indexPath.section == 0 else { return }
-
     }
     
     func tableView(_ tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
@@ -164,6 +157,28 @@ extension FavoriteViewController: UITableViewDelegate {
     func tableView(_ tableView: UITableView, heightForFooterInSection section: Int) -> CGFloat {
         return .zero
     }
+}
+
+extension FavoriteViewController: NSFetchedResultsControllerDelegate {
+    func controllerWillChangeContent(_ controller: NSFetchedResultsController<NSFetchRequestResult>) {
+        tableView.beginUpdates()
+    }
+    
+    func controller(_ controller: NSFetchedResultsController<NSFetchRequestResult>, didChange anObject: Any, at indexPath: IndexPath?, for type: NSFetchedResultsChangeType, newIndexPath: IndexPath?) {
+        switch type {
+        case .delete:
+            tableView.performBatchUpdates {
+                tableView.deleteRows(at: [indexPath! as IndexPath], with: .fade)
+            }
+        default:
+            break
+        }
+    }
+    
+    func controllerDidChangeContent(_ controller: NSFetchedResultsController<NSFetchRequestResult>) {
+        tableView.endUpdates()
+    }
+    
 }
 
 extension FavoriteViewController: FavoritePostTableViewCellDelegate {
