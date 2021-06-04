@@ -95,12 +95,14 @@ class FavoritePostTableViewCell: UITableViewCell {
         }
     }
     
-    func configure(with viewModel: FavoritePostTableViewCellViewModel) {
-        authorName.text = viewModel.author
-        descriptionLabel.text = viewModel.description
-        likesLabel.text = "Likes: \(viewModel.likes)"
-        viewsLabel.text = "Views: \(viewModel.view)"
-        loadImage(urlImage: viewModel.image)
+    func configure(with object: FavoritePost) {
+        authorName.text = object.author
+        descriptionLabel.text = object.descript
+        likesLabel.text = "Likes: \(object.likes)"
+        viewsLabel.text = "Views: \(object.views)"
+        if let url = object.image {
+            loadImage(urlImage: url)
+        }
     }
     
     private func setupLayout() {

@@ -15,8 +15,15 @@ import RealmSwift
 final class RealmDataProvider: DataProvider {
     
     private var realm: Realm? {
-        var config = Realm.Configuration()
-        config.fileURL = config.fileURL?.deletingLastPathComponent().appendingPathComponent("credentials.realm")
+        
+        var key = Data(count: 64)
+        
+        var _ = key.withUnsafeMutableBytes { (pointer: UnsafeMutableRawBufferPointer) in
+            SecRandomCopyBytes(kSecRandomDefault, 64, pointer.baseAddress!) }
+        
+        var config = Realm.Configuration(encryptionKey: key)
+
+        config.fileURL = config.fileURL?.deletingLastPathComponent().appendingPathComponent("EncryptedCredentials.realm")
         return try? Realm(configuration: config)
     }
     
@@ -33,7 +40,7 @@ final class RealmDataProvider: DataProvider {
         cachedCredential.account = credential.account
         cachedCredential.password = credential.password
         
-        try? realm?.write {
+        try? realm?.write() {
             realm?.add(cachedCredential)
         }
     }
