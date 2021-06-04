@@ -1,22 +1,42 @@
 PODS:
+  - EncryptedCoreData (3.1):
+    - SQLCipher (~> 3.4.0)
   - Realm (10.1.4):
     - Realm/Headers (= 10.1.4)
   - Realm/Headers (10.1.4)
   - RealmSwift (10.1.4):
     - Realm (= 10.1.4)
+  - SQLCipher (3.4.2):
+    - SQLCipher/standard (= 3.4.2)
+  - SQLCipher/common (3.4.2)
+  - SQLCipher/standard (3.4.2):
+    - SQLCipher/common
 
 DEPENDENCIES:
+  - EncryptedCoreData (from `https://github.com/project-imas/encrypted-core-data.git`)
   - RealmSwift (= 10.1.4)
 
 SPEC REPOS:
   trunk:
     - Realm
     - RealmSwift
+    - SQLCipher
+
+EXTERNAL SOURCES:
+  EncryptedCoreData:
+    :git: https://github.com/project-imas/encrypted-core-data.git
+
+CHECKOUT OPTIONS:
+  EncryptedCoreData:
+    :commit: b97ffaf2f19dad4d1558bc9b0668cc2e09d17347
+    :git: https://github.com/project-imas/encrypted-core-data.git
 
 SPEC CHECKSUMS:
+  EncryptedCoreData: f6762fb05f88a52f36c5648659abc91b57f244b4
   Realm: 80f4fb2971ccb9adc27a47d0955ae8e533a7030b
   RealmSwift: 0e566ca714edb377bba8ea0811eafcea0b93734e
+  SQLCipher: f9fcf29b2e59ced7defc2a2bdd0ebe79b40d4990
 
-PODFILE CHECKSUM: 936708d2ad9409a322928687679db726034aa2ce
+PODFILE CHECKSUM: 43580d9197a1160526d977a1c9efc2d34c4e4be0
 
-COCOAPODS: 1.10.1
+COCOAPODS: 1.10.0

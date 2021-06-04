@@ -1,5 +1,6 @@
 import Foundation
 import CoreData
+import EncryptedCoreData
 
 final class CoreDataStack {
     
@@ -11,10 +12,11 @@ final class CoreDataStack {
     
     lazy var persistentStoreContainer: NSPersistentContainer = {
         let container = NSPersistentContainer(name: self.modelName)
-        container.loadPersistentStores { (storeDescription, error) in
-            if let error = error as NSError? {
-                fatalError()
-            }
+        do {
+            let options: [AnyHashable: Any] = [NSPersistentStoreFileProtectionKey: FileProtectionType.complete, EncryptedStorePassphraseKey : "password"]
+            let store = try container.persistentStoreCoordinator.addPersistentStore(ofType: EncryptedStoreType, configurationName: nil, at: container.persistentStoreDescriptions[0].url, options: options)
+        } catch let error as NSError {
+            print(error.localizedDescription)
         }
         return container
     }()
