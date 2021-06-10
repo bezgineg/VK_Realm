@@ -53,6 +53,7 @@
 		A3C12B08262C743C0026ACC0 /* CoreDataManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = A3C12B07262C743C0026ACC0 /* CoreDataManager.swift */; };
 		A3C12B0D262C74F00026ACC0 /* FavoriteViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A3C12B0C262C74F00026ACC0 /* FavoriteViewController.swift */; };
 		A3C12B11262C75360026ACC0 /* FavoritePostTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = A3C12B10262C75360026ACC0 /* FavoritePostTableViewCell.swift */; };
+		A3C9D9292672666300E2578D /* KeychainConfiguration.swift in Sources */ = {isa = PBXBuildFile; fileRef = A3C9D9282672666300E2578D /* KeychainConfiguration.swift */; };
 		A3E518492595F63C008B6465 /* FeedViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 060782B5250CE27700A87020 /* FeedViewController.swift */; };
 		A3E5184A2595F63C008B6465 /* ProfileTableHeaderView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5967809D2562AF1B00C9E10B /* ProfileTableHeaderView.swift */; };
 		A3E5184B2595F63C008B6465 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 060782B1250CE27700A87020 /* AppDelegate.swift */; };
@@ -131,6 +132,7 @@
 		A3C12B07262C743C0026ACC0 /* CoreDataManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CoreDataManager.swift; sourceTree = "<group>"; };
 		A3C12B0C262C74F00026ACC0 /* FavoriteViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FavoriteViewController.swift; sourceTree = "<group>"; };
 		A3C12B10262C75360026ACC0 /* FavoritePostTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FavoritePostTableViewCell.swift; sourceTree = "<group>"; };
+		A3C9D9282672666300E2578D /* KeychainConfiguration.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KeychainConfiguration.swift; sourceTree = "<group>"; };
 		A3E518622595F63C008B6465 /* Navigation copy.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Navigation copy.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		A3E518632595F63C008B6465 /* Navigation copy-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; name = "Navigation copy-Info.plist"; path = "/Users/pobegutsolga/Desktop/Navigation/ProjectStructure/Navigation copy-Info.plist"; sourceTree = "<absolute>"; };
 		A3E518B925AB3B4B008B6465 /* RealmDataProvider.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RealmDataProvider.swift; sourceTree = "<group>"; };
@@ -231,6 +233,7 @@
 				597DC856255C09FB0038FFDF /* LogInViewController.swift */,
 				A3E518B925AB3B4B008B6465 /* RealmDataProvider.swift */,
 				BBAED41C2625C7F500D710D1 /* DataProvider.swift */,
+				A3C9D9282672666300E2578D /* KeychainConfiguration.swift */,
 			);
 			path = LoginFlow;
 			sourceTree = "<group>";
@@ -591,6 +594,7 @@
 				A3C12B11262C75360026ACC0 /* FavoritePostTableViewCell.swift in Sources */,
 				E413A04A25937F8D001CD6AD /* TabBarController.swift in Sources */,
 				A36473C225B33DED0037082B /* FeedCoordinator.swift in Sources */,
+				A3C9D9292672666300E2578D /* KeychainConfiguration.swift in Sources */,
 				A38D8CEE2552EB1F00864FEE /* ProfileViewController.swift in Sources */,
 				597DC857255C09FB0038FFDF /* LogInViewController.swift in Sources */,
 				A3773B2F25FCEE62009955E4 /* NetworkManager.swift in Sources */,
