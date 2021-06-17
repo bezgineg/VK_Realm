@@ -22,7 +22,7 @@ class InfoViewController: UIViewController {
     private let alertButton: UIButton = {
         let button = UIButton(type: .system)
         button.toAutoLayout()
-        button.setTitle("Show alert", for: .normal)
+        button.setTitle(FeedFlowLocalization.infoAlertButton.localizedValue, for: .normal)
         button.setTitleColor(.systemBlue, for: .normal)
         button.addTarget(self, action: #selector(showAlert), for: .touchUpInside)
         return button
@@ -109,11 +109,11 @@ class InfoViewController: UIViewController {
     
     
     @objc private func showAlert() {
-        let alertController = UIAlertController(title: "Удалить пост?", message: "Пост нельзя будет восстановить", preferredStyle: .alert)
-        let cancelAction = UIAlertAction(title: "Отмена", style: .default) { _ in
+        let alertController = UIAlertController(title: AlertLocalization.infoAlertTitle.localizedValue, message: AlertLocalization.infoMessageTitle.localizedValue, preferredStyle: .alert)
+        let cancelAction = UIAlertAction(title: AlertLocalization.cancelActionTitle.localizedValue, style: .default) { _ in
             print("Отмена")
         }
-        let deleteAction = UIAlertAction(title: "Удалить", style: .destructive) { _ in
+        let deleteAction = UIAlertAction(title: AlertLocalization.deleteActionTitle.localizedValue, style: .destructive) { _ in
             print("Удалить")
         }
         alertController.addAction(cancelAction)
@@ -144,7 +144,7 @@ class InfoViewController: UIViewController {
 
             alertButton.centerXAnchor.constraint(equalTo: view.centerXAnchor),
             alertButton.topAnchor.constraint(equalTo: planetLabel.bottomAnchor, constant: 50),
-            alertButton.widthAnchor.constraint(equalToConstant: 150),
+            alertButton.widthAnchor.constraint(equalToConstant: 200),
             alertButton.heightAnchor.constraint(equalToConstant: 30),
             
             tableView.topAnchor.constraint(equalTo: alertButton.bottomAnchor, constant: 50),

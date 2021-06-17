@@ -12,8 +12,8 @@ class FeedCoordinator: Coordinator {
     func start() {
         let feedViewController = FeedViewController()
         feedViewController.coordinator = self
-        feedViewController.tabBarItem.title = "Feed"
-        
+        feedViewController.tabBarItem.title = TabBarLocalization.feed.localizedValue
+
         if #available(iOS 13.0, *) {
             feedViewController.tabBarItem.image = UIImage(systemName: "house.fill")
             feedViewController.tabBarItem.selectedImage = UIImage(systemName: "house.fill")

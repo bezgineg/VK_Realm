@@ -15,8 +15,8 @@ final class FeedViewController: UIViewController {
         super.viewDidLoad()
         
         view.backgroundColor = .systemGreen
-        navigationItem.title = "Feed"
-        
+        navigationItem.title = TabBarLocalization.feed.localizedValue
+
         buttonOnTapSetup()
         setupLayout()
     }
@@ -35,7 +35,7 @@ final class FeedViewController: UIViewController {
         let constratints = [
             buttonView.centerYAnchor.constraint(equalTo: view.centerYAnchor),
             buttonView.centerXAnchor.constraint(equalTo: view.centerXAnchor),
-            buttonView.widthAnchor.constraint(equalToConstant: 150),
+            buttonView.widthAnchor.constraint(equalToConstant: 200),
             buttonView.heightAnchor.constraint(equalToConstant: 60)
         ]
         

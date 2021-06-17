@@ -23,7 +23,7 @@ class LoginCoordinator: Coordinator {
             // Fallback on earlier versions
         }
         
-        loginViewController.tabBarItem.title = "Profile"
+        loginViewController.tabBarItem.title = TabBarLocalization.profile.localizedValue
         navigationController.show(loginViewController, sender: self)
         
         checkCurrentUser()

@@ -14,7 +14,7 @@ struct PhotosTableViewCellViewModel {
     let fourthImage: UIImage?
     
     init() {
-        self.titleLabel = "Photos"
+        self.titleLabel = ProfileFlowLocalization.photosCellTitle.localizedValue
         self.arrowLabel = "->"
         self.firstImage = UIImage(named: "5")
         self.secondImage = UIImage(named: "6")

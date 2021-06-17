@@ -9,9 +9,9 @@ struct ProfileTableHeaderViewModel {
 
     init() {
         self.avatarImage = #imageLiteral(resourceName: "4")
-        self.fullNameLabel = "My name"
-        self.statusLabel = "My status"
-        self.statusPlaceholder = "Set your status"
+        self.fullNameLabel = ProfileFlowLocalization.fullName.localizedValue
+        self.statusLabel = ProfileFlowLocalization.status.localizedValue
+        self.statusPlaceholder = ProfileFlowLocalization.statusPlaceholder.localizedValue
         self.statusText = ""
     }
 }

@@ -1,0 +1,49 @@
+// Feed Flow Localization
+"firstPostButton" = "Open first post";
+"secondPostButton" = "Open second post";
+"postTitle" = "Post";
+"infoAlertButton" = "Show alert";
+
+// Alert Localization
+"infoAlertTitle" = "Delete post?";
+"infoMessageTitle" = "The post cannot be restored";
+"cancelActionTitle" = "Cancel";
+"deleteActionTitle" = "Delete";
+"saveActionTitle" = "Save";
+"favoriteAlertTitle" = "Add filter";
+"favoriteMessageTitle" = "Enter author";
+"favoriteAlertPlaceholder" = "Enter author";
+"profileAlertTitle" = "Post added";
+
+// Tab bar Localization
+"favorite" = "Favorites";
+"feed" = "Feed";
+"profile" = "Profile";
+
+// Login Flow Localization
+"loginPlaceholder" = "email";
+"passwordPlaceholder" = "password";
+"loginButton" = "Log In";
+
+// Photos Flow Localization
+"photosTitle" = "Photo Gallery";
+
+// Api Error Localization
+"dataNotFoundTitle" = "Data not found";
+"dataNotFoundMessage" = "Check URL";
+"networkConnectionProblemTitle" = "Network connection problem";
+"networkConnectionProblemMessage" = "Check your network connection";
+
+// Favorite Flow Localization
+"deleteFavoriteItem" = "Delete";
+
+// Profile Flow Localization
+"timerLabel" = "Reload in";
+"seconds" = "sec";
+"photosCellTitle" = "Photos";
+"setStatusButton" = "Set status";
+"logOutButton" = "Log out";
+"fullName" = "My name";
+"status" = "My status";
+"statusPlaceholder" = "Set your status";
+

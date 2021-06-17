@@ -50,7 +50,7 @@ final class ProfileHeaderView: UIView {
         let setStatusButton = UIButton()
         setStatusButton.translatesAutoresizingMaskIntoConstraints = false
         setStatusButton.backgroundColor = .blue
-        setStatusButton.setTitle("Set status", for: .normal)
+        setStatusButton.setTitle(ProfileFlowLocalization.setStatusButton.localizedValue, for: .normal)
         setStatusButton.setTitleColor(.white, for: .normal)
         setStatusButton.addTarget(self, action: #selector(buttonPressed), for: .touchUpInside)
         setStatusButton.clipsToBounds = true
@@ -62,7 +62,7 @@ final class ProfileHeaderView: UIView {
         let setStatusButton = UIButton()
         setStatusButton.translatesAutoresizingMaskIntoConstraints = false
         setStatusButton.backgroundColor = .blue
-        setStatusButton.setTitle("Log out", for: .normal)
+        setStatusButton.setTitle(ProfileFlowLocalization.logOutButton.localizedValue, for: .normal)
         setStatusButton.setTitleColor(.white, for: .normal)
         setStatusButton.addTarget(self, action: #selector(logOut), for: .touchUpInside)
         setStatusButton.clipsToBounds = true
