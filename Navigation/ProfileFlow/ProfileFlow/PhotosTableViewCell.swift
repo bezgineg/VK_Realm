@@ -18,8 +18,10 @@ class PhotosTableViewCell: UITableViewCell {
     
     private let timerLabel: UILabel = {
         let label = UILabel()
-        label.text = "Reload in 10 sec"
-        label.setupLabel()
+        label.text = "\(ProfileFlowLocalization.timerLabel.localizedValue) 10 \(ProfileFlowLocalization.seconds.localizedValue)"
+        label.toAutoLayout()
+        label.font = UIFont.systemFont(ofSize: 16, weight: .bold)
+        label.textColor = .black
         return label
     }()
     
@@ -87,8 +89,8 @@ class PhotosTableViewCell: UITableViewCell {
     
     func updateReloadingInfo() {
         counter -= 1
-        timerLabel.text =  "Reload in \(counter) sec"
-        
+        timerLabel.text = "\(ProfileFlowLocalization.timerLabel.localizedValue) \(counter) \(ProfileFlowLocalization.seconds.localizedValue)"
+
         if counter == 1 {
             counter = 11
         } else if counter == 10 {

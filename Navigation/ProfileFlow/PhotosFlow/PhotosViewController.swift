@@ -28,7 +28,7 @@ final class PhotosViewController: UIViewController {
         super.viewWillAppear(animated)
         
         navigationController?.navigationBar.isHidden = false
-        navigationItem.title = "Photo Gallery"
+        navigationItem.title = PhotosFlowLocalization.photosTitle.localizedValue
     }
     
     override func viewWillDisappear(_ animated: Bool) {

@@ -8,7 +8,7 @@ class ButtonView: UIView {
     private let firstPostButton: UIButton = {
         let button = UIButton(type: .system)
         button.toAutoLayout()
-        button.setTitle("Open first button", for: .normal)
+        button.setTitle(FeedFlowLocalization.firstPostButton.localizedValue, for: .normal)
         button.setTitleColor(.black, for: .normal)
         button.backgroundColor = .white
         button.addTarget(self, action: #selector(openPost), for: .touchUpInside)
@@ -18,7 +18,7 @@ class ButtonView: UIView {
     private let secondPostButton: UIButton = {
         let button = UIButton(type: .system)
         button.toAutoLayout()
-        button.setTitle("Open second button", for: .normal)
+        button.setTitle(FeedFlowLocalization.secondPostButton.localizedValue, for: .normal)
         button.setTitleColor(.black, for: .normal)
         button.backgroundColor = .white
         button.addTarget(self, action: #selector(openPost), for: .touchUpInside)
@@ -44,12 +44,12 @@ class ButtonView: UIView {
     
     private func setupLayout() {
         let constraints = [
-            firstPostButton.widthAnchor.constraint(equalToConstant: 150),
+            firstPostButton.widthAnchor.constraint(equalToConstant: 200),
             firstPostButton.heightAnchor.constraint(equalToConstant: 30),
             
             secondPostButton.topAnchor.constraint(equalTo: firstPostButton.bottomAnchor),
             secondPostButton.centerXAnchor.constraint(equalTo: firstPostButton.centerXAnchor),
-            secondPostButton.widthAnchor.constraint(equalToConstant: 150),
+            secondPostButton.widthAnchor.constraint(equalToConstant: 200),
             secondPostButton.heightAnchor.constraint(equalToConstant: 30)
         ]
         

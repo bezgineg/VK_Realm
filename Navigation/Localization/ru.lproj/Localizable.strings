@@ -1,0 +1,49 @@
+// Feed Flow Localization
+"firstPostButton" = "Открыть первый пост";
+"secondPostButton" = "Открыть второй пост";
+"postTitle" = "Пост";
+"infoAlertButton" = "Показать предупреждение";
+
+// Alert Localization
+"infoAlertTitle" = "Удалить пост?";
+"infoMessageTitle" = "Пост нельзя будет восстановить";
+"cancelActionTitle" = "Отмена";
+"deleteActionTitle" = "Удалить";
+"saveActionTitle" = "Сохранить";
+"favoriteAlertTitle" = "Добавить фильтр";
+"favoriteMessageTitle" = "Введите автора";
+"favoriteAlertPlaceholder" = "Введите автора";
+"profileAlertTitle" = "Пост добавлен";
+
+// Tab bar Localization
+"favorite" = "Избранное";
+"feed" = "Лента";
+"profile" = "Профиль";
+
+// Login Flow Localization
+"loginPlaceholder" = "электронная почта";
+"passwordPlaceholder" = "пароль";
+"loginButton" = "Войти";
+
+// Photos Flow Localization
+"photosTitle" = "Галерея фото";
+
+// Api Error Localization
+"dataNotFoundTitle" = "Данные не найдены";
+"dataNotFoundMessage" = "Проверьте URL";
+"networkConnectionProblemTitle" = "Не удается установить соединение с сетью";
+"networkConnectionProblemMessage" = "Проверьте ваше соединение с сетью";
+
+// Favorite Flow Localization
+"deleteFavoriteItem" = "Удалить";
+
+// Profile Flow Localization
+"timerLabel" = "Перезагрузка через";
+"seconds" = "сек";
+"photosCellTitle" = "Фото";
+"setStatusButton" = "Добавить статус";
+"logOutButton" = "Выйти";
+"fullName" = "Мое имя";
+"status" = "Мой статус";
+"statusPlaceholder" = "Установить мой статус";
+

@@ -12,8 +12,8 @@ class FavoriteCoordinator: Coordinator {
     func start() {
         let favoriteViewController = FavoriteViewController()
         favoriteViewController.coordinator = self
-        favoriteViewController.tabBarItem.title = "Favorites"
-        
+        favoriteViewController.tabBarItem.title = TabBarLocalization.favorite.localizedValue
+
         if #available(iOS 13.0, *) {
             favoriteViewController.tabBarItem.image = UIImage(systemName: "star.fill")
             favoriteViewController.tabBarItem.selectedImage = UIImage(systemName: "star.fill")

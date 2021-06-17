@@ -66,12 +66,12 @@ class PhotosCollectionViewCell: UICollectionViewCell {
     private func alertError(error: ApiError) {
         switch  error {
         case .dataNotFound:
-            let title = "Data not found"
-            let message = "Check URL"
+            let title = ApiErrorLocalization.dataNotFoundTitle.localizedValue
+            let message = ApiErrorLocalization.dataNotFoundMessage.localizedValue
             delegate?.showDataNotFoundAlert(with: title, with: message)
         case .networkConnectionProblem:
-            let title = "Network connection problem"
-            let message = "Check your network connection"
+            let title = ApiErrorLocalization.networkConnectionProblemTitle.localizedValue
+            let message = ApiErrorLocalization.networkConnectionProblemMessage.localizedValue
             delegate?.showNetworkConnectionProblemAlert(with: title, with: message)
         }
     }

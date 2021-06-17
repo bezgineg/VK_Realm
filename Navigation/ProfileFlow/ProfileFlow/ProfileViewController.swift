@@ -110,8 +110,8 @@ class ProfileViewController: UIViewController {
     @objc private func cellTapped() {
         guard let post = favoritePost else { return }
         getCoreData(post)
-        coordinator?.showAlert(with: "Post added", with: "")
-        
+        coordinator?.showAlert(with: AlertLocalization.profileAlertTitle.localizedValue, with: "")
+
     }
     
     private func getCoreData(_ post: Post) {

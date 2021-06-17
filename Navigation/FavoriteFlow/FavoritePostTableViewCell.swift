@@ -84,12 +84,12 @@ class FavoritePostTableViewCell: UITableViewCell {
     private func alertError(error: ApiError) {
         switch  error {
         case .dataNotFound:
-            let title = "Data not found"
-            let message = "Check URL"
+            let title = ApiErrorLocalization.dataNotFoundTitle.localizedValue
+            let message = ApiErrorLocalization.dataNotFoundMessage.localizedValue
             delegate?.showDataNotFoundAlert(with: title, with: message)
         case .networkConnectionProblem:
-            let title = "Network connection problem"
-            let message = "Check your network connection"
+            let title = ApiErrorLocalization.networkConnectionProblemTitle.localizedValue
+            let message = ApiErrorLocalization.networkConnectionProblemMessage.localizedValue
             delegate?.showNetworkConnectionProblemAlert(with: title, with: message)
             
         }
@@ -98,11 +98,24 @@ class FavoritePostTableViewCell: UITableViewCell {
     func configure(with object: FavoritePost) {
         authorName.text = object.author
         descriptionLabel.text = object.descript
-        likesLabel.text = "Likes: \(object.likes)"
-        viewsLabel.text = "Views: \(object.views)"
+        likesLabel.text = "\(localizeLikes(count: UInt(object.likes))): \(object.likes)"
+        viewsLabel.text = "\(localizeViews(count: UInt(object.views))): \(object.views)"
         if let url = object.image {
             loadImage(urlImage: url)
         }
+    }
+    
+    private func localizeViews(count: UInt) -> String {
+        let formatString: String = NSLocalizedString("views count", comment: "views count title")
+        let resultString: String = String.localizedStringWithFormat(formatString, count)
+        return resultString
+        
+    }
+    private func localizeLikes(count: UInt) -> String {
+        let formatString: String = NSLocalizedString("likes count", comment: "likes count title")
+        let resultString: String = String.localizedStringWithFormat(formatString, count)
+        return resultString
+        
     }
     
     private func setupLayout() {

@@ -8,8 +8,8 @@ class PostViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         view.backgroundColor = .systemPink
-        navigationItem.title = "Post"
-        
+        navigationItem.title = FeedFlowLocalization.postTitle.localizedValue
+
         if #available(iOS 13.0, *) {
             let barButtonimage = UIImage(systemName: "plus")
             navigationItem.rightBarButtonItem = UIBarButtonItem(image: barButtonimage, style: .plain, target: self, action: #selector(presentInfoVC))

@@ -17,7 +17,7 @@ class LogInViewController: UIViewController {
         let textField = UITextField()
         textField.toAutoLayout()
         textField.setupTextField()
-        textField.placeholder = "Email"
+        textField.placeholder = LoginFlowLocalization.loginPlaceholder.localizedValue
         textField.addTarget(self, action: #selector(checkField), for: .editingChanged
         )
         return textField
@@ -27,7 +27,7 @@ class LogInViewController: UIViewController {
         let textField = UITextField()
         textField.toAutoLayout()
         textField.setupTextField()
-        textField.placeholder = "Password"
+        textField.placeholder = LoginFlowLocalization.passwordPlaceholder.localizedValue
         textField.addTarget(self, action: #selector(checkField), for: .editingChanged
         )
         textField.isSecureTextEntry = true
@@ -54,7 +54,7 @@ class LogInViewController: UIViewController {
         button.layer.masksToBounds = true
         button.layer.cornerRadius = 10
         button.setTitleColor(.white, for: .normal)
-        button.setTitle("Log In", for: .normal)
+        button.setTitle(LoginFlowLocalization.loginButtonTitle.localizedValue, for: .normal)
         button.setBackgroundImage(#imageLiteral(resourceName: "blue_pixel"), for: .normal)
         button.setBackgroundImage(#imageLiteral(resourceName: "blue_pixel").alpha(0.2), for: .disabled)
         button.setBackgroundImage(#imageLiteral(resourceName: "blue_pixel").alpha(0.8), for: .selected)

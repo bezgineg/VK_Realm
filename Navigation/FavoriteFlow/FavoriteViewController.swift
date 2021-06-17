@@ -58,16 +58,17 @@ class FavoriteViewController: UIViewController {
     
     @objc private func addFilter() {
         
-        let alertController = UIAlertController(title: "Add filter", message: "Enter author", preferredStyle: .alert)
+        let alertController = UIAlertController(title: AlertLocalization.favoriteAlertTitle.localizedValue, message: AlertLocalization.favoriteMessageTitle.localizedValue, preferredStyle: .alert)
         alertController.addTextField { [weak self] textField in
-            textField.placeholder = "Enter author"
+            textField.placeholder = AlertLocalization.favoriteAlertPlaceholder.localizedValue
             if let self = self {
                 self.inputTextField = textField
             }
         }
 
-        let saveAction = UIAlertAction(title: "Save", style: .default) { [weak self] _ in
-            
+
+        let saveAction = UIAlertAction(title: AlertLocalization.saveActionTitle.localizedValue, style: .default) { [weak self] _ in
+
             if let self = self {
                 if let authorName = self.inputTextField?.text {
                     CoreDataManager.manager.filterData(authorName: authorName)
@@ -77,8 +78,8 @@ class FavoriteViewController: UIViewController {
             }
         }
             
-        let cancelAction = UIAlertAction(title: "Cancel", style: .cancel) { _ in }
-        
+        let cancelAction = UIAlertAction(title: AlertLocalization.cancelActionTitle.localizedValue, style: .cancel) { _ in }
+
             
             alertController.addAction(saveAction)
             alertController.addAction(cancelAction)
@@ -140,7 +141,7 @@ extension FavoriteViewController: UITableViewDataSource {
 extension FavoriteViewController: UITableViewDelegate {
     
     func tableView(_ tableView: UITableView, trailingSwipeActionsConfigurationForRowAt indexPath: IndexPath) -> UISwipeActionsConfiguration? {
-        let contextItem = UIContextualAction(style: .destructive, title: "Удалить") { [ weak self ] contextualAction, view, boolValue in
+        let contextItem = UIContextualAction(style: .destructive, title: FavoriteFlowLocalization.deleteFavoriteItem.localizedValue) { [ weak self ] contextualAction, view, boolValue in
             if let self = self {
                 let post = self.fetchResultController.object(at: indexPath)
                 CoreDataManager.manager.delete(object: post)
