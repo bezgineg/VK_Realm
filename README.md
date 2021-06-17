@@ -9,3 +9,4 @@
 *  Coordinators pattern, MVC/MVVM
 *  AutoLayout
 *  Swift Package Manager
+*  Localization
