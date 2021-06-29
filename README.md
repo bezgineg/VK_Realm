@@ -10,3 +10,4 @@
 *  AutoLayout
 *  Swift Package Manager
 *  Localization
+*  Light/Dark mode
