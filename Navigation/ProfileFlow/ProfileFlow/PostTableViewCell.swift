@@ -14,7 +14,7 @@ class PostTableViewCell: UITableViewCell {
         let label = UILabel()
         label.toAutoLayout()
         label.font = UIFont.systemFont(ofSize: 20, weight: .bold)
-        label.textColor = .black
+        label.textColor = UIColor.createColor(lightMode: .black, darkMode: .white)
         label.numberOfLines = 2
         return label
     }()
@@ -23,7 +23,7 @@ class PostTableViewCell: UITableViewCell {
         let imageView = UIImageView()
         imageView.contentMode = .scaleAspectFit
         imageView.toAutoLayout()
-        imageView.backgroundColor = .black
+        imageView.backgroundColor = UIColor.createColor(lightMode: .black, darkMode: .white)
         return imageView
     }()
     
@@ -31,7 +31,7 @@ class PostTableViewCell: UITableViewCell {
         let label = UILabel()
         label.toAutoLayout()
         label.font = UIFont.systemFont(ofSize: 14, weight: .regular)
-        label.textColor = .systemGray
+        label.textColor = UIColor.createColor(lightMode: .systemGray, darkMode: .gray)
         label.textAlignment = .left
         label.numberOfLines = 0
         return label
@@ -41,7 +41,7 @@ class PostTableViewCell: UITableViewCell {
         let label = UILabel()
         label.toAutoLayout()
         label.font = UIFont.systemFont(ofSize: 16, weight: .regular)
-        label.textColor = .black
+        label.textColor = UIColor.createColor(lightMode: .black, darkMode: .white)
         return label
     }()
     
@@ -49,7 +49,7 @@ class PostTableViewCell: UITableViewCell {
         let label = UILabel()
         label.toAutoLayout()
         label.font = UIFont.systemFont(ofSize: 16, weight: .regular)
-        label.textColor = .black
+        label.textColor = UIColor.createColor(lightMode: .black, darkMode: .white)
         return label
     }()
     

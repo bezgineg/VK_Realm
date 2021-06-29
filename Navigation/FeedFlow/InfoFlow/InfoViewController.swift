@@ -9,13 +9,17 @@ class InfoViewController: UIViewController {
     
     private let userLabel: UILabel = {
         let label = UILabel()
-        label.setupLabel()
+        label.toAutoLayout()
+        label.font = UIFont.systemFont(ofSize: 24, weight: .bold)
+        label.textColor = .black
         return label
     }()
     
     private let planetLabel: UILabel = {
         let label = UILabel()
-        label.setupLabel()
+        label.toAutoLayout()
+        label.font = UIFont.systemFont(ofSize: 24, weight: .bold)
+        label.textColor = .black
         return label
     }()
     

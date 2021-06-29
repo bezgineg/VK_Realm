@@ -15,7 +15,7 @@ class ProfileViewController: UIViewController {
         let button = UIButton(type: .system)
         button.toAutoLayout()
         button.backgroundColor = UIColor.white.withAlphaComponent(0)
-        button.setTitleColor(.black, for: .normal)
+        button.setTitleColor(UIColor.createColor(lightMode: .black, darkMode: .white), for: .normal)
         button.setTitle("X", for: .normal)
         button.titleLabel?.font = UIFont.systemFont(ofSize: 24, weight: .bold)
         button.alpha = 0

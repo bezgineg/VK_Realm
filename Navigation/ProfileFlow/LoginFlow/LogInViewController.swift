@@ -44,7 +44,7 @@ class LogInViewController: UIViewController {
         stackView.spacing = 0
         stackView.layer.borderWidth = 0.5
         stackView.layer.cornerRadius = 10
-        stackView.layer.borderColor = UIColor.lightGray.cgColor
+        stackView.layer.borderColor = UIColor.createColor(lightMode: .lightGray, darkMode: .gray).cgColor
         return stackView
     }()
     
@@ -79,14 +79,14 @@ class LogInViewController: UIViewController {
     
     private let dividerView: UIView = {
         let divider = UIView()
-        divider.backgroundColor = .lightGray
+        divider.backgroundColor = UIColor.createColor(lightMode: .lightGray, darkMode: .gray)
         return divider
     }()
     
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        view.backgroundColor = .white
+        view.backgroundColor = UIColor.createColor(lightMode: .white, darkMode: .black)
         
         setupLayout()
         

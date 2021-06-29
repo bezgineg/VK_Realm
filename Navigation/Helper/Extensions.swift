@@ -1,6 +1,17 @@
 
 import UIKit
 
+extension UIColor {
+    static func createColor(lightMode: UIColor, darkMode: UIColor) -> UIColor {
+        guard #available(iOS 13.0, *) else {
+            return lightMode
+        }
+        return UIColor { (traitCollection ) -> UIColor in
+            return traitCollection.userInterfaceStyle == .light ? lightMode : darkMode
+        }
+    }
+}
+
 extension UIView {
     
     /// Method adds shadow and corner radius for top of view by default.
@@ -48,8 +59,9 @@ extension UIView {
 extension UITextField {
     func setupTextField() {
         let colorSet = UIColor(red: 72/255, green: 133/255, blue: 204/255, alpha: 1)
-        self.textColor = .black
+        self.textColor = UIColor.createColor(lightMode: .black, darkMode: .white)
         self.tintColor = colorSet
+        self.backgroundColor = UIColor.createColor(lightMode: .white, darkMode: .black)
         self.autocapitalizationType = .none
         self.font = UIFont.systemFont(ofSize: 16, weight: .regular)
         self.leftView = UIView(frame: CGRect(x: 0, y: 0, width: 10, height: self.frame.height))
@@ -72,7 +84,7 @@ extension UILabel {
     func setupLabel() {
         self.toAutoLayout()
         self.font = UIFont.systemFont(ofSize: 24, weight: .bold)
-        self.textColor = .black
+        self.textColor = UIColor.createColor(lightMode: .black, darkMode: .white)
     }
 }
 
