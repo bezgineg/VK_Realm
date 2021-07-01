@@ -8,7 +8,7 @@ final class PhotosViewController: UIViewController {
     private lazy var collectionView : UICollectionView = {
         let layout = UICollectionViewFlowLayout()
         let cv = UICollectionView(frame: .zero, collectionViewLayout: layout)
-        cv.backgroundColor = UIColor.createColor(lightMode: .white, darkMode: .black)
+        cv.backgroundColor = UIColor.createColor(lightMode: Colors.white, darkMode: Colors.black)
         cv.register(PhotosCollectionViewCell.self, forCellWithReuseIdentifier: String(describing: PhotosCollectionViewCell.self))
         cv.dataSource = self
         cv.delegate = self
@@ -19,7 +19,7 @@ final class PhotosViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        view.backgroundColor = UIColor.createColor(lightMode: .white, darkMode: .black)
+        view.backgroundColor = UIColor.createColor(lightMode: Colors.white, darkMode: Colors.black)
         
         setupViews()
     }

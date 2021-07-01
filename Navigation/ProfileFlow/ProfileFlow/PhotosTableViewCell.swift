@@ -21,7 +21,7 @@ class PhotosTableViewCell: UITableViewCell {
         label.text = "\(ProfileFlowLocalization.timerLabel.localizedValue) 10 \(ProfileFlowLocalization.seconds.localizedValue)"
         label.toAutoLayout()
         label.font = UIFont.systemFont(ofSize: 16, weight: .bold)
-        label.textColor = UIColor.createColor(lightMode: .black, darkMode: .white)
+        label.textColor = UIColor.createColor(lightMode: Colors.black, darkMode: Colors.white)
         return label
     }()
     
@@ -66,8 +66,8 @@ class PhotosTableViewCell: UITableViewCell {
         stackView.axis = .horizontal
         stackView.distribution = .fillEqually
         stackView.spacing = 8
-        stackView.layer.borderColor = UIColor.createColor(lightMode: .white, darkMode: .black).cgColor
-        stackView.backgroundColor = UIColor.createColor(lightMode: .white, darkMode: .black)
+        stackView.layer.borderColor = UIColor.createColor(lightMode: Colors.white, darkMode: Colors.black).cgColor
+        stackView.backgroundColor = UIColor.createColor(lightMode: Colors.white, darkMode: Colors.black)
         return stackView
     }()
     

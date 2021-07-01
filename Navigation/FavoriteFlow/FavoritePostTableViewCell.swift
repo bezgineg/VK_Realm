@@ -13,7 +13,7 @@ class FavoritePostTableViewCell: UITableViewCell {
         let label = UILabel()
         label.toAutoLayout()
         label.font = UIFont.systemFont(ofSize: 20, weight: .bold)
-        label.textColor = UIColor.createColor(lightMode: .black, darkMode: .white)
+        label.textColor = UIColor.createColor(lightMode: Colors.black, darkMode: Colors.white)
         label.numberOfLines = 2
         return label
     }()
@@ -22,7 +22,7 @@ class FavoritePostTableViewCell: UITableViewCell {
         let imageView = UIImageView()
         imageView.contentMode = .scaleAspectFit
         imageView.toAutoLayout()
-        imageView.backgroundColor = UIColor.createColor(lightMode: .black, darkMode: .white)
+        imageView.backgroundColor = UIColor.createColor(lightMode: Colors.black, darkMode: Colors.white)
         return imageView
     }()
     
@@ -30,7 +30,7 @@ class FavoritePostTableViewCell: UITableViewCell {
         let label = UILabel()
         label.toAutoLayout()
         label.font = UIFont.systemFont(ofSize: 14, weight: .regular)
-        label.textColor = UIColor.createColor(lightMode: .systemGray, darkMode: .gray)
+        label.textColor = UIColor.createColor(lightMode: Colors.systemGray, darkMode: Colors.gray)
         label.textAlignment = .left
         label.numberOfLines = 0
         return label
@@ -40,7 +40,7 @@ class FavoritePostTableViewCell: UITableViewCell {
         let label = UILabel()
         label.toAutoLayout()
         label.font = UIFont.systemFont(ofSize: 16, weight: .regular)
-        label.textColor = UIColor.createColor(lightMode: .black, darkMode: .white)
+        label.textColor = UIColor.createColor(lightMode: Colors.black, darkMode: Colors.white)
         return label
     }()
     
@@ -48,7 +48,7 @@ class FavoritePostTableViewCell: UITableViewCell {
         let label = UILabel()
         label.toAutoLayout()
         label.font = UIFont.systemFont(ofSize: 16, weight: .regular)
-        label.textColor = UIColor.createColor(lightMode: .black, darkMode: .white)
+        label.textColor = UIColor.createColor(lightMode: Colors.black, darkMode: Colors.white)
         return label
     }()
     

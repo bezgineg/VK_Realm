@@ -44,7 +44,7 @@ class FavoriteViewController: UIViewController {
     }
     
     private func setupNavigationBar() {
-        navigationController?.navigationBar.backgroundColor = UIColor.createColor(lightMode: .white, darkMode: .black)
+        navigationController?.navigationBar.backgroundColor = UIColor.createColor(lightMode: Colors.white, darkMode: Colors.black)
         
         if #available(iOS 13.0, *) {
             let filterButtonImage = UIImage(systemName: "magnifyingglass")
