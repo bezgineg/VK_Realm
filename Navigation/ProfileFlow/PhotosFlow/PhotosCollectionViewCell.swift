@@ -21,7 +21,7 @@ class PhotosCollectionViewCell: UICollectionViewCell {
     override init(frame: CGRect) {
         super.init(frame: frame)
     
-        contentView.backgroundColor = UIColor.createColor(lightMode: .black, darkMode: .white)
+        contentView.backgroundColor = UIColor.createColor(lightMode: Colors.black, darkMode: Colors.white)
         setupViews()
         
     }

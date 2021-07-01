@@ -56,6 +56,7 @@
 		A3C9D95A267BA69700E2578D /* Localization.swift in Sources */ = {isa = PBXBuildFile; fileRef = A3C9D959267BA69700E2578D /* Localization.swift */; };
 		A3C9D96B267BA79300E2578D /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = A3C9D96D267BA79300E2578D /* Localizable.strings */; };
 		A3C9D977267BA7D800E2578D /* Localizable.stringsdict in Resources */ = {isa = PBXBuildFile; fileRef = A3C9D979267BA7D800E2578D /* Localizable.stringsdict */; };
+		A3C9DA0D268E4A1F00E2578D /* Colors.swift in Sources */ = {isa = PBXBuildFile; fileRef = A3C9DA0C268E4A1F00E2578D /* Colors.swift */; };
 		A3E518492595F63C008B6465 /* FeedViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 060782B5250CE27700A87020 /* FeedViewController.swift */; };
 		A3E5184A2595F63C008B6465 /* ProfileTableHeaderView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5967809D2562AF1B00C9E10B /* ProfileTableHeaderView.swift */; };
 		A3E5184B2595F63C008B6465 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 060782B1250CE27700A87020 /* AppDelegate.swift */; };
@@ -138,6 +139,7 @@
 		A3C9D970267BA79800E2578D /* ru */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = ru; path = ru.lproj/Localizable.strings; sourceTree = "<group>"; };
 		A3C9D978267BA7D800E2578D /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.stringsdict; name = en; path = en.lproj/Localizable.stringsdict; sourceTree = "<group>"; };
 		A3C9D97A267BA7D900E2578D /* ru */ = {isa = PBXFileReference; lastKnownFileType = text.plist.stringsdict; name = ru; path = ru.lproj/Localizable.stringsdict; sourceTree = "<group>"; };
+		A3C9DA0C268E4A1F00E2578D /* Colors.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Colors.swift; sourceTree = "<group>"; };
 		A3E518622595F63C008B6465 /* Navigation copy.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Navigation copy.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		A3E518632595F63C008B6465 /* Navigation copy-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; name = "Navigation copy-Info.plist"; path = "/Users/pobegutsolga/Desktop/Navigation/ProjectStructure/Navigation copy-Info.plist"; sourceTree = "<absolute>"; };
 		A3E518B925AB3B4B008B6465 /* RealmDataProvider.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RealmDataProvider.swift; sourceTree = "<group>"; };
@@ -192,6 +194,7 @@
 		060782B0250CE27700A87020 /* Navigation */ = {
 			isa = PBXGroup;
 			children = (
+				A3C9DA0B268E4A0E00E2578D /* Constants */,
 				A3C9D958267BA67E00E2578D /* Localization */,
 				A3773B2B25FCEE4E009955E4 /* Managers */,
 				A38D8CE92552EAAE00864FEE /* ProfileFlow */,
@@ -403,6 +406,14 @@
 			path = Localization;
 			sourceTree = "<group>";
 		};
+		A3C9DA0B268E4A0E00E2578D /* Constants */ = {
+			isa = PBXGroup;
+			children = (
+				A3C9DA0C268E4A1F00E2578D /* Colors.swift */,
+			);
+			path = Constants;
+			sourceTree = "<group>";
+		};
 		D167708DCDC1C16FB647E2C6 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
@@ -596,6 +607,7 @@
 				A38D8D6C255ED3A100864FEE /* PostStorage.swift in Sources */,
 				A3C12AEE262C72780026ACC0 /* FavoriteCoordinator.swift in Sources */,
 				A3C12B00262C74050026ACC0 /* FavoritePost+CoreDataProperties.swift in Sources */,
+				A3C9DA0D268E4A1F00E2578D /* Colors.swift in Sources */,
 				060782C6250CEB0A00A87020 /* InfoViewController.swift in Sources */,
 				A3C12B0D262C74F00026ACC0 /* FavoriteViewController.swift in Sources */,
 				A3A8167926012D2200F95B40 /* Planet.swift in Sources */,

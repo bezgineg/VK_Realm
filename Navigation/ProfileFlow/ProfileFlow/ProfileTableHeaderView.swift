@@ -8,7 +8,7 @@ final class ProfileHeaderView: UIView {
         let avatarImageView = UIImageView()
         avatarImageView.translatesAutoresizingMaskIntoConstraints = false
         avatarImageView.contentMode = .scaleAspectFill
-        avatarImageView.layer.borderColor = UIColor.createColor(lightMode: .white, darkMode: .black).cgColor
+        avatarImageView.layer.borderColor = UIColor.createColor(lightMode: Colors.white, darkMode: Colors.black).cgColor
         avatarImageView.layer.borderWidth = 3
         avatarImageView.layer.masksToBounds = true
         avatarImageView.layer.cornerRadius = avatarImageSize.height/2
@@ -19,7 +19,7 @@ final class ProfileHeaderView: UIView {
     private let fullNameLabel: UILabel = {
         let fullNameLabel = UILabel()
         fullNameLabel.translatesAutoresizingMaskIntoConstraints = false
-        fullNameLabel.textColor = UIColor.createColor(lightMode: .black, darkMode: .white)
+        fullNameLabel.textColor = UIColor.createColor(lightMode: Colors.black, darkMode: Colors.white)
         fullNameLabel.font = UIFont.systemFont(ofSize: 18, weight: .bold)
         return fullNameLabel
     }()
@@ -27,7 +27,7 @@ final class ProfileHeaderView: UIView {
     private let statusLabel: UILabel = {
         let statusLabel = UILabel()
         statusLabel.translatesAutoresizingMaskIntoConstraints = false
-        statusLabel.textColor = UIColor.createColor(lightMode: .lightGray, darkMode: .gray)
+        statusLabel.textColor = UIColor.createColor(lightMode: Colors.lightGray, darkMode: Colors.gray)
         statusLabel.font = UIFont.systemFont(ofSize: 14, weight: .regular)
         return statusLabel
     }()
@@ -35,12 +35,12 @@ final class ProfileHeaderView: UIView {
     private let statusTextField: UITextField = {
         let statusTextField = UITextField()
         statusTextField.translatesAutoresizingMaskIntoConstraints = false
-        statusTextField.backgroundColor = UIColor.createColor(lightMode: .white, darkMode: .black)
+        statusTextField.backgroundColor = UIColor.createColor(lightMode: Colors.white, darkMode: Colors.black)
         statusTextField.layer.cornerRadius = 12
-        statusTextField.textColor = UIColor.createColor(lightMode: .black, darkMode: .white)
+        statusTextField.textColor = UIColor.createColor(lightMode: Colors.black, darkMode: Colors.white)
         statusTextField.font = UIFont.systemFont(ofSize: 15, weight: .regular)
         statusTextField.layer.borderWidth = 1
-        statusTextField.layer.borderColor = UIColor.createColor(lightMode: .black, darkMode: .white).cgColor
+        statusTextField.layer.borderColor = UIColor.createColor(lightMode: Colors.black, darkMode: Colors.white).cgColor
         statusTextField.leftView = UIView(frame: CGRect(x: 0, y: 0, width: 10, height: statusTextField.frame.height))
         statusTextField.leftViewMode = .always
         return statusTextField
