@@ -87,11 +87,6 @@ class LogInViewController: UIViewController {
     private let biometryButton: UIButton = {
         let button = UIButton()
         button.translatesAutoresizingMaskIntoConstraints = false
-        if #available(iOS 13.0, *) {
-            button.setImage(UIImage(systemName: "faceid"), for: .normal)
-        } else {
-            button.setImage(UIImage(named: "logo"), for: .normal)
-        }
         button.backgroundColor = .white
         button.layer.borderColor = UIColor.blue.cgColor
         button.layer.borderWidth = 4
@@ -116,6 +111,7 @@ class LogInViewController: UIViewController {
         
         setupLayout()
         enableBiometryButton()
+        setupBiometryButtonIcon()
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -138,11 +134,20 @@ class LogInViewController: UIViewController {
     }
     
     @objc private func biometryButtonTapped() {
-        authManager.authorizeIfPossible { [weak self] isSuccess in
+        authManager.authorizeIfPossible { [weak self] result in
             guard let self = self else { return }
-            if isSuccess {
+            switch result {
+            case .success(true):
                 DispatchQueue.main.async {
                     self.coordinator?.pushProfileVC()
+                }
+            case.success(false):
+                DispatchQueue.main.async {
+                    self.coordinator?.showAlert(message: "Try again")
+                }
+            case .failure(let error):
+                DispatchQueue.main.async {
+                    self.coordinator?.showAlert(message: error.localizedDescription)
                 }
             }
         }
@@ -181,6 +186,27 @@ class LogInViewController: UIViewController {
         }
         
         logInButton.isEnabled = true
+    }
+    
+    private func setupBiometryButtonIcon() {
+        switch authManager.laContext.biometryType {
+        case .none:
+            biometryButton.setImage(UIImage(named: "logo"), for: .normal)
+        case .touchID:
+            if #available(iOS 13.0, *) {
+                biometryButton.setImage(UIImage(systemName: "touchid"), for: .normal)
+            } else {
+                biometryButton.setImage(UIImage(named: "logo"), for: .normal)
+            }
+        case .faceID:
+            if #available(iOS 13.0, *) {
+                biometryButton.setImage(UIImage(systemName: "faceid"), for: .normal)
+            } else {
+                biometryButton.setImage(UIImage(named: "logo"), for: .normal)
+            }
+        @unknown default:
+            return
+        }
     }
     
     private func enableBiometryButton() {
