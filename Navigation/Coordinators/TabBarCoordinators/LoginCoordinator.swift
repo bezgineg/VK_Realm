@@ -54,6 +54,7 @@ class LoginCoordinator: Coordinator {
     }
     
     func logOut() {
+        guard !dataProvider.getCredentials().isEmpty else { return }
         let credential = dataProvider.getCredentials()[0]
         dataProvider.deleteCredentials(credential)
     }

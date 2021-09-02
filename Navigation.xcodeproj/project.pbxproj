@@ -78,6 +78,7 @@
 		A3E5185D2595F63C008B6465 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 060782BA250CE27A00A87020 /* Assets.xcassets */; };
 		A3E518BA25AB3B4B008B6465 /* RealmDataProvider.swift in Sources */ = {isa = PBXBuildFile; fileRef = A3E518B925AB3B4B008B6465 /* RealmDataProvider.swift */; };
 		B41DDEA0BC05DEB1F99B80F1 /* Pods_Navigation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 39EECD3007B128A937AC7383 /* Pods_Navigation.framework */; };
+		BB59593B26E0A90300F8AA65 /* LocalAuthorizationService.swift in Sources */ = {isa = PBXBuildFile; fileRef = BB59593A26E0A90300F8AA65 /* LocalAuthorizationService.swift */; };
 		BBAED4162625C1D400D710D1 /* Credential.swift in Sources */ = {isa = PBXBuildFile; fileRef = BBAED4152625C1D400D710D1 /* Credential.swift */; };
 		BBAED41D2625C7F500D710D1 /* DataProvider.swift in Sources */ = {isa = PBXBuildFile; fileRef = BBAED41C2625C7F500D710D1 /* DataProvider.swift */; };
 		E413A04A25937F8D001CD6AD /* TabBarController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E413A04925937F8D001CD6AD /* TabBarController.swift */; };
@@ -143,6 +144,7 @@
 		A3E518622595F63C008B6465 /* Navigation copy.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Navigation copy.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		A3E518632595F63C008B6465 /* Navigation copy-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; name = "Navigation copy-Info.plist"; path = "/Users/pobegutsolga/Desktop/Navigation/ProjectStructure/Navigation copy-Info.plist"; sourceTree = "<absolute>"; };
 		A3E518B925AB3B4B008B6465 /* RealmDataProvider.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RealmDataProvider.swift; sourceTree = "<group>"; };
+		BB59593A26E0A90300F8AA65 /* LocalAuthorizationService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LocalAuthorizationService.swift; sourceTree = "<group>"; };
 		BBAED4152625C1D400D710D1 /* Credential.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Credential.swift; sourceTree = "<group>"; };
 		BBAED41C2625C7F500D710D1 /* DataProvider.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DataProvider.swift; sourceTree = "<group>"; };
 		C26469335FDAB266F3B83C37 /* Pods-Navigation copy.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Navigation copy.release.xcconfig"; path = "Target Support Files/Pods-Navigation copy/Pods-Navigation copy.release.xcconfig"; sourceTree = "<group>"; };
@@ -196,7 +198,7 @@
 			children = (
 				A3C9DA0B268E4A0E00E2578D /* Constants */,
 				A3C9D958267BA67E00E2578D /* Localization */,
-				A3773B2B25FCEE4E009955E4 /* Managers */,
+				A3773B2B25FCEE4E009955E4 /* Services */,
 				A38D8CE92552EAAE00864FEE /* ProfileFlow */,
 				A3C12B0B262C74830026ACC0 /* FavoriteFlow */,
 				A38D8D6A255ED38F00864FEE /* Storage */,
@@ -336,13 +338,14 @@
 			path = LoginCoordinators;
 			sourceTree = "<group>";
 		};
-		A3773B2B25FCEE4E009955E4 /* Managers */ = {
+		A3773B2B25FCEE4E009955E4 /* Services */ = {
 			isa = PBXGroup;
 			children = (
+				BB59593926E0A8E400F8AA65 /* AuthenticationService */,
 				A3773B2E25FCEE62009955E4 /* NetworkManager.swift */,
 				A3C12AF7262C73100026ACC0 /* CoreDataManager */,
 			);
-			path = Managers;
+			path = Services;
 			sourceTree = "<group>";
 		};
 		A38D8CE92552EAAE00864FEE /* ProfileFlow */ = {
@@ -412,6 +415,14 @@
 				A3C9DA0C268E4A1F00E2578D /* Colors.swift */,
 			);
 			path = Constants;
+			sourceTree = "<group>";
+		};
+		BB59593926E0A8E400F8AA65 /* AuthenticationService */ = {
+			isa = PBXGroup;
+			children = (
+				BB59593A26E0A90300F8AA65 /* LocalAuthorizationService.swift */,
+			);
+			path = AuthenticationService;
 			sourceTree = "<group>";
 		};
 		D167708DCDC1C16FB647E2C6 /* Frameworks */ = {
@@ -636,6 +647,7 @@
 				59EC7CC0256555D400A12046 /* PhotosCollectionViewCell.swift in Sources */,
 				A3C12AFA262C735B0026ACC0 /* FavoritePostModel.xcdatamodeld in Sources */,
 				A3C12AE8262C70710026ACC0 /* Coordinator.swift in Sources */,
+				BB59593B26E0A90300F8AA65 /* LocalAuthorizationService.swift in Sources */,
 				59EC7CC42565566D00A12046 /* PhotosStorage.swift in Sources */,
 				59EC7CBD256554E300A12046 /* PhotosViewController.swift in Sources */,
 				A38D8D67255ED2EF00864FEE /* Post.swift in Sources */,
