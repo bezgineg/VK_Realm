@@ -54,7 +54,15 @@ class LoginCoordinator: Coordinator {
     }
     
     func logOut() {
+        guard !dataProvider.getCredentials().isEmpty else { return }
         let credential = dataProvider.getCredentials()[0]
         dataProvider.deleteCredentials(credential)
+    }
+    
+    func showAlert(message: String) {
+        let alertController = UIAlertController(title: "Something went wrong", message: message, preferredStyle: .alert)
+        let okAction = UIAlertAction(title: "OK", style: .cancel, handler: nil)
+        alertController.addAction(okAction)
+        navigationController.present(alertController, animated: false, completion: nil)
     }
 }

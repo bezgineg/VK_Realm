@@ -4,7 +4,8 @@ import UIKit
 class LogInViewController: UIViewController {
     
     weak var coordinator: LoginCoordinator?
-    
+   
+    private var authManager: AuthorizationServiceProtocol
     private let logoImageView: UIImageView = {
         let imageView = UIImageView()
         imageView.contentMode = .scaleAspectFit
@@ -83,13 +84,34 @@ class LogInViewController: UIViewController {
         return divider
     }()
     
+    private let biometryButton: UIButton = {
+        let button = UIButton()
+        button.translatesAutoresizingMaskIntoConstraints = false
+        button.backgroundColor = .white
+        button.layer.borderColor = UIColor.blue.cgColor
+        button.layer.borderWidth = 4
+        button.layer.cornerRadius = 25
+        button.addTarget(self, action: #selector(biometryButtonTapped), for: .touchUpInside)
+        return button
+    }()
+    
+    init(authManager: AuthorizationServiceProtocol = LocalAuthorizationService()) {
+        self.authManager = authManager
+        super.init(nibName: nil, bundle: nil)
+    }
+    
+    required init?(coder: NSCoder) {
+        fatalError("init(coder:) has not been implemented")
+    }
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         
         view.backgroundColor = UIColor.createColor(lightMode: Colors.white, darkMode: Colors.black)
         
         setupLayout()
-        
+        enableBiometryButton()
+        setupBiometryButtonIcon()
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -109,6 +131,26 @@ class LogInViewController: UIViewController {
         
         NotificationCenter.default.removeObserver(self, name: UIResponder.keyboardWillShowNotification, object: nil)
         NotificationCenter.default.removeObserver(self, name: UIResponder.keyboardWillHideNotification, object: nil)
+    }
+    
+    @objc private func biometryButtonTapped() {
+        authManager.authorizeIfPossible { [weak self] result in
+            guard let self = self else { return }
+            switch result {
+            case .success(true):
+                DispatchQueue.main.async {
+                    self.coordinator?.pushProfileVC()
+                }
+            case.success(false):
+                DispatchQueue.main.async {
+                    self.coordinator?.showAlert(message: "Try again")
+                }
+            case .failure(let error):
+                DispatchQueue.main.async {
+                    self.coordinator?.showAlert(message: error.localizedDescription)
+                }
+            }
+        }
     }
     
     @objc fileprivate func keyboardWillShow(notification: NSNotification) {
@@ -146,6 +188,34 @@ class LogInViewController: UIViewController {
         logInButton.isEnabled = true
     }
     
+    private func setupBiometryButtonIcon() {
+        switch authManager.laContext.biometryType {
+        case .none:
+            biometryButton.setImage(UIImage(named: "logo"), for: .normal)
+        case .touchID:
+            if #available(iOS 13.0, *) {
+                biometryButton.setImage(UIImage(systemName: "touchid"), for: .normal)
+            } else {
+                biometryButton.setImage(UIImage(named: "logo"), for: .normal)
+            }
+        case .faceID:
+            if #available(iOS 13.0, *) {
+                biometryButton.setImage(UIImage(systemName: "faceid"), for: .normal)
+            } else {
+                biometryButton.setImage(UIImage(named: "logo"), for: .normal)
+            }
+        @unknown default:
+            return
+        }
+    }
+    
+    private func enableBiometryButton() {
+        biometryButton.isEnabled = authManager.laContext.canEvaluatePolicy(
+            .deviceOwnerAuthenticationWithBiometrics,
+            error: &authManager.error
+        )
+    }
+    
     private func setupLayout() {
         
         view.addSubview(scrollView)
@@ -154,6 +224,7 @@ class LogInViewController: UIViewController {
         contentView.addSubview(logoImageView)
         contentView.addSubview(stackView)
         contentView.addSubview(logInButton)
+        contentView.addSubview(biometryButton)
         
         let constraints = [
             scrollView.topAnchor.constraint(equalTo: view.topAnchor),
@@ -186,7 +257,12 @@ class LogInViewController: UIViewController {
             logInButton.leadingAnchor.constraint(equalTo: contentView.safeAreaLayoutGuide.leadingAnchor, constant: 16),
             logInButton.trailingAnchor.constraint(equalTo: contentView.safeAreaLayoutGuide.trailingAnchor, constant: -16),
             logInButton.heightAnchor.constraint(equalToConstant: 50),
-            logInButton.bottomAnchor.constraint(equalTo: contentView.safeAreaLayoutGuide.bottomAnchor, constant: -12)
+            logInButton.bottomAnchor.constraint(equalTo: contentView.safeAreaLayoutGuide.bottomAnchor, constant: -12),
+            
+            biometryButton.widthAnchor.constraint(equalToConstant: 50),
+            biometryButton.heightAnchor.constraint(equalToConstant: 50),
+            biometryButton.centerXAnchor.constraint(equalTo: contentView.centerXAnchor),
+            biometryButton.topAnchor.constraint(equalTo: logoImageView.bottomAnchor, constant: 30)
             
         ]
         
