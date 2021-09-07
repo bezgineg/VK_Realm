@@ -11,3 +11,4 @@
 *  Swift Package Manager
 *  Localization
 *  Light/Dark mode
+*  FaceID/TouchID
