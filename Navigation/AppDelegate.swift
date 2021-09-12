@@ -29,8 +29,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
             break
         }
         
-        let notificationService: NotificationCenterService = LocalNotificationCenter()
-        notificationService.registerForLatestUpdatesIfPossible()
+        LocalNotificationCenter.shared.registerForLatestUpdatesIfPossible()
         
         return true
     }

@@ -15,6 +15,10 @@ protocol NotificationCenterService {
 
 final class LocalNotificationCenter: NSObject, NotificationCenterService {
     
+    // MARK: - Public properties
+    
+    static let shared = LocalNotificationCenter()
+    
     // MARK: - Public Methods
     
     public func registerForLatestUpdatesIfPossible() {
@@ -52,7 +56,7 @@ final class LocalNotificationCenter: NSObject, NotificationCenterService {
     }
     
     private func registerUpdatesCategory() {
-        let actions = UNNotificationAction(identifier: "tapAction", title: "Rate app", options: [])
+        let actions = UNNotificationAction(identifier: "tapAction", title: "Rate app", options: [.foreground])
         let category = UNNotificationCategory(identifier: "updates", actions: [actions], intentIdentifiers: [])
     
         UNUserNotificationCenter.current().setNotificationCategories([category])
@@ -74,5 +78,13 @@ extension LocalNotificationCenter: UNUserNotificationCenterDelegate {
             break
         }
         completionHandler()
+    }
+    
+    func userNotificationCenter(
+        _ center: UNUserNotificationCenter,
+        willPresent notification: UNNotification,
+        withCompletionHandler completionHandler: @escaping (UNNotificationPresentationOptions) -> Void
+    ) {
+        completionHandler([.alert, .sound])
     }
 }

@@ -7,7 +7,7 @@ target 'Navigation' do
 
   # Pods for Navigation
 
-pod 'RealmSwift', '=10.1.4'
+pod 'RealmSwift', '=10.7.4'
 pod 'EncryptedCoreData', :git => 'https://github.com/project-imas/encrypted-core-data.git'
 
 
