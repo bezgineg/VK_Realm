@@ -12,3 +12,4 @@
 *  Localization
 *  Light/Dark mode
 *  FaceID/TouchID
+*  Notifications
