@@ -65,6 +65,9 @@ class ProfileViewController: UIViewController {
     
     private func setupTableView() {
         tableView.translatesAutoresizingMaskIntoConstraints = false
+        tableView.dragInteractionEnabled = true
+        tableView.dragDelegate = self
+        tableView.dropDelegate = self
         tableView.dataSource = self
         tableView.delegate = self
         tableView.register(PostTableViewCell.self, forCellReuseIdentifier: reuseID)
@@ -263,3 +266,32 @@ extension ProfileViewController: PostTableViewCellDelegate {
     
 }
 
+// MARK: - UITableViewDragDelegate
+
+extension ProfileViewController: UITableViewDragDelegate {
+    func tableView(
+        _ tableView: UITableView,
+        itemsForBeginning session: UIDragSession,
+        at indexPath: IndexPath
+    ) -> [UIDragItem] {
+        if let imageUrl = URL(string: PostStorage.posts[1][indexPath.item].image),
+        let data = try? Data(contentsOf: imageUrl),
+        let image = UIImage(data: data) {
+            let descr = PostStorage.posts[1][indexPath.item].description
+            let dragImageItem = UIDragItem(itemProvider: NSItemProvider(object: image))
+            let dragDescrItem = UIDragItem(itemProvider: NSItemProvider(object: NSString(string: descr)))
+            return [dragImageItem, dragDescrItem]
+        } else {
+            return []
+        }
+    }
+}
+
+// MARK: - UITableViewDropDelegate
+
+extension ProfileViewController: UITableViewDropDelegate {
+    func tableView(_ tableView: UITableView, performDropWith coordinator: UITableViewDropCoordinator) {
+        print("1")
+    }
+    
+}
