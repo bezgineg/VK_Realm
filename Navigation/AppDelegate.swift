@@ -29,6 +29,8 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
             break
         }
         
+        LocalNotificationCenter.shared.registerForLatestUpdatesIfPossible()
+        
         return true
     }
     

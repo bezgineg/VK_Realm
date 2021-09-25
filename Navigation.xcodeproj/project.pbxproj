@@ -81,6 +81,7 @@
 		BB59593B26E0A90300F8AA65 /* LocalAuthorizationService.swift in Sources */ = {isa = PBXBuildFile; fileRef = BB59593A26E0A90300F8AA65 /* LocalAuthorizationService.swift */; };
 		BBAED4162625C1D400D710D1 /* Credential.swift in Sources */ = {isa = PBXBuildFile; fileRef = BBAED4152625C1D400D710D1 /* Credential.swift */; };
 		BBAED41D2625C7F500D710D1 /* DataProvider.swift in Sources */ = {isa = PBXBuildFile; fileRef = BBAED41C2625C7F500D710D1 /* DataProvider.swift */; };
+		BBCF092226EB3AFC0093B127 /* LocalNotificationCenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = BBCF092126EB3AFC0093B127 /* LocalNotificationCenter.swift */; };
 		E413A04A25937F8D001CD6AD /* TabBarController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E413A04925937F8D001CD6AD /* TabBarController.swift */; };
 /* End PBXBuildFile section */
 
@@ -147,6 +148,7 @@
 		BB59593A26E0A90300F8AA65 /* LocalAuthorizationService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LocalAuthorizationService.swift; sourceTree = "<group>"; };
 		BBAED4152625C1D400D710D1 /* Credential.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Credential.swift; sourceTree = "<group>"; };
 		BBAED41C2625C7F500D710D1 /* DataProvider.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DataProvider.swift; sourceTree = "<group>"; };
+		BBCF092126EB3AFC0093B127 /* LocalNotificationCenter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LocalNotificationCenter.swift; sourceTree = "<group>"; };
 		C26469335FDAB266F3B83C37 /* Pods-Navigation copy.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Navigation copy.release.xcconfig"; path = "Target Support Files/Pods-Navigation copy/Pods-Navigation copy.release.xcconfig"; sourceTree = "<group>"; };
 		E413A04925937F8D001CD6AD /* TabBarController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TabBarController.swift; sourceTree = "<group>"; };
 		E963D9D2EB8580F5942162AD /* Pods_Navigation_copy.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Navigation_copy.framework; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -341,6 +343,7 @@
 		A3773B2B25FCEE4E009955E4 /* Services */ = {
 			isa = PBXGroup;
 			children = (
+				BBCF091E26EB3ADF0093B127 /* NotificationService */,
 				BB59593926E0A8E400F8AA65 /* AuthenticationService */,
 				A3773B2E25FCEE62009955E4 /* NetworkManager.swift */,
 				A3C12AF7262C73100026ACC0 /* CoreDataManager */,
@@ -423,6 +426,14 @@
 				BB59593A26E0A90300F8AA65 /* LocalAuthorizationService.swift */,
 			);
 			path = AuthenticationService;
+			sourceTree = "<group>";
+		};
+		BBCF091E26EB3ADF0093B127 /* NotificationService */ = {
+			isa = PBXGroup;
+			children = (
+				BBCF092126EB3AFC0093B127 /* LocalNotificationCenter.swift */,
+			);
+			path = NotificationService;
 			sourceTree = "<group>";
 		};
 		D167708DCDC1C16FB647E2C6 /* Frameworks */ = {
@@ -654,6 +665,7 @@
 				BBAED4162625C1D400D710D1 /* Credential.swift in Sources */,
 				5967809625629B0F00C9E10B /* PostTableViewCell.swift in Sources */,
 				A36473FD25B48C740037082B /* PhotosCoordinator.swift in Sources */,
+				BBCF092226EB3AFC0093B127 /* LocalNotificationCenter.swift in Sources */,
 				A3A8167526012BB200F95B40 /* User.swift in Sources */,
 				A3C12AFF262C74050026ACC0 /* FavoritePost+CoreDataClass.swift in Sources */,
 			);
