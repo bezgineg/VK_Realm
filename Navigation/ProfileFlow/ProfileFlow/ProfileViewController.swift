@@ -278,9 +278,9 @@ extension ProfileViewController: UITableViewDragDelegate {
         let data = try? Data(contentsOf: imageUrl),
         let image = UIImage(data: data) {
             let descr = PostStorage.posts[1][indexPath.item].description
-            let dragImageItem = UIDragItem(itemProvider: NSItemProvider(object: image))
+            //let dragImageItem = UIDragItem(itemProvider: NSItemProvider(object: image))
             let dragDescrItem = UIDragItem(itemProvider: NSItemProvider(object: NSString(string: descr)))
-            return [dragImageItem, dragDescrItem]
+            return [dragDescrItem]
         } else {
             return []
         }
@@ -290,8 +290,51 @@ extension ProfileViewController: UITableViewDragDelegate {
 // MARK: - UITableViewDropDelegate
 
 extension ProfileViewController: UITableViewDropDelegate {
+    
+    func tableView(_ tableView: UITableView, canHandle session: UIDropSession) -> Bool {
+        return session.canLoadObjects(ofClass: NSString.self)
+    }
+    
+    func tableView(
+        _ tableView: UITableView,
+        dropSessionDidUpdate session: UIDropSession,
+        withDestinationIndexPath destinationIndexPath: IndexPath?
+    ) -> UITableViewDropProposal {
+        let dropProposal = UITableViewDropProposal(operation: .copy, intent: .insertAtDestinationIndexPath)
+        return dropProposal
+    }
+    
+    
     func tableView(_ tableView: UITableView, performDropWith coordinator: UITableViewDropCoordinator) {
-        print("1")
+        let destinationIndexPath: IndexPath
+            
+        if let indexPath = coordinator.destinationIndexPath {
+            destinationIndexPath = indexPath
+        } else {
+            let section = tableView.numberOfSections - 1
+            let row = tableView.numberOfRows(inSection: section)
+            destinationIndexPath = IndexPath(row: row, section: section)
+        }
+        
+        var indexPaths = [IndexPath]()
+        
+        coordinator.session.loadObjects(ofClass: NSString.self) { items in
+            let stringItems = items as! [String]
+            for (_, item) in stringItems.enumerated() {
+                let indexPath = IndexPath(row: destinationIndexPath.row, section: destinationIndexPath.section)
+                let post = Post(
+                    author: "Drag&Drop",
+                    description: item,
+                    image: "https://www.gazeta.uz/media/img/2020/11/1OCux116053357565761_b.jpg",
+                    likes: 0,
+                    view: 0
+                )
+                PostStorage.posts[1].insert(post, at: indexPath.row)
+                indexPaths.append(indexPath)
+            }
+            
+            tableView.insertRows(at: indexPaths, with: .automatic)
+        }
     }
     
 }
