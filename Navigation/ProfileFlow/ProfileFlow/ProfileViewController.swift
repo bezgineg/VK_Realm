@@ -278,9 +278,9 @@ extension ProfileViewController: UITableViewDragDelegate {
         let data = try? Data(contentsOf: imageUrl),
         let image = UIImage(data: data) {
             let descr = PostStorage.posts[1][indexPath.item].description
-            //let dragImageItem = UIDragItem(itemProvider: NSItemProvider(object: image))
+            let dragImageItem = UIDragItem(itemProvider: NSItemProvider(object: image))
             let dragDescrItem = UIDragItem(itemProvider: NSItemProvider(object: NSString(string: descr)))
-            return [dragDescrItem]
+            return [dragDescrItem, dragImageItem]
         } else {
             return []
         }
@@ -292,7 +292,8 @@ extension ProfileViewController: UITableViewDragDelegate {
 extension ProfileViewController: UITableViewDropDelegate {
     
     func tableView(_ tableView: UITableView, canHandle session: UIDropSession) -> Bool {
-        return session.canLoadObjects(ofClass: NSString.self)
+        return session.canLoadObjects(ofClass: NSString.self) &&
+        session.canLoadObjects(ofClass: UIImage.self)
     }
     
     func tableView(
@@ -317,6 +318,14 @@ extension ProfileViewController: UITableViewDropDelegate {
         }
         
         var indexPaths = [IndexPath]()
+        var imageData = Data()
+        
+        coordinator.session.loadObjects(ofClass: UIImage.self) { items in
+            let imageItems = items as! [UIImage]
+            for item in imageItems {
+                imageData = item.jpegData(compressionQuality: 1)!
+            }
+        }
         
         coordinator.session.loadObjects(ofClass: NSString.self) { items in
             let stringItems = items as! [String]
@@ -325,7 +334,7 @@ extension ProfileViewController: UITableViewDropDelegate {
                 let post = Post(
                     author: "Drag&Drop",
                     description: item,
-                    image: "https://www.gazeta.uz/media/img/2020/11/1OCux116053357565761_b.jpg",
+                    image: String(data: imageData, encoding: .utf8)!,
                     likes: 0,
                     view: 0
                 )
