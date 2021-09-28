@@ -316,25 +316,36 @@ extension ProfileViewController: UITableViewDropDelegate {
         }
         
         var indexPaths = [IndexPath]()
+        var images = [UIImage]()
+        var strings = [String]()
         
-        /// Основной метод дропа dragItem
-        coordinator.session.loadObjects(ofClass: NSString.self) { items in
-            let stringItems = items as! [String]
-            for (_, item) in stringItems.enumerated() {
-                let indexPath = IndexPath(row: destinationIndexPath.row, section: destinationIndexPath.section)
-                let post = Post(
-                    author: "Drag&Drop",
-                    description: item,
-                    image: UIImage(),
-                    likes: 0,
-                    view: 0
-                )
-                PostStorage.posts[1].insert(post, at: indexPath.row)
-                indexPaths.append(indexPath)
+        tableView.performBatchUpdates({
+            
+            coordinator.session.loadObjects(ofClass: UIImage.self) { items in
+                let imageItems = items as! [UIImage]
+                for el in imageItems {
+                    images.append(el)
+                }
             }
             
+            coordinator.session.loadObjects(ofClass: NSString.self) { items in
+                let stringItems = items as! [String]
+                for el in stringItems {
+                    strings.append(el)
+                }
+            }
+        }, completion: { _ in
+            let indexPath = IndexPath(row: destinationIndexPath.row, section: destinationIndexPath.section)
+            let post = Post(
+                author: "Drag&Drop",
+                description: strings.first ?? "",
+                image: images.first ?? UIImage(),
+                likes: 0,
+                view: 0
+            )
+            PostStorage.posts[1].insert(post, at: indexPath.row)
+            indexPaths.append(indexPath)
             tableView.insertRows(at: indexPaths, with: .automatic)
-        }
+        })
     }
-    
 }
