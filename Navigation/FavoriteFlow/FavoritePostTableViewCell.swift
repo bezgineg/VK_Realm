@@ -100,8 +100,8 @@ class FavoritePostTableViewCell: UITableViewCell {
         descriptionLabel.text = object.descript
         likesLabel.text = "\(localizeLikes(count: UInt(object.likes))): \(object.likes)"
         viewsLabel.text = "\(localizeViews(count: UInt(object.views))): \(object.views)"
-        if let url = object.image {
-            loadImage(urlImage: url)
+        if let image = object.image {
+            postImageView.image = UIImage(data: image)
         }
     }
     

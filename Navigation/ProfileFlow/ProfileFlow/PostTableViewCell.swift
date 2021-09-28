@@ -100,7 +100,7 @@ class PostTableViewCell: UITableViewCell {
         descriptionLabel.text = viewModel.description
         likesLabel.text = "\(localizeLikes(count: UInt(viewModel.likes))): \(viewModel.likes)"
         viewsLabel.text = "\(localizeViews(count: UInt(viewModel.view))): \(viewModel.view)"
-        loadImage(urlImage: viewModel.image)
+        postImageView.image = viewModel.image
     }
     
     private func localizeViews(count: UInt) -> String {

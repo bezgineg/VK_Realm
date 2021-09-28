@@ -1,5 +1,6 @@
 
 import Foundation
+import UIKit
 
 enum ApiError: Error {
     case dataNotFound
@@ -9,7 +10,7 @@ enum ApiError: Error {
 struct PostTableViewCellViewModel {
     let author: String
     let description: String
-    let image: String
+    let image: UIImage?
     let likes: Int
     let view: Int
     

@@ -122,7 +122,7 @@ class ProfileViewController: UIViewController {
         let favoritePost = CoreDataManager.manager.createObject(from: FavoritePost.self, context: context)
         favoritePost.author = post.author
         favoritePost.descript = post.description
-        favoritePost.image = post.image
+        favoritePost.image = post.image?.pngData()
         favoritePost.likes = Int64(post.likes)
         favoritePost.views = Int64(post.view)
         
@@ -274,9 +274,7 @@ extension ProfileViewController: UITableViewDragDelegate {
         itemsForBeginning session: UIDragSession,
         at indexPath: IndexPath
     ) -> [UIDragItem] {
-        if let imageUrl = URL(string: PostStorage.posts[1][indexPath.item].image),
-        let data = try? Data(contentsOf: imageUrl),
-        let image = UIImage(data: data) {
+        if let image =  PostStorage.posts[1][indexPath.item].image {
             let descr = PostStorage.posts[1][indexPath.item].description
             let dragImageItem = UIDragItem(itemProvider: NSItemProvider(object: image))
             let dragDescrItem = UIDragItem(itemProvider: NSItemProvider(object: NSString(string: descr)))
@@ -318,12 +316,12 @@ extension ProfileViewController: UITableViewDropDelegate {
         }
         
         var indexPaths = [IndexPath]()
-        var imageData = Data()
+        var imageData = UIImage()
         
         coordinator.session.loadObjects(ofClass: UIImage.self) { items in
             let imageItems = items as! [UIImage]
             for item in imageItems {
-                imageData = item.jpegData(compressionQuality: 1)!
+                imageData = item
             }
         }
         
@@ -334,7 +332,7 @@ extension ProfileViewController: UITableViewDropDelegate {
                 let post = Post(
                     author: "Drag&Drop",
                     description: item,
-                    image: String(data: imageData, encoding: .utf8)!,
+                    image: imageData,
                     likes: 0,
                     view: 0
                 )
