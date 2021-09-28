@@ -290,7 +290,7 @@ extension ProfileViewController: UITableViewDragDelegate {
 extension ProfileViewController: UITableViewDropDelegate {
     
     func tableView(_ tableView: UITableView, canHandle session: UIDropSession) -> Bool {
-        return session.canLoadObjects(ofClass: NSString.self) &&
+        return session.canLoadObjects(ofClass: NSString.self) ||
         session.canLoadObjects(ofClass: UIImage.self)
     }
     
@@ -316,15 +316,8 @@ extension ProfileViewController: UITableViewDropDelegate {
         }
         
         var indexPaths = [IndexPath]()
-        var imageData = UIImage()
         
-        coordinator.session.loadObjects(ofClass: UIImage.self) { items in
-            let imageItems = items as! [UIImage]
-            for item in imageItems {
-                imageData = item
-            }
-        }
-        
+        /// Основной метод дропа dragItem
         coordinator.session.loadObjects(ofClass: NSString.self) { items in
             let stringItems = items as! [String]
             for (_, item) in stringItems.enumerated() {
@@ -332,7 +325,7 @@ extension ProfileViewController: UITableViewDropDelegate {
                 let post = Post(
                     author: "Drag&Drop",
                     description: item,
-                    image: imageData,
+                    image: UIImage(),
                     likes: 0,
                     view: 0
                 )
