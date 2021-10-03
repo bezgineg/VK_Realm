@@ -306,6 +306,7 @@ extension ProfileViewController: UITableViewDropDelegate {
     
     func tableView(_ tableView: UITableView, performDropWith coordinator: UITableViewDropCoordinator) {
         let destinationIndexPath: IndexPath
+        let group = DispatchGroup()
             
         if let indexPath = coordinator.destinationIndexPath {
             destinationIndexPath = indexPath
@@ -321,6 +322,7 @@ extension ProfileViewController: UITableViewDropDelegate {
         
         tableView.performBatchUpdates({
             
+            group.enter()
             coordinator.session.loadObjects(ofClass: UIImage.self) { items in
                 let imageItems = items as! [UIImage]
                 for el in imageItems {
@@ -334,6 +336,7 @@ extension ProfileViewController: UITableViewDropDelegate {
                     strings.append(el)
                 }
             }
+            group.leave()
         }, completion: { _ in
             let indexPath = IndexPath(row: destinationIndexPath.row, section: destinationIndexPath.section)
             let post = Post(
@@ -345,7 +348,9 @@ extension ProfileViewController: UITableViewDropDelegate {
             )
             PostStorage.posts[1].insert(post, at: indexPath.row)
             indexPaths.append(indexPath)
-            tableView.insertRows(at: indexPaths, with: .automatic)
+            group.notify(queue: .main) {
+                tableView.insertRows(at: indexPaths, with: .automatic)
+            }
         })
     }
 }
