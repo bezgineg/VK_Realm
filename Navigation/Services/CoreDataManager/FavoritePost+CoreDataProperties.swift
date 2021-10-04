@@ -2,6 +2,7 @@
 
 import Foundation
 import CoreData
+import UIKit
 
 
 extension FavoritePost {
@@ -12,7 +13,7 @@ extension FavoritePost {
 
     @NSManaged public var author: String?
     @NSManaged public var descript: String?
-    @NSManaged public var image: String?
+    @NSManaged public var image: Data?
     @NSManaged public var views: Int64
     @NSManaged public var likes: Int64
 

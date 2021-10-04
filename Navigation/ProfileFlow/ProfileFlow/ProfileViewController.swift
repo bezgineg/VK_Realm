@@ -65,6 +65,9 @@ class ProfileViewController: UIViewController {
     
     private func setupTableView() {
         tableView.translatesAutoresizingMaskIntoConstraints = false
+        tableView.dragInteractionEnabled = true
+        tableView.dragDelegate = self
+        tableView.dropDelegate = self
         tableView.dataSource = self
         tableView.delegate = self
         tableView.register(PostTableViewCell.self, forCellReuseIdentifier: reuseID)
@@ -119,7 +122,7 @@ class ProfileViewController: UIViewController {
         let favoritePost = CoreDataManager.manager.createObject(from: FavoritePost.self, context: context)
         favoritePost.author = post.author
         favoritePost.descript = post.description
-        favoritePost.image = post.image
+        favoritePost.image = post.image?.pngData()
         favoritePost.likes = Int64(post.likes)
         favoritePost.views = Int64(post.view)
         
@@ -263,3 +266,91 @@ extension ProfileViewController: PostTableViewCellDelegate {
     
 }
 
+// MARK: - UITableViewDragDelegate
+
+extension ProfileViewController: UITableViewDragDelegate {
+    func tableView(
+        _ tableView: UITableView,
+        itemsForBeginning session: UIDragSession,
+        at indexPath: IndexPath
+    ) -> [UIDragItem] {
+        if let image =  PostStorage.posts[1][indexPath.item].image {
+            let descr = PostStorage.posts[1][indexPath.item].description
+            let dragImageItem = UIDragItem(itemProvider: NSItemProvider(object: image))
+            let dragDescrItem = UIDragItem(itemProvider: NSItemProvider(object: NSString(string: descr)))
+            return [dragDescrItem, dragImageItem]
+        } else {
+            return []
+        }
+    }
+}
+
+// MARK: - UITableViewDropDelegate
+
+extension ProfileViewController: UITableViewDropDelegate {
+    
+    func tableView(_ tableView: UITableView, canHandle session: UIDropSession) -> Bool {
+        return session.canLoadObjects(ofClass: NSString.self) ||
+        session.canLoadObjects(ofClass: UIImage.self)
+    }
+    
+    func tableView(
+        _ tableView: UITableView,
+        dropSessionDidUpdate session: UIDropSession,
+        withDestinationIndexPath destinationIndexPath: IndexPath?
+    ) -> UITableViewDropProposal {
+        let dropProposal = UITableViewDropProposal(operation: .copy, intent: .insertAtDestinationIndexPath)
+        return dropProposal
+    }
+    
+    
+    func tableView(_ tableView: UITableView, performDropWith coordinator: UITableViewDropCoordinator) {
+        let destinationIndexPath: IndexPath
+        let group = DispatchGroup()
+            
+        if let indexPath = coordinator.destinationIndexPath {
+            destinationIndexPath = indexPath
+        } else {
+            let section = tableView.numberOfSections - 1
+            let row = tableView.numberOfRows(inSection: section)
+            destinationIndexPath = IndexPath(row: row, section: section)
+        }
+        
+        var indexPaths = [IndexPath]()
+        var images = [UIImage]()
+        var strings = [String]()
+        
+        tableView.performBatchUpdates({
+            
+            group.enter()
+            coordinator.session.loadObjects(ofClass: UIImage.self) { items in
+                let imageItems = items as! [UIImage]
+                for el in imageItems {
+                    images.append(el)
+                }
+            }
+            
+            coordinator.session.loadObjects(ofClass: NSString.self) { items in
+                let stringItems = items as! [String]
+                for el in stringItems {
+                    strings.append(el)
+                }
+            }
+            group.leave()
+        }, completion: { _ in
+            let indexPath = IndexPath(row: destinationIndexPath.row, section: destinationIndexPath.section)
+            let post = Post(
+                author: "Drag&Drop",
+                description: strings.first ?? "",
+                image: images.first ?? UIImage(),
+                likes: 0,
+                view: 0
+            )
+            PostStorage.posts[1].insert(post, at: indexPath.row)
+            indexPaths.append(indexPath)
+            group.notify(queue: .main) {
+                tableView.insertRows(at: indexPaths, with: .automatic)
+            }
+        })
+    }
+}
