@@ -16,10 +16,14 @@ protocol AuthorizationServiceProtocol {
 
 final class LocalAuthorizationService: AuthorizationServiceProtocol {
     
-    let laContext = LAContext()
-    var error: NSError?
+    // MARK: - Public Properties
     
-    func authorizeIfPossible(_ authorizationFinished: @escaping (Result<Bool, LAError>) -> Void) {
+    public let laContext = LAContext()
+    public var error: NSError?
+    
+    // MARK: - Public Methods
+    
+    public func authorizeIfPossible(_ authorizationFinished: @escaping (Result<Bool, LAError>) -> Void) {
         laContext.evaluatePolicy(
             .deviceOwnerAuthenticationWithBiometrics,
             localizedReason: "To access data"

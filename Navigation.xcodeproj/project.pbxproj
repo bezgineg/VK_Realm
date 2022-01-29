@@ -40,7 +40,6 @@
 		A364747A25C2B4210037082B /* ProfileTableHeaderViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = A364747925C2B4210037082B /* ProfileTableHeaderViewModel.swift */; };
 		A36474AE25C5ADB90037082B /* iOSIntPackage in Frameworks */ = {isa = PBXBuildFile; productRef = A36474AD25C5ADB90037082B /* iOSIntPackage */; };
 		A3773B2F25FCEE62009955E4 /* NetworkManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = A3773B2E25FCEE62009955E4 /* NetworkManager.swift */; };
-		A3773B3325FCEEB8009955E4 /* AppConfiguration.swift in Sources */ = {isa = PBXBuildFile; fileRef = A3773B3225FCEEB8009955E4 /* AppConfiguration.swift */; };
 		A38D8CEE2552EB1F00864FEE /* ProfileViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A38D8CED2552EB1F00864FEE /* ProfileViewController.swift */; };
 		A38D8D67255ED2EF00864FEE /* Post.swift in Sources */ = {isa = PBXBuildFile; fileRef = A38D8D66255ED2EF00864FEE /* Post.swift */; };
 		A38D8D6C255ED3A100864FEE /* PostStorage.swift in Sources */ = {isa = PBXBuildFile; fileRef = A38D8D6B255ED3A100864FEE /* PostStorage.swift */; };
@@ -127,7 +126,6 @@
 		A364747525C2B3E40037082B /* PhotosTableViewCellViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PhotosTableViewCellViewModel.swift; sourceTree = "<group>"; };
 		A364747925C2B4210037082B /* ProfileTableHeaderViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileTableHeaderViewModel.swift; sourceTree = "<group>"; };
 		A3773B2E25FCEE62009955E4 /* NetworkManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkManager.swift; sourceTree = "<group>"; };
-		A3773B3225FCEEB8009955E4 /* AppConfiguration.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppConfiguration.swift; sourceTree = "<group>"; };
 		A38D8CED2552EB1F00864FEE /* ProfileViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileViewController.swift; sourceTree = "<group>"; };
 		A38D8D66255ED2EF00864FEE /* Post.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Post.swift; sourceTree = "<group>"; };
 		A38D8D6B255ED3A100864FEE /* PostStorage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PostStorage.swift; sourceTree = "<group>"; };
@@ -274,7 +272,6 @@
 		7EAC6BC827A5555200C8F279 /* Network */ = {
 			isa = PBXGroup;
 			children = (
-				A3773B3225FCEEB8009955E4 /* AppConfiguration.swift */,
 				A3773B2E25FCEE62009955E4 /* NetworkManager.swift */,
 			);
 			path = Network;
@@ -700,7 +697,6 @@
 				A3A8167926012D2200F95B40 /* Planet.swift in Sources */,
 				A3C12B08262C743C0026ACC0 /* CoreDataManager.swift in Sources */,
 				A3E518BA25AB3B4B008B6465 /* RealmDataProvider.swift in Sources */,
-				A3773B3325FCEEB8009955E4 /* AppConfiguration.swift in Sources */,
 				A3C12AF4262C72DA0026ACC0 /* FavoritePostStorage.swift in Sources */,
 				A364747A25C2B4210037082B /* ProfileTableHeaderViewModel.swift in Sources */,
 				A3C12B04262C74190026ACC0 /* CoreDataStack.swift in Sources */,

@@ -63,6 +63,8 @@ final class LocalNotificationCenter: NSObject, NotificationCenterService {
     }
 }
 
+// MARK: - UNUserNotificationCenterDelegate
+
 extension LocalNotificationCenter: UNUserNotificationCenterDelegate {
     func userNotificationCenter(
         _ center: UNUserNotificationCenter,
