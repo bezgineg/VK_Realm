@@ -1,15 +1,21 @@
 import UIKit
 
-class FeedCoordinator: Coordinator {
+final class FeedCoordinator: Coordinator {
     
-    var childCoordinators =  [Coordinator]()
-    var navigationController: UINavigationController
+    // MARK: - Public Properties
+    
+    public var childCoordinators = [Coordinator]()
+    public var navigationController: UINavigationController
+    
+    // MARK: - Initializers
     
     init(navigationController: UINavigationController) {
         self.navigationController = navigationController
     }
     
-    func start() {
+    // MARK: - Public Methods
+    
+    public func start() {
         let feedViewController = FeedViewController()
         feedViewController.coordinator = self
         feedViewController.tabBarItem.title = TabBarLocalization.feed.localizedValue
@@ -17,14 +23,11 @@ class FeedCoordinator: Coordinator {
         if #available(iOS 13.0, *) {
             feedViewController.tabBarItem.image = UIImage(systemName: "house.fill")
             feedViewController.tabBarItem.selectedImage = UIImage(systemName: "house.fill")
-            
-        } else {
-            
         }
         navigationController.show(feedViewController, sender: self)
     }
     
-    func pushPostVC() {
+    public func pushPostVC() {
         let postCoordinator = PostCoordinator(navigationController: navigationController)
         postCoordinator.navigationController = navigationController
         childCoordinators.append(postCoordinator)
@@ -32,7 +35,7 @@ class FeedCoordinator: Coordinator {
         postCoordinator.start()
     }
     
-    func childDidiFinish(_ child: Coordinator?) {
+    public func childDidiFinish(_ child: Coordinator?) {
         for (index, coordinator) in childCoordinators.enumerated() {
             if coordinator === child {
                 childCoordinators.remove(at: index)
@@ -40,5 +43,4 @@ class FeedCoordinator: Coordinator {
             }
         }
     }
-    
 }

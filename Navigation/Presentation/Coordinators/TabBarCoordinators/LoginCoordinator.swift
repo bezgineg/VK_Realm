@@ -1,26 +1,35 @@
 import UIKit
 
-class LoginCoordinator: Coordinator {
+final class LoginCoordinator: Coordinator {
     
-    var childCoordinators =  [Coordinator]()
-    var navigationController: UINavigationController
+    // MARK: - Public Properties
     
-    let dataProvider: DataProvider = RealmDataProvider()
+    public var childCoordinators =  [Coordinator]()
+    public var navigationController: UINavigationController
+    
+    // MARK: - Private Properties
+    
+    private let dataProvider: DataProvider
         
-    init(navigationController: UINavigationController) {
+    // MARK: - Initializers
+    
+    init(
+        navigationController: UINavigationController,
+        dataProvider: DataProvider = RealmDataProvider()
+    ) {
         self.navigationController = navigationController
+        self.dataProvider = dataProvider
     }
     
-    func start() {
+    // MARK: - Public Methods
+    
+    public func start() {
         let loginViewController = LogInViewController()
         loginViewController.coordinator = self
         
         if #available(iOS 13.0, *) {
             loginViewController.tabBarItem.image = UIImage(systemName: "person.fill")
             loginViewController.tabBarItem.selectedImage = UIImage(systemName: "person.fill")
-            
-        } else {
-            // Fallback on earlier versions
         }
         
         loginViewController.tabBarItem.title = TabBarLocalization.profile.localizedValue
@@ -29,14 +38,7 @@ class LoginCoordinator: Coordinator {
         checkCurrentUser()
     }
     
-    private func checkCurrentUser() {
-        let credential = dataProvider.getCredentials()
-        if !credential.isEmpty {
-            pushProfileVC()
-        }
-    }
-    
-    func pushProfileVC() {
+    public func pushProfileVC() {
         let profileCoordinator = ProfileCoordinator(navigationController: navigationController)
         profileCoordinator.navigationController = navigationController
         childCoordinators.append(profileCoordinator)
@@ -44,7 +46,7 @@ class LoginCoordinator: Coordinator {
         profileCoordinator.start()
     }
     
-    func childDidiFinish(_ child: Coordinator?) {
+    public func childDidiFinish(_ child: Coordinator?) {
         for (index, coordinator) in childCoordinators.enumerated() {
             if coordinator === child {
                 childCoordinators.remove(at: index)
@@ -53,16 +55,29 @@ class LoginCoordinator: Coordinator {
         }
     }
     
-    func logOut() {
+    public func logOut() {
         guard !dataProvider.getCredentials().isEmpty else { return }
         let credential = dataProvider.getCredentials()[0]
         dataProvider.deleteCredentials(credential)
     }
     
-    func showAlert(message: String) {
-        let alertController = UIAlertController(title: "Something went wrong", message: message, preferredStyle: .alert)
+    public func showAlert(message: String) {
+        let alertController = UIAlertController(
+            title: "Something went wrong",
+            message: message,
+            preferredStyle: .alert
+        )
         let okAction = UIAlertAction(title: "OK", style: .cancel, handler: nil)
         alertController.addAction(okAction)
         navigationController.present(alertController, animated: false, completion: nil)
+    }
+    
+    // MARK: - Private Methods
+    
+    private func checkCurrentUser() {
+        let credential = dataProvider.getCredentials()
+        if !credential.isEmpty {
+            pushProfileVC()
+        }
     }
 }

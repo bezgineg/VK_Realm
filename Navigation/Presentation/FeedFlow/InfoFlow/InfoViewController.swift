@@ -64,7 +64,7 @@ class InfoViewController: UIViewController {
         
         NetworkManager.getJson(with: url) { data in
             if let data = data,
-               let dictionary = try? NetworkManager.toOject(json: data),
+               let dictionary = try? NetworkManager.toObject(json: data),
                let title = dictionary["title"] as? String
             {
                 let user = User(title: title)
@@ -100,7 +100,7 @@ class InfoViewController: UIViewController {
             
             NetworkManager.getJson(with: url) { data in
                 if let data = data,
-                   let dictionary = try? NetworkManager.toOject(json: data),
+                   let dictionary = try? NetworkManager.toObject(json: data),
                    let name = dictionary["name"] as? String
                 {
                     let resident = Resident(name: name)

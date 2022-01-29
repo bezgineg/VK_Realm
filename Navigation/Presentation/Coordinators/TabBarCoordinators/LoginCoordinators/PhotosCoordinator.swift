@@ -1,27 +1,33 @@
 import UIKit
 
-class PhotosCoordinator: Coordinator {
+final class PhotosCoordinator: Coordinator {
     
-    weak var parentCoordinator: ProfileCoordinator?
+    // MARK: - Public Properties
+    
+    public weak var parentCoordinator: ProfileCoordinator?
 
-    var childCoordinators =  [Coordinator]()
-    var navigationController: UINavigationController
+    public var childCoordinators =  [Coordinator]()
+    public var navigationController: UINavigationController
+    
+    // MARK: - Initializers
     
     init(navigationController: UINavigationController) {
         self.navigationController = navigationController
     }
     
-    func start() {
+    // MARK: - Public Methods
+    
+    public func start() {
         let photosViewController = PhotosViewController()
         photosViewController.coordinator = self
         navigationController.show(photosViewController, sender: self)
     }
     
-    func didFinishPhotos() {
+    public func didFinishPhotos() {
         parentCoordinator?.childDidiFinish(self)
     }
     
-    func showAlert(with title: String, with message: String) {
+    public func showAlert(with title: String, with message: String) {
         let alertController = UIAlertController(title: title, message: message, preferredStyle: .alert)
         let okAction = UIAlertAction(title: "OK", style: .cancel, handler: nil)
         alertController.addAction(okAction)

@@ -1,24 +1,30 @@
 import UIKit
 
-class ProfileCoordinator: Coordinator {
+final class ProfileCoordinator: Coordinator {
     
-    weak var parentCoordinator: LoginCoordinator?
+    // MARK: - Public Properties
+    
+    public weak var parentCoordinator: LoginCoordinator?
 
-    var childCoordinators =  [Coordinator]()
-    var navigationController: UINavigationController
+    public var childCoordinators =  [Coordinator]()
+    public var navigationController: UINavigationController
+    
+    // MARK: - Initializers
     
     init(navigationController: UINavigationController) {
         self.navigationController = navigationController
     }
     
-    func start() {
+    // MARK: - Public Methods
+    
+    public func start() {
         let tableHeaderViewModel = ProfileTableHeaderViewModel()
         let profileViewController = ProfileViewController(tableHeaderViewModel: tableHeaderViewModel)
         profileViewController.coordinator = self
         navigationController.show(profileViewController, sender: self)
     }
     
-    func pushPhotosVC() {
+    public func pushPhotosVC() {
         let photosCoordinator = PhotosCoordinator(navigationController: navigationController)
         photosCoordinator.navigationController = navigationController
         childCoordinators.append(photosCoordinator)
@@ -26,11 +32,11 @@ class ProfileCoordinator: Coordinator {
         photosCoordinator.start()
     }
     
-    func didFinishProfile() {
+    public func didFinishProfile() {
         parentCoordinator?.childDidiFinish(self)
     }
     
-    func childDidiFinish(_ child: Coordinator?) {
+    public func childDidiFinish(_ child: Coordinator?) {
         for (index, coordinator) in childCoordinators.enumerated() {
             if coordinator === child {
                 childCoordinators.remove(at: index)
@@ -39,19 +45,15 @@ class ProfileCoordinator: Coordinator {
         }
     }
     
-    func showAlert(with title: String, with message: String) {
+    public func showAlert(with title: String, with message: String) {
         let alertController = UIAlertController(title: title, message: message, preferredStyle: .alert)
         let okAction = UIAlertAction(title: "OK", style: .cancel, handler: nil)
         alertController.addAction(okAction)
         navigationController.present(alertController, animated: false, completion: nil)
     }
     
-    func logOut() {
+    public func logOut() {
         parentCoordinator?.logOut()
         parentCoordinator?.navigationController.popViewController(animated: true)
     }
-
 }
-
-
-

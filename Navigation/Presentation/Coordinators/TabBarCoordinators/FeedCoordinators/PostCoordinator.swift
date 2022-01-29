@@ -1,23 +1,29 @@
 import UIKit
 
-class PostCoordinator: Coordinator {
+final class PostCoordinator: Coordinator {
 
-    weak var parentCoordinator: FeedCoordinator?
+    // MARK: - Public Properties
     
-    var childCoordinators =  [Coordinator]()
-    var navigationController: UINavigationController
+    public weak var parentCoordinator: FeedCoordinator?
+    
+    public var childCoordinators =  [Coordinator]()
+    public var navigationController: UINavigationController
+    
+    // MARK: - Initializers
     
     init(navigationController: UINavigationController) {
         self.navigationController = navigationController
     }
     
-    func start() {
+    // MARK: - Public Methods
+    
+    public func start() {
         let postViewController = PostViewController()
         postViewController.coordinator = self
         navigationController.show(postViewController, sender: self)
     }
     
-    func present() {
+    public func present() {
         let infoCoordinator = InfoCoordinator(navigationController: navigationController)
         infoCoordinator.navigationController = navigationController
         childCoordinators.append(infoCoordinator)
@@ -25,11 +31,11 @@ class PostCoordinator: Coordinator {
         infoCoordinator.start()
     }
     
-    func didFinishPost() {
+    public func didFinishPost() {
         parentCoordinator?.childDidiFinish(self)
     }
     
-    func childDidiFinish(_ child: Coordinator?) {
+    public func childDidiFinish(_ child: Coordinator?) {
         for (index, coordinator) in childCoordinators.enumerated() {
             if coordinator === child {
                 childCoordinators.remove(at: index)
