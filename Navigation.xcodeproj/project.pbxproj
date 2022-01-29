@@ -21,6 +21,12 @@
 		59EC7CBD256554E300A12046 /* PhotosViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 59EC7CBC256554E300A12046 /* PhotosViewController.swift */; };
 		59EC7CC0256555D400A12046 /* PhotosCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 59EC7CBF256555D400A12046 /* PhotosCollectionViewCell.swift */; };
 		59EC7CC42565566D00A12046 /* PhotosStorage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 59EC7CC32565566D00A12046 /* PhotosStorage.swift */; };
+		7EAC6BCC27A557DC00C8F279 /* UIColor+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7EAC6BCB27A557DC00C8F279 /* UIColor+Extensions.swift */; };
+		7EAC6BCE27A557F300C8F279 /* UIView+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7EAC6BCD27A557F300C8F279 /* UIView+Extensions.swift */; };
+		7EAC6BD027A5582300C8F279 /* UITextField+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7EAC6BCF27A5582300C8F279 /* UITextField+Extensions.swift */; };
+		7EAC6BD227A5583C00C8F279 /* UIImage+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7EAC6BD127A5583C00C8F279 /* UIImage+Extensions.swift */; };
+		7EAC6BD427A5586400C8F279 /* UILabel+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7EAC6BD327A5586400C8F279 /* UILabel+Extensions.swift */; };
+		7EAC6BD827A5589E00C8F279 /* UIImageView+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7EAC6BD727A5589E00C8F279 /* UIImageView+Extensions.swift */; };
 		81B0AF2E63B9BA547A8F0820 /* Pods_Navigation_copy.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = E963D9D2EB8580F5942162AD /* Pods_Navigation_copy.framework */; };
 		A364739525AF715B0037082B /* ButtonView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A364739425AF715B0037082B /* ButtonView.swift */; };
 		A36473C225B33DED0037082B /* FeedCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = A36473C125B33DED0037082B /* FeedCoordinator.swift */; };
@@ -36,7 +42,6 @@
 		A3773B2F25FCEE62009955E4 /* NetworkManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = A3773B2E25FCEE62009955E4 /* NetworkManager.swift */; };
 		A3773B3325FCEEB8009955E4 /* AppConfiguration.swift in Sources */ = {isa = PBXBuildFile; fileRef = A3773B3225FCEEB8009955E4 /* AppConfiguration.swift */; };
 		A38D8CEE2552EB1F00864FEE /* ProfileViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A38D8CED2552EB1F00864FEE /* ProfileViewController.swift */; };
-		A38D8CF12553037F00864FEE /* Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = A38D8CF02553037F00864FEE /* Extensions.swift */; };
 		A38D8D67255ED2EF00864FEE /* Post.swift in Sources */ = {isa = PBXBuildFile; fileRef = A38D8D66255ED2EF00864FEE /* Post.swift */; };
 		A38D8D6C255ED3A100864FEE /* PostStorage.swift in Sources */ = {isa = PBXBuildFile; fileRef = A38D8D6B255ED3A100864FEE /* PostStorage.swift */; };
 		A3A8167526012BB200F95B40 /* User.swift in Sources */ = {isa = PBXBuildFile; fileRef = A3A8167426012BB200F95B40 /* User.swift */; };
@@ -62,7 +67,6 @@
 		A3E5184B2595F63C008B6465 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 060782B1250CE27700A87020 /* AppDelegate.swift */; };
 		A3E5184C2595F63C008B6465 /* PostStorage.swift in Sources */ = {isa = PBXBuildFile; fileRef = A38D8D6B255ED3A100864FEE /* PostStorage.swift */; };
 		A3E5184D2595F63C008B6465 /* InfoViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 060782C5250CEB0A00A87020 /* InfoViewController.swift */; };
-		A3E5184E2595F63C008B6465 /* Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = A38D8CF02553037F00864FEE /* Extensions.swift */; };
 		A3E5184F2595F63C008B6465 /* TabBarController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E413A04925937F8D001CD6AD /* TabBarController.swift */; };
 		A3E518502595F63C008B6465 /* ProfileViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A38D8CED2552EB1F00864FEE /* ProfileViewController.swift */; };
 		A3E518512595F63C008B6465 /* LogInViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 597DC856255C09FB0038FFDF /* LogInViewController.swift */; };
@@ -103,6 +107,12 @@
 		59EC7CBC256554E300A12046 /* PhotosViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PhotosViewController.swift; sourceTree = "<group>"; };
 		59EC7CBF256555D400A12046 /* PhotosCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PhotosCollectionViewCell.swift; sourceTree = "<group>"; };
 		59EC7CC32565566D00A12046 /* PhotosStorage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PhotosStorage.swift; sourceTree = "<group>"; };
+		7EAC6BCB27A557DC00C8F279 /* UIColor+Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIColor+Extensions.swift"; sourceTree = "<group>"; };
+		7EAC6BCD27A557F300C8F279 /* UIView+Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIView+Extensions.swift"; sourceTree = "<group>"; };
+		7EAC6BCF27A5582300C8F279 /* UITextField+Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UITextField+Extensions.swift"; sourceTree = "<group>"; };
+		7EAC6BD127A5583C00C8F279 /* UIImage+Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIImage+Extensions.swift"; sourceTree = "<group>"; };
+		7EAC6BD327A5586400C8F279 /* UILabel+Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UILabel+Extensions.swift"; sourceTree = "<group>"; };
+		7EAC6BD727A5589E00C8F279 /* UIImageView+Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIImageView+Extensions.swift"; sourceTree = "<group>"; };
 		8DFF5758EB38E82F0BDA2BDD /* Pods-Navigation copy.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Navigation copy.debug.xcconfig"; path = "Target Support Files/Pods-Navigation copy/Pods-Navigation copy.debug.xcconfig"; sourceTree = "<group>"; };
 		93D2C21FAF4FE66F16904342 /* Pods-Navigation.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Navigation.release.xcconfig"; path = "Target Support Files/Pods-Navigation/Pods-Navigation.release.xcconfig"; sourceTree = "<group>"; };
 		9D641B20035EA534A2E366E1 /* Pods-Navigation.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Navigation.debug.xcconfig"; path = "Target Support Files/Pods-Navigation/Pods-Navigation.debug.xcconfig"; sourceTree = "<group>"; };
@@ -119,7 +129,6 @@
 		A3773B2E25FCEE62009955E4 /* NetworkManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkManager.swift; sourceTree = "<group>"; };
 		A3773B3225FCEEB8009955E4 /* AppConfiguration.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppConfiguration.swift; sourceTree = "<group>"; };
 		A38D8CED2552EB1F00864FEE /* ProfileViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileViewController.swift; sourceTree = "<group>"; };
-		A38D8CF02553037F00864FEE /* Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Extensions.swift; sourceTree = "<group>"; };
 		A38D8D66255ED2EF00864FEE /* Post.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Post.swift; sourceTree = "<group>"; };
 		A38D8D6B255ED3A100864FEE /* PostStorage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PostStorage.swift; sourceTree = "<group>"; };
 		A3A8167426012BB200F95B40 /* User.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = User.swift; sourceTree = "<group>"; };
@@ -255,7 +264,7 @@
 			children = (
 				A3C12A59260BC2F90026ACC0 /* GoogleService-Info.plist */,
 				060782BA250CE27A00A87020 /* Assets.xcassets */,
-				A36473AB25B32C0E0037082B /* Helper */,
+				A36473AB25B32C0E0037082B /* Helpers */,
 				A3C9D958267BA67E00E2578D /* Localization */,
 				A3C9DA0B268E4A0E00E2578D /* Constants */,
 			);
@@ -298,12 +307,17 @@
 			path = LoginFlow;
 			sourceTree = "<group>";
 		};
-		A36473AB25B32C0E0037082B /* Helper */ = {
+		A36473AB25B32C0E0037082B /* Helpers */ = {
 			isa = PBXGroup;
 			children = (
-				A38D8CF02553037F00864FEE /* Extensions.swift */,
+				7EAC6BCB27A557DC00C8F279 /* UIColor+Extensions.swift */,
+				7EAC6BCD27A557F300C8F279 /* UIView+Extensions.swift */,
+				7EAC6BCF27A5582300C8F279 /* UITextField+Extensions.swift */,
+				7EAC6BD127A5583C00C8F279 /* UIImage+Extensions.swift */,
+				7EAC6BD327A5586400C8F279 /* UILabel+Extensions.swift */,
+				7EAC6BD727A5589E00C8F279 /* UIImageView+Extensions.swift */,
 			);
-			path = Helper;
+			path = Helpers;
 			sourceTree = "<group>";
 		};
 		A36473AE25B32C2A0037082B /* FeedFlow */ = {
@@ -673,11 +687,14 @@
 				A364739525AF715B0037082B /* ButtonView.swift in Sources */,
 				A36473E925B38E980037082B /* InfoCoordinator.swift in Sources */,
 				060782B2250CE27700A87020 /* AppDelegate.swift in Sources */,
+				7EAC6BCE27A557F300C8F279 /* UIView+Extensions.swift in Sources */,
 				BBAED41D2625C7F500D710D1 /* DataProvider.swift in Sources */,
 				A38D8D6C255ED3A100864FEE /* PostStorage.swift in Sources */,
 				A3C12AEE262C72780026ACC0 /* FavoriteCoordinator.swift in Sources */,
 				A3C12B00262C74050026ACC0 /* FavoritePost+CoreDataProperties.swift in Sources */,
 				A3C9DA0D268E4A1F00E2578D /* Colors.swift in Sources */,
+				7EAC6BCC27A557DC00C8F279 /* UIColor+Extensions.swift in Sources */,
+				7EAC6BD027A5582300C8F279 /* UITextField+Extensions.swift in Sources */,
 				060782C6250CEB0A00A87020 /* InfoViewController.swift in Sources */,
 				A3C12B0D262C74F00026ACC0 /* FavoriteViewController.swift in Sources */,
 				A3A8167926012D2200F95B40 /* Planet.swift in Sources */,
@@ -687,7 +704,6 @@
 				A3C12AF4262C72DA0026ACC0 /* FavoritePostStorage.swift in Sources */,
 				A364747A25C2B4210037082B /* ProfileTableHeaderViewModel.swift in Sources */,
 				A3C12B04262C74190026ACC0 /* CoreDataStack.swift in Sources */,
-				A38D8CF12553037F00864FEE /* Extensions.swift in Sources */,
 				A364747625C2B3E50037082B /* PhotosTableViewCellViewModel.swift in Sources */,
 				A3C12B11262C75360026ACC0 /* FavoritePostTableViewCell.swift in Sources */,
 				E413A04A25937F8D001CD6AD /* TabBarController.swift in Sources */,
@@ -699,7 +715,9 @@
 				A36473F725B48B940037082B /* ProfileCoordinator.swift in Sources */,
 				59EC7CBA25654DBC00A12046 /* PhotosTableViewCell.swift in Sources */,
 				599D51CB25655E1700A1B219 /* Photo.swift in Sources */,
+				7EAC6BD827A5589E00C8F279 /* UIImageView+Extensions.swift in Sources */,
 				A36473C825B3471C0037082B /* LoginCoordinator.swift in Sources */,
+				7EAC6BD227A5583C00C8F279 /* UIImage+Extensions.swift in Sources */,
 				A3C9D95A267BA69700E2578D /* Localization.swift in Sources */,
 				A364747225C2B3BF0037082B /* PostTableViewCellViewModel.swift in Sources */,
 				060782C8250CEE5D00A87020 /* PostViewController.swift in Sources */,
@@ -711,6 +729,7 @@
 				59EC7CBD256554E300A12046 /* PhotosViewController.swift in Sources */,
 				A38D8D67255ED2EF00864FEE /* Post.swift in Sources */,
 				BBAED4162625C1D400D710D1 /* Credential.swift in Sources */,
+				7EAC6BD427A5586400C8F279 /* UILabel+Extensions.swift in Sources */,
 				5967809625629B0F00C9E10B /* PostTableViewCell.swift in Sources */,
 				A36473FD25B48C740037082B /* PhotosCoordinator.swift in Sources */,
 				BBCF092226EB3AFC0093B127 /* LocalNotificationCenter.swift in Sources */,
@@ -728,7 +747,6 @@
 				A3E5184B2595F63C008B6465 /* AppDelegate.swift in Sources */,
 				A3E5184C2595F63C008B6465 /* PostStorage.swift in Sources */,
 				A3E5184D2595F63C008B6465 /* InfoViewController.swift in Sources */,
-				A3E5184E2595F63C008B6465 /* Extensions.swift in Sources */,
 				A3E5184F2595F63C008B6465 /* TabBarController.swift in Sources */,
 				A3E518502595F63C008B6465 /* ProfileViewController.swift in Sources */,
 				A3E518512595F63C008B6465 /* LogInViewController.swift in Sources */,

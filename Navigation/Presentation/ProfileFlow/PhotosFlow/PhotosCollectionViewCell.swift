@@ -1,7 +1,7 @@
 
 import UIKit
 
-protocol PhotosTableViewCellDelegate: class {
+protocol PhotosTableViewCellDelegate: AnyObject {
     func showDataNotFoundAlert(with title: String, with message: String)
     func showNetworkConnectionProblemAlert(with title: String, with message: String)
 }
