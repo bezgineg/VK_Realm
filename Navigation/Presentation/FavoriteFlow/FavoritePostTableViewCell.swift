@@ -1,6 +1,6 @@
 import UIKit
 
-protocol FavoritePostTableViewCellDelegate: class {
+protocol FavoritePostTableViewCellDelegate: AnyObject {
     func showDataNotFoundAlert(with title: String, with message: String)
     func showNetworkConnectionProblemAlert(with title: String, with message: String)
 }

@@ -198,15 +198,13 @@
 		060782B0250CE27700A87020 /* Navigation */ = {
 			isa = PBXGroup;
 			children = (
+				060782BF250CE27A00A87020 /* Info.plist */,
 				7EAC6BC627A554CB00C8F279 /* Supporting files */,
 				7EAC6BC527A554BE00C8F279 /* Persistancy */,
 				7EAC6BC427A554B400C8F279 /* Presentation */,
 				A3773B2B25FCEE4E009955E4 /* Services */,
 				7EAC6BC927A5557D00C8F279 /* UIApplication */,
-				060782BA250CE27A00A87020 /* Assets.xcassets */,
 				7EAC6BCA27A5559700C8F279 /* LaunchScreen */,
-				A3C12A59260BC2F90026ACC0 /* GoogleService-Info.plist */,
-				060782BF250CE27A00A87020 /* Info.plist */,
 			);
 			path = Navigation;
 			sourceTree = "<group>";
@@ -255,6 +253,8 @@
 		7EAC6BC627A554CB00C8F279 /* Supporting files */ = {
 			isa = PBXGroup;
 			children = (
+				A3C12A59260BC2F90026ACC0 /* GoogleService-Info.plist */,
+				060782BA250CE27A00A87020 /* Assets.xcassets */,
 				A36473AB25B32C0E0037082B /* Helper */,
 				A3C9D958267BA67E00E2578D /* Localization */,
 				A3C9DA0B268E4A0E00E2578D /* Constants */,

@@ -1,7 +1,7 @@
 
 import Foundation
 
-protocol DataProvider: class {
+protocol DataProvider: AnyObject {
 
     func getCredentials() -> [Credential]
     func addCredentials(_ credential: Credential)

@@ -1,7 +1,7 @@
 
 import UIKit
 
-protocol PostTableViewCellDelegate: class {
+protocol PostTableViewCellDelegate: AnyObject {
     func showDataNotFoundAlert(with title: String, with message: String)
     func showNetworkConnectionProblemAlert(with title: String, with message: String)
 }
