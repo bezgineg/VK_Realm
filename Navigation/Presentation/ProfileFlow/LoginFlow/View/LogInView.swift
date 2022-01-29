@@ -1,11 +1,27 @@
+//
+//  LoginView.swift
+//  Navigation
+//
+//  Created by Евгений on 29.01.2022.
+//  Copyright © 2022 Artem Novichkov. All rights reserved.
+//
 
 import UIKit
+import LocalAuthentication
 
-class LogInViewController: UIViewController {
+protocol LoginViewDelegate: AnyObject {
+    func loginView(_ loginView: LoginView, createLoginWith login: String?, password: String?)
+    func loginView(biometryButtonTappedAt loginView: LoginView)
+}
+
+final class LoginView: UIView {
     
-    weak var coordinator: LoginCoordinator?
-   
-    private var authManager: AuthorizationServiceProtocol
+    // MARK: - Public Properties
+    
+    public weak var delegate: LoginViewDelegate?
+    
+    // MARK: - Private Properties
+    
     private let logoImageView: UIImageView = {
         let imageView = UIImageView()
         imageView.contentMode = .scaleAspectFit
@@ -14,23 +30,21 @@ class LogInViewController: UIViewController {
         return imageView
     }()
     
-    private let loginTextField: UITextField = {
+    private lazy var loginTextField: UITextField = {
         let textField = UITextField()
         textField.toAutoLayout()
         textField.setupTextField()
         textField.placeholder = LoginFlowLocalization.loginPlaceholder.localizedValue
-        textField.addTarget(self, action: #selector(checkField), for: .editingChanged
-        )
+        textField.addTarget(self, action: #selector(checkField), for: .editingChanged)
         return textField
     }()
     
-    private let passwordTextField: UITextField = {
+    private lazy var passwordTextField: UITextField = {
         let textField = UITextField()
         textField.toAutoLayout()
         textField.setupTextField()
         textField.placeholder = LoginFlowLocalization.passwordPlaceholder.localizedValue
-        textField.addTarget(self, action: #selector(checkField), for: .editingChanged
-        )
+        textField.addTarget(self, action: #selector(checkField), for: .editingChanged)
         textField.isSecureTextEntry = true
         return textField
     }()
@@ -84,7 +98,7 @@ class LogInViewController: UIViewController {
         return divider
     }()
     
-    private let biometryButton: UIButton = {
+    private lazy var biometryButton: UIButton = {
         let button = UIButton()
         button.translatesAutoresizingMaskIntoConstraints = false
         button.backgroundColor = .white
@@ -95,101 +109,47 @@ class LogInViewController: UIViewController {
         return button
     }()
     
-    init(authManager: AuthorizationServiceProtocol = LocalAuthorizationService()) {
-        self.authManager = authManager
-        super.init(nibName: nil, bundle: nil)
+    // MARK: - Initializers
+
+    init() {
+        super.init(frame: .zero)
+        backgroundColor = UIColor.createColor(lightMode: Colors.white, darkMode: Colors.black)
+        addSubviews()
+        setupLayout()
     }
-    
+
     required init?(coder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
     }
     
-    override func viewDidLoad() {
-        super.viewDidLoad()
-        
-        view.backgroundColor = UIColor.createColor(lightMode: Colors.white, darkMode: Colors.black)
-        
-        setupLayout()
-        enableBiometryButton()
-        setupBiometryButtonIcon()
-    }
+    // MARK: - Public Methods
     
-    override func viewWillAppear(_ animated: Bool) {
-        super.viewWillAppear(animated)
-        
-        self.navigationController?.navigationBar.isHidden = true
-        
-        NotificationCenter.default.addObserver(self, selector: #selector(keyboardWillShow), name: UIResponder.keyboardWillShowNotification, object: nil)
-        NotificationCenter.default.addObserver(self, selector: #selector(keyboardWillHide), name: UIResponder.keyboardWillHideNotification, object: nil)
-    }
-    
-    override func viewDidDisappear(_ animated: Bool) {
-        super.viewDidDisappear(animated)
-        
+    public func clearTextFields() {
         loginTextField.text?.removeAll()
         passwordTextField.text?.removeAll()
-        
-        NotificationCenter.default.removeObserver(self, name: UIResponder.keyboardWillShowNotification, object: nil)
-        NotificationCenter.default.removeObserver(self, name: UIResponder.keyboardWillHideNotification, object: nil)
     }
     
-    @objc private func biometryButtonTapped() {
-        authManager.authorizeIfPossible { [weak self] result in
-            guard let self = self else { return }
-            switch result {
-            case .success(true):
-                DispatchQueue.main.async {
-                    self.coordinator?.pushProfileVC()
-                }
-            case.success(false):
-                DispatchQueue.main.async {
-                    self.coordinator?.showAlert(message: "Try again")
-                }
-            case .failure(let error):
-                DispatchQueue.main.async {
-                    self.coordinator?.showAlert(message: error.localizedDescription)
-                }
-            }
-        }
+    public func setupKeyboardShowing(keyboardSize: CGRect) {
+        scrollView.contentInset.bottom = keyboardSize.height
+        scrollView.verticalScrollIndicatorInsets = UIEdgeInsets(
+            top: 0,
+            left: 0,
+            bottom: keyboardSize.height,
+            right: 0
+        )
     }
     
-    @objc fileprivate func keyboardWillShow(notification: NSNotification) {
-        if let keyboardSize = (notification.userInfo?[UIResponder.keyboardFrameEndUserInfoKey] as? NSValue)?.cgRectValue {
-            
-            scrollView.contentInset.bottom = keyboardSize.height
-            scrollView.verticalScrollIndicatorInsets = UIEdgeInsets(top: 0, left: 0, bottom: keyboardSize.height, right: 0)
-        }
-    }
-    
-    @objc fileprivate func keyboardWillHide(notification: NSNotification) {
+    public func setupKeyboardHiding() {
         scrollView.contentInset.bottom = .zero
         scrollView.verticalScrollIndicatorInsets = .zero
     }
     
-    @objc private func logInButtonTapped() {
-        guard let login = loginTextField.text,
-              let password = passwordTextField.text else { return }
-        
-        let credential = Credential(account: login, password: password)
-        coordinator?.dataProvider.addCredentials(credential)
-        coordinator?.pushProfileVC()
-        
+    public func enableBiometryButton(isEnabled: Bool) {
+        biometryButton.isEnabled = isEnabled
     }
     
-    @objc private func checkField() {
-        guard let login = loginTextField.text,
-              let password = passwordTextField.text,
-              !login.isEmpty,
-              !password.isEmpty else {
-            self.logInButton.isEnabled = false
-            return
-        }
-        
-        logInButton.isEnabled = true
-    }
-    
-    private func setupBiometryButtonIcon() {
-        switch authManager.laContext.biometryType {
+    public func setupBiometryButtonIcon(biometryType: LABiometryType) {
+        switch biometryType {
         case .none:
             biometryButton.setImage(UIImage(named: "logo"), for: .normal)
         case .touchID:
@@ -209,28 +169,42 @@ class LogInViewController: UIViewController {
         }
     }
     
-    private func enableBiometryButton() {
-        biometryButton.isEnabled = authManager.laContext.canEvaluatePolicy(
-            .deviceOwnerAuthenticationWithBiometrics,
-            error: &authManager.error
-        )
+    // MARK: - Private Methods
+    
+    @objc private func logInButtonTapped() {
+        delegate?.loginView(self, createLoginWith: loginTextField.text, password: passwordTextField.text)
     }
     
-    private func setupLayout() {
-        
-        view.addSubview(scrollView)
+    @objc private func biometryButtonTapped() {
+        delegate?.loginView(biometryButtonTappedAt: self)
+    }
+    
+    @objc private func checkField() {
+        guard let login = loginTextField.text, let password = passwordTextField.text,
+              !login.isEmpty, !password.isEmpty else {
+            logInButton.isEnabled = false
+            return
+            }
+        logInButton.isEnabled = true
+    }
+    
+    private func addSubviews() {
+        addSubview(scrollView)
         scrollView.addSubview(contentView)
         
         contentView.addSubview(logoImageView)
         contentView.addSubview(stackView)
         contentView.addSubview(logInButton)
         contentView.addSubview(biometryButton)
+    }
+    
+    private func setupLayout() {
         
         let constraints = [
-            scrollView.topAnchor.constraint(equalTo: view.topAnchor),
-            scrollView.leadingAnchor.constraint(equalTo: view.leadingAnchor),
-            scrollView.trailingAnchor.constraint(equalTo: view.trailingAnchor),
-            scrollView.bottomAnchor.constraint(equalTo: view.bottomAnchor),
+            scrollView.topAnchor.constraint(equalTo: topAnchor),
+            scrollView.leadingAnchor.constraint(equalTo: leadingAnchor),
+            scrollView.trailingAnchor.constraint(equalTo: trailingAnchor),
+            scrollView.bottomAnchor.constraint(equalTo: bottomAnchor),
             
             contentView.topAnchor.constraint(equalTo: scrollView.topAnchor),
             contentView.leadingAnchor.constraint(equalTo: scrollView.leadingAnchor),
@@ -239,25 +213,41 @@ class LogInViewController: UIViewController {
             contentView.widthAnchor.constraint(equalTo: scrollView.widthAnchor),
             
             logoImageView.centerXAnchor.constraint(equalTo: contentView.centerXAnchor),
-            logoImageView.topAnchor.constraint(equalTo: contentView.safeAreaLayoutGuide.topAnchor, constant: 120),
+            logoImageView.topAnchor.constraint(
+                equalTo: contentView.safeAreaLayoutGuide.topAnchor,
+                constant: 120
+            ),
             logoImageView.heightAnchor.constraint(equalToConstant: 100),
             logoImageView.widthAnchor.constraint(equalToConstant: 100),
             
             stackView.topAnchor.constraint(equalTo: logoImageView.bottomAnchor, constant: 120),
-            stackView.leadingAnchor.constraint(equalTo: contentView.safeAreaLayoutGuide.leadingAnchor, constant: 16),
-            stackView.trailingAnchor.constraint(equalTo: contentView.safeAreaLayoutGuide.trailingAnchor, constant: -16),
+            stackView.leadingAnchor.constraint(
+                equalTo: contentView.safeAreaLayoutGuide.leadingAnchor,
+                constant: 16
+            ),
+            stackView.trailingAnchor.constraint(
+                equalTo: contentView.safeAreaLayoutGuide.trailingAnchor,
+                constant: -16
+            ),
             
             dividerView.heightAnchor.constraint(equalToConstant: 0.5),
-            
             loginTextField.heightAnchor.constraint(equalToConstant: 50),
-            
             passwordTextField.heightAnchor.constraint(equalToConstant: 50),
             
             logInButton.topAnchor.constraint(equalTo: passwordTextField.bottomAnchor, constant: 16),
-            logInButton.leadingAnchor.constraint(equalTo: contentView.safeAreaLayoutGuide.leadingAnchor, constant: 16),
-            logInButton.trailingAnchor.constraint(equalTo: contentView.safeAreaLayoutGuide.trailingAnchor, constant: -16),
+            logInButton.leadingAnchor.constraint(
+                equalTo: contentView.safeAreaLayoutGuide.leadingAnchor,
+                constant: 16
+            ),
+            logInButton.trailingAnchor.constraint(
+                equalTo: contentView.safeAreaLayoutGuide.trailingAnchor,
+                constant: -16
+            ),
             logInButton.heightAnchor.constraint(equalToConstant: 50),
-            logInButton.bottomAnchor.constraint(equalTo: contentView.safeAreaLayoutGuide.bottomAnchor, constant: -12),
+            logInButton.bottomAnchor.constraint(
+                equalTo: contentView.safeAreaLayoutGuide.bottomAnchor,
+                constant: -12
+            ),
             
             biometryButton.widthAnchor.constraint(equalToConstant: 50),
             biometryButton.heightAnchor.constraint(equalToConstant: 50),
@@ -265,13 +255,6 @@ class LogInViewController: UIViewController {
             biometryButton.topAnchor.constraint(equalTo: logoImageView.bottomAnchor, constant: 30)
             
         ]
-        
         NSLayoutConstraint.activate(constraints)
-        
     }
 }
-
-
-
-
-

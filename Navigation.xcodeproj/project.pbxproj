@@ -27,6 +27,7 @@
 		7EAC6BD227A5583C00C8F279 /* UIImage+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7EAC6BD127A5583C00C8F279 /* UIImage+Extensions.swift */; };
 		7EAC6BD427A5586400C8F279 /* UILabel+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7EAC6BD327A5586400C8F279 /* UILabel+Extensions.swift */; };
 		7EAC6BD827A5589E00C8F279 /* UIImageView+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7EAC6BD727A5589E00C8F279 /* UIImageView+Extensions.swift */; };
+		7EAC6BDF27A5673300C8F279 /* LogInView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7EAC6BDE27A5673300C8F279 /* LogInView.swift */; };
 		81B0AF2E63B9BA547A8F0820 /* Pods_Navigation_copy.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = E963D9D2EB8580F5942162AD /* Pods_Navigation_copy.framework */; };
 		A364739525AF715B0037082B /* ButtonView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A364739425AF715B0037082B /* ButtonView.swift */; };
 		A36473C225B33DED0037082B /* FeedCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = A36473C125B33DED0037082B /* FeedCoordinator.swift */; };
@@ -111,6 +112,7 @@
 		7EAC6BD127A5583C00C8F279 /* UIImage+Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIImage+Extensions.swift"; sourceTree = "<group>"; };
 		7EAC6BD327A5586400C8F279 /* UILabel+Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UILabel+Extensions.swift"; sourceTree = "<group>"; };
 		7EAC6BD727A5589E00C8F279 /* UIImageView+Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIImageView+Extensions.swift"; sourceTree = "<group>"; };
+		7EAC6BDE27A5673300C8F279 /* LogInView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LogInView.swift; sourceTree = "<group>"; };
 		8DFF5758EB38E82F0BDA2BDD /* Pods-Navigation copy.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Navigation copy.debug.xcconfig"; path = "Target Support Files/Pods-Navigation copy/Pods-Navigation copy.debug.xcconfig"; sourceTree = "<group>"; };
 		93D2C21FAF4FE66F16904342 /* Pods-Navigation.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Navigation.release.xcconfig"; path = "Target Support Files/Pods-Navigation/Pods-Navigation.release.xcconfig"; sourceTree = "<group>"; };
 		9D641B20035EA534A2E366E1 /* Pods-Navigation.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Navigation.debug.xcconfig"; path = "Target Support Files/Pods-Navigation/Pods-Navigation.debug.xcconfig"; sourceTree = "<group>"; };
@@ -310,10 +312,27 @@
 			path = RealmDataProvider;
 			sourceTree = "<group>";
 		};
-		A353640E25ADFFD4004D5C78 /* LoginFlow */ = {
+		7EAC6BDB27A566EB00C8F279 /* View */ = {
+			isa = PBXGroup;
+			children = (
+				7EAC6BDE27A5673300C8F279 /* LogInView.swift */,
+			);
+			path = View;
+			sourceTree = "<group>";
+		};
+		7EAC6BDD27A566F900C8F279 /* Controller */ = {
 			isa = PBXGroup;
 			children = (
 				597DC856255C09FB0038FFDF /* LogInViewController.swift */,
+			);
+			path = Controller;
+			sourceTree = "<group>";
+		};
+		A353640E25ADFFD4004D5C78 /* LoginFlow */ = {
+			isa = PBXGroup;
+			children = (
+				7EAC6BDB27A566EB00C8F279 /* View */,
+				7EAC6BDD27A566F900C8F279 /* Controller */,
 			);
 			path = LoginFlow;
 			sourceTree = "<group>";
@@ -710,6 +729,7 @@
 				A3C12B08262C743C0026ACC0 /* CoreDataManager.swift in Sources */,
 				A3E518BA25AB3B4B008B6465 /* RealmDataProvider.swift in Sources */,
 				A3C12AF4262C72DA0026ACC0 /* FavoritePostStorage.swift in Sources */,
+				7EAC6BDF27A5673300C8F279 /* LogInView.swift in Sources */,
 				A364747A25C2B4210037082B /* ProfileTableHeaderViewModel.swift in Sources */,
 				A3C12B04262C74190026ACC0 /* CoreDataStack.swift in Sources */,
 				A364747625C2B3E50037082B /* PhotosTableViewCellViewModel.swift in Sources */,
