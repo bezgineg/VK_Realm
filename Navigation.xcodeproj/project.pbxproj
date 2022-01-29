@@ -207,9 +207,9 @@
 			children = (
 				060782BF250CE27A00A87020 /* Info.plist */,
 				7EAC6BC627A554CB00C8F279 /* Supporting files */,
+				A3773B2B25FCEE4E009955E4 /* Services */,
 				7EAC6BC527A554BE00C8F279 /* Persistancy */,
 				7EAC6BC427A554B400C8F279 /* Presentation */,
-				A3773B2B25FCEE4E009955E4 /* Services */,
 				7EAC6BC927A5557D00C8F279 /* UIApplication */,
 				7EAC6BCA27A5559700C8F279 /* LaunchScreen */,
 			);
@@ -240,9 +240,10 @@
 			isa = PBXGroup;
 			children = (
 				A36473D225B347510037082B /* Coordinators */,
-				E413A04925937F8D001CD6AD /* TabBarController.swift */,
-				A3C12B0B262C74830026ACC0 /* FavoriteFlow */,
+				7EAC6BD927A5627100C8F279 /* TabBarController */,
 				A38D8CE92552EAAE00864FEE /* ProfileFlow */,
+				A3C12B0B262C74830026ACC0 /* FavoriteFlow */,
+				A36473AE25B32C2A0037082B /* FeedFlow */,
 			);
 			path = Presentation;
 			sourceTree = "<group>";
@@ -291,6 +292,14 @@
 				060782BC250CE27A00A87020 /* LaunchScreen.storyboard */,
 			);
 			path = LaunchScreen;
+			sourceTree = "<group>";
+		};
+		7EAC6BD927A5627100C8F279 /* TabBarController */ = {
+			isa = PBXGroup;
+			children = (
+				E413A04925937F8D001CD6AD /* TabBarController.swift */,
+			);
+			path = TabBarController;
 			sourceTree = "<group>";
 		};
 		A353640E25ADFFD4004D5C78 /* LoginFlow */ = {
@@ -363,7 +372,6 @@
 		A36473D225B347510037082B /* Coordinators */ = {
 			isa = PBXGroup;
 			children = (
-				A36473AE25B32C2A0037082B /* FeedFlow */,
 				A3C12AE7262C70700026ACC0 /* Coordinator.swift */,
 				A36473D925B365DC0037082B /* TabBarCoordinators */,
 			);
@@ -376,8 +384,8 @@
 				A3C12AED262C72780026ACC0 /* FavoriteCoordinator.swift */,
 				A36473C125B33DED0037082B /* FeedCoordinator.swift */,
 				A36473C725B3471C0037082B /* LoginCoordinator.swift */,
-				A36473EC25B38EAF0037082B /* FeedCoordinators */,
 				A36473F325B451880037082B /* LoginCoordinators */,
+				A36473EC25B38EAF0037082B /* FeedCoordinators */,
 			);
 			path = TabBarCoordinators;
 			sourceTree = "<group>";
