@@ -198,23 +198,15 @@
 		060782B0250CE27700A87020 /* Navigation */ = {
 			isa = PBXGroup;
 			children = (
-				A3C9DA0B268E4A0E00E2578D /* Constants */,
-				A3C9D958267BA67E00E2578D /* Localization */,
+				7EAC6BC627A554CB00C8F279 /* Supporting files */,
+				7EAC6BC527A554BE00C8F279 /* Persistancy */,
+				7EAC6BC427A554B400C8F279 /* Presentation */,
 				A3773B2B25FCEE4E009955E4 /* Services */,
-				A38D8CE92552EAAE00864FEE /* ProfileFlow */,
-				A3C12B0B262C74830026ACC0 /* FavoriteFlow */,
-				A38D8D6A255ED38F00864FEE /* Storage */,
-				A38D8D65255ED2E200864FEE /* Model */,
-				060782B1250CE27700A87020 /* AppDelegate.swift */,
-				E413A04925937F8D001CD6AD /* TabBarController.swift */,
-				A36473D225B347510037082B /* Coordinators */,
-				A36473AE25B32C2A0037082B /* FeedFlow */,
-				A36473AB25B32C0E0037082B /* Helper */,
+				7EAC6BC927A5557D00C8F279 /* UIApplication */,
 				060782BA250CE27A00A87020 /* Assets.xcassets */,
-				060782BC250CE27A00A87020 /* LaunchScreen.storyboard */,
+				7EAC6BCA27A5559700C8F279 /* LaunchScreen */,
 				A3C12A59260BC2F90026ACC0 /* GoogleService-Info.plist */,
 				060782BF250CE27A00A87020 /* Info.plist */,
-				A3773B3225FCEEB8009955E4 /* AppConfiguration.swift */,
 			);
 			path = Navigation;
 			sourceTree = "<group>";
@@ -237,6 +229,62 @@
 				59EC7CBC256554E300A12046 /* PhotosViewController.swift */,
 			);
 			path = PhotosFlow;
+			sourceTree = "<group>";
+		};
+		7EAC6BC427A554B400C8F279 /* Presentation */ = {
+			isa = PBXGroup;
+			children = (
+				A36473D225B347510037082B /* Coordinators */,
+				E413A04925937F8D001CD6AD /* TabBarController.swift */,
+				A3C12B0B262C74830026ACC0 /* FavoriteFlow */,
+				A38D8CE92552EAAE00864FEE /* ProfileFlow */,
+			);
+			path = Presentation;
+			sourceTree = "<group>";
+		};
+		7EAC6BC527A554BE00C8F279 /* Persistancy */ = {
+			isa = PBXGroup;
+			children = (
+				A38D8D65255ED2E200864FEE /* Model */,
+				A38D8D6A255ED38F00864FEE /* Storage */,
+				A3C12AF7262C73100026ACC0 /* CoreDataManager */,
+			);
+			path = Persistancy;
+			sourceTree = "<group>";
+		};
+		7EAC6BC627A554CB00C8F279 /* Supporting files */ = {
+			isa = PBXGroup;
+			children = (
+				A36473AB25B32C0E0037082B /* Helper */,
+				A3C9D958267BA67E00E2578D /* Localization */,
+				A3C9DA0B268E4A0E00E2578D /* Constants */,
+			);
+			path = "Supporting files";
+			sourceTree = "<group>";
+		};
+		7EAC6BC827A5555200C8F279 /* Network */ = {
+			isa = PBXGroup;
+			children = (
+				A3773B3225FCEEB8009955E4 /* AppConfiguration.swift */,
+				A3773B2E25FCEE62009955E4 /* NetworkManager.swift */,
+			);
+			path = Network;
+			sourceTree = "<group>";
+		};
+		7EAC6BC927A5557D00C8F279 /* UIApplication */ = {
+			isa = PBXGroup;
+			children = (
+				060782B1250CE27700A87020 /* AppDelegate.swift */,
+			);
+			path = UIApplication;
+			sourceTree = "<group>";
+		};
+		7EAC6BCA27A5559700C8F279 /* LaunchScreen */ = {
+			isa = PBXGroup;
+			children = (
+				060782BC250CE27A00A87020 /* LaunchScreen.storyboard */,
+			);
+			path = LaunchScreen;
 			sourceTree = "<group>";
 		};
 		A353640E25ADFFD4004D5C78 /* LoginFlow */ = {
@@ -304,6 +352,7 @@
 		A36473D225B347510037082B /* Coordinators */ = {
 			isa = PBXGroup;
 			children = (
+				A36473AE25B32C2A0037082B /* FeedFlow */,
 				A3C12AE7262C70700026ACC0 /* Coordinator.swift */,
 				A36473D925B365DC0037082B /* TabBarCoordinators */,
 			);
@@ -343,10 +392,9 @@
 		A3773B2B25FCEE4E009955E4 /* Services */ = {
 			isa = PBXGroup;
 			children = (
+				7EAC6BC827A5555200C8F279 /* Network */,
 				BBCF091E26EB3ADF0093B127 /* NotificationService */,
 				BB59593926E0A8E400F8AA65 /* AuthenticationService */,
-				A3773B2E25FCEE62009955E4 /* NetworkManager.swift */,
-				A3C12AF7262C73100026ACC0 /* CoreDataManager */,
 			);
 			path = Services;
 			sourceTree = "<group>";
