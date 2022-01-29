@@ -7,9 +7,7 @@ final class LoginCoordinator: Coordinator {
     public var childCoordinators =  [Coordinator]()
     public var navigationController: UINavigationController
     
-    // MARK: - Private Properties
-    
-    private let dataProvider: DataProvider
+    public let dataProvider: DataProvider
         
     // MARK: - Initializers
     

@@ -83,7 +83,6 @@
 		B41DDEA0BC05DEB1F99B80F1 /* Pods_Navigation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 39EECD3007B128A937AC7383 /* Pods_Navigation.framework */; };
 		BB59593B26E0A90300F8AA65 /* LocalAuthorizationService.swift in Sources */ = {isa = PBXBuildFile; fileRef = BB59593A26E0A90300F8AA65 /* LocalAuthorizationService.swift */; };
 		BBAED4162625C1D400D710D1 /* Credential.swift in Sources */ = {isa = PBXBuildFile; fileRef = BBAED4152625C1D400D710D1 /* Credential.swift */; };
-		BBAED41D2625C7F500D710D1 /* DataProvider.swift in Sources */ = {isa = PBXBuildFile; fileRef = BBAED41C2625C7F500D710D1 /* DataProvider.swift */; };
 		BBCF092226EB3AFC0093B127 /* LocalNotificationCenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = BBCF092126EB3AFC0093B127 /* LocalNotificationCenter.swift */; };
 		E413A04A25937F8D001CD6AD /* TabBarController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E413A04925937F8D001CD6AD /* TabBarController.swift */; };
 /* End PBXBuildFile section */
@@ -154,7 +153,6 @@
 		A3E518B925AB3B4B008B6465 /* RealmDataProvider.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RealmDataProvider.swift; sourceTree = "<group>"; };
 		BB59593A26E0A90300F8AA65 /* LocalAuthorizationService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LocalAuthorizationService.swift; sourceTree = "<group>"; };
 		BBAED4152625C1D400D710D1 /* Credential.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Credential.swift; sourceTree = "<group>"; };
-		BBAED41C2625C7F500D710D1 /* DataProvider.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DataProvider.swift; sourceTree = "<group>"; };
 		BBCF092126EB3AFC0093B127 /* LocalNotificationCenter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LocalNotificationCenter.swift; sourceTree = "<group>"; };
 		C26469335FDAB266F3B83C37 /* Pods-Navigation copy.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Navigation copy.release.xcconfig"; path = "Target Support Files/Pods-Navigation copy/Pods-Navigation copy.release.xcconfig"; sourceTree = "<group>"; };
 		E413A04925937F8D001CD6AD /* TabBarController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TabBarController.swift; sourceTree = "<group>"; };
@@ -251,7 +249,8 @@
 		7EAC6BC527A554BE00C8F279 /* Persistancy */ = {
 			isa = PBXGroup;
 			children = (
-				A38D8D65255ED2E200864FEE /* Model */,
+				7EAC6BDA27A564F800C8F279 /* RealmDataProvider */,
+				A38D8D65255ED2E200864FEE /* Models */,
 				A38D8D6A255ED38F00864FEE /* Storage */,
 				A3C12AF7262C73100026ACC0 /* CoreDataManager */,
 			);
@@ -302,13 +301,19 @@
 			path = TabBarController;
 			sourceTree = "<group>";
 		};
+		7EAC6BDA27A564F800C8F279 /* RealmDataProvider */ = {
+			isa = PBXGroup;
+			children = (
+				A3E518B925AB3B4B008B6465 /* RealmDataProvider.swift */,
+				A3C9D9282672666300E2578D /* KeychainConfiguration.swift */,
+			);
+			path = RealmDataProvider;
+			sourceTree = "<group>";
+		};
 		A353640E25ADFFD4004D5C78 /* LoginFlow */ = {
 			isa = PBXGroup;
 			children = (
 				597DC856255C09FB0038FFDF /* LogInViewController.swift */,
-				A3E518B925AB3B4B008B6465 /* RealmDataProvider.swift */,
-				BBAED41C2625C7F500D710D1 /* DataProvider.swift */,
-				A3C9D9282672666300E2578D /* KeychainConfiguration.swift */,
 			);
 			path = LoginFlow;
 			sourceTree = "<group>";
@@ -428,14 +433,14 @@
 			path = ProfileFlow;
 			sourceTree = "<group>";
 		};
-		A38D8D65255ED2E200864FEE /* Model */ = {
+		A38D8D65255ED2E200864FEE /* Models */ = {
 			isa = PBXGroup;
 			children = (
 				A38D8D66255ED2EF00864FEE /* Post.swift */,
 				599D51CA25655E1700A1B219 /* Photo.swift */,
 				BBAED4152625C1D400D710D1 /* Credential.swift */,
 			);
-			path = Model;
+			path = Models;
 			sourceTree = "<group>";
 		};
 		A38D8D6A255ED38F00864FEE /* Storage */ = {
@@ -693,7 +698,6 @@
 				A36473E925B38E980037082B /* InfoCoordinator.swift in Sources */,
 				060782B2250CE27700A87020 /* AppDelegate.swift in Sources */,
 				7EAC6BCE27A557F300C8F279 /* UIView+Extensions.swift in Sources */,
-				BBAED41D2625C7F500D710D1 /* DataProvider.swift in Sources */,
 				A38D8D6C255ED3A100864FEE /* PostStorage.swift in Sources */,
 				A3C12AEE262C72780026ACC0 /* FavoriteCoordinator.swift in Sources */,
 				A3C12B00262C74050026ACC0 /* FavoritePost+CoreDataProperties.swift in Sources */,

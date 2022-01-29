@@ -12,24 +12,33 @@ import RealmSwift
     }
 }
 
+protocol DataProvider: AnyObject {
+    func getCredentials() -> [Credential]
+    func addCredentials(_ credential: Credential)
+    func deleteCredentials(_ credential: Credential)
+}
+
 final class RealmDataProvider: DataProvider {
     
+    // MARK: - Private Properties
+    
     private var realm: Realm? {
-        
         var config = Realm.Configuration(encryptionKey: getKey())
-
-        config.fileURL = config.fileURL?.deletingLastPathComponent().appendingPathComponent("EncryptedCredentials.realm")
+        config.fileURL = config.fileURL?.deletingLastPathComponent()
+            .appendingPathComponent("EncryptedCredentials.realm")
         return try? Realm(configuration: config)
     }
     
-    func getCredentials() -> [Credential] {
+    // MARK: - Public Methods
+    
+    public func getCredentials() -> [Credential] {
         return realm?.objects(CachedCredential.self).compactMap {
-            guard let id = $0.id, let account = $0.account, let password = $0.password else { return nil}
+            guard let id = $0.id, let account = $0.account, let password = $0.password else { return nil }
             return Credential(id: id, account: account, password: password)
         } ?? []
     }
     
-    func addCredentials(_ credential: Credential) {
+    public func addCredentials(_ credential: Credential) {
         let cachedCredential = CachedCredential()
         cachedCredential.id = credential.id
         cachedCredential.account = credential.account
@@ -40,17 +49,25 @@ final class RealmDataProvider: DataProvider {
         }
     }
     
-    func deleteCredentials(_ credential: Credential) {
-        guard let cachedCredential = realm?.object(ofType: CachedCredential.self, forPrimaryKey: credential.id) else { return }
+    public func deleteCredentials(_ credential: Credential) {
+        guard let cachedCredential = realm?.object(
+            ofType: CachedCredential.self,
+            forPrimaryKey: credential.id
+        ) else { return }
         
         try? realm?.write {
             realm?.delete(cachedCredential)
         }
     }
 
+    // MARK: - Private Methods
+    
     private func getKey() -> Data {
         let keychainIdentifier = KeychainConfiguration.serviceName
-        let keychainIdentifierData = keychainIdentifier.data(using: String.Encoding.utf8, allowLossyConversion: false)!
+        let keychainIdentifierData = keychainIdentifier.data(
+            using: String.Encoding.utf8,
+            allowLossyConversion: false
+        )!
 
         var query: [NSString: AnyObject] = [
             kSecClass: kSecClassKey,
@@ -60,7 +77,9 @@ final class RealmDataProvider: DataProvider {
         ]
 
         var dataTypeRef: AnyObject?
-        var status = withUnsafeMutablePointer(to: &dataTypeRef) { SecItemCopyMatching(query as CFDictionary, UnsafeMutablePointer($0)) }
+        var status = withUnsafeMutablePointer(
+            to: &dataTypeRef
+        ) { SecItemCopyMatching(query as CFDictionary, UnsafeMutablePointer($0)) }
         if status == errSecSuccess {
             return dataTypeRef as! Data
         }
