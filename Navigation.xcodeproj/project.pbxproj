@@ -32,6 +32,9 @@
 		7EAC6BE627A68CB500C8F279 /* PhotosModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7EAC6BE527A68CB500C8F279 /* PhotosModel.swift */; };
 		7EAC6BEA27A69A5500C8F279 /* FavoriteView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7EAC6BE927A69A5500C8F279 /* FavoriteView.swift */; };
 		7EAC6BEF27A6A94800C8F279 /* ProfileView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7EAC6BEE27A6A94800C8F279 /* ProfileView.swift */; };
+		7EAC6BF327A71DB200C8F279 /* FeedView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7EAC6BF227A71DB200C8F279 /* FeedView.swift */; };
+		7EAC6BF527A71E5E00C8F279 /* FeedTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7EAC6BF427A71E5E00C8F279 /* FeedTableViewCell.swift */; };
+		7EAC6BF727A71F6A00C8F279 /* FeedStorage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7EAC6BF627A71F6A00C8F279 /* FeedStorage.swift */; };
 		81B0AF2E63B9BA547A8F0820 /* Pods_Navigation_copy.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = E963D9D2EB8580F5942162AD /* Pods_Navigation_copy.framework */; };
 		A364739525AF715B0037082B /* ButtonView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A364739425AF715B0037082B /* ButtonView.swift */; };
 		A36473C225B33DED0037082B /* FeedCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = A36473C125B33DED0037082B /* FeedCoordinator.swift */; };
@@ -121,6 +124,9 @@
 		7EAC6BE527A68CB500C8F279 /* PhotosModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PhotosModel.swift; sourceTree = "<group>"; };
 		7EAC6BE927A69A5500C8F279 /* FavoriteView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FavoriteView.swift; sourceTree = "<group>"; };
 		7EAC6BEE27A6A94800C8F279 /* ProfileView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileView.swift; sourceTree = "<group>"; };
+		7EAC6BF227A71DB200C8F279 /* FeedView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FeedView.swift; sourceTree = "<group>"; };
+		7EAC6BF427A71E5E00C8F279 /* FeedTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FeedTableViewCell.swift; sourceTree = "<group>"; };
+		7EAC6BF627A71F6A00C8F279 /* FeedStorage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FeedStorage.swift; sourceTree = "<group>"; };
 		8DFF5758EB38E82F0BDA2BDD /* Pods-Navigation copy.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Navigation copy.debug.xcconfig"; path = "Target Support Files/Pods-Navigation copy/Pods-Navigation copy.debug.xcconfig"; sourceTree = "<group>"; };
 		93D2C21FAF4FE66F16904342 /* Pods-Navigation.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Navigation.release.xcconfig"; path = "Target Support Files/Pods-Navigation/Pods-Navigation.release.xcconfig"; sourceTree = "<group>"; };
 		9D641B20035EA534A2E366E1 /* Pods-Navigation.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Navigation.debug.xcconfig"; path = "Target Support Files/Pods-Navigation/Pods-Navigation.debug.xcconfig"; sourceTree = "<group>"; };
@@ -408,6 +414,23 @@
 			path = Models;
 			sourceTree = "<group>";
 		};
+		7EAC6BF027A71D8800C8F279 /* Controller */ = {
+			isa = PBXGroup;
+			children = (
+				060782B5250CE27700A87020 /* FeedViewController.swift */,
+			);
+			path = Controller;
+			sourceTree = "<group>";
+		};
+		7EAC6BF127A71D9400C8F279 /* Views */ = {
+			isa = PBXGroup;
+			children = (
+				7EAC6BF227A71DB200C8F279 /* FeedView.swift */,
+				7EAC6BF427A71E5E00C8F279 /* FeedTableViewCell.swift */,
+			);
+			path = Views;
+			sourceTree = "<group>";
+		};
 		A353640E25ADFFD4004D5C78 /* LoginFlow */ = {
 			isa = PBXGroup;
 			children = (
@@ -433,7 +456,8 @@
 		A36473AE25B32C2A0037082B /* FeedFlow */ = {
 			isa = PBXGroup;
 			children = (
-				060782B5250CE27700A87020 /* FeedViewController.swift */,
+				7EAC6BF127A71D9400C8F279 /* Views */,
+				7EAC6BF027A71D8800C8F279 /* Controller */,
 				A364739425AF715B0037082B /* ButtonView.swift */,
 				A36473B625B32C430037082B /* InfoFlow */,
 				A36473B325B32C3B0037082B /* PostFlow */,
@@ -544,6 +568,7 @@
 				A38D8D6B255ED3A100864FEE /* PostStorage.swift */,
 				59EC7CC32565566D00A12046 /* PhotosStorage.swift */,
 				A3C12AF3262C72DA0026ACC0 /* FavoritePostStorage.swift */,
+				7EAC6BF627A71F6A00C8F279 /* FeedStorage.swift */,
 			);
 			path = Storage;
 			sourceTree = "<group>";
@@ -803,6 +828,7 @@
 				7EAC6BD027A5582300C8F279 /* UITextField+Extensions.swift in Sources */,
 				060782C6250CEB0A00A87020 /* InfoViewController.swift in Sources */,
 				7EAC6BEF27A6A94800C8F279 /* ProfileView.swift in Sources */,
+				7EAC6BF727A71F6A00C8F279 /* FeedStorage.swift in Sources */,
 				7EAC6BEA27A69A5500C8F279 /* FavoriteView.swift in Sources */,
 				A3C12B0D262C74F00026ACC0 /* FavoriteViewController.swift in Sources */,
 				A3A8167926012D2200F95B40 /* Planet.swift in Sources */,
@@ -836,6 +862,8 @@
 				59EC7CC42565566D00A12046 /* PhotosStorage.swift in Sources */,
 				59EC7CBD256554E300A12046 /* PhotosViewController.swift in Sources */,
 				A38D8D67255ED2EF00864FEE /* Post.swift in Sources */,
+				7EAC6BF327A71DB200C8F279 /* FeedView.swift in Sources */,
+				7EAC6BF527A71E5E00C8F279 /* FeedTableViewCell.swift in Sources */,
 				BBAED4162625C1D400D710D1 /* Credential.swift in Sources */,
 				7EAC6BD427A5586400C8F279 /* UILabel+Extensions.swift in Sources */,
 				5967809625629B0F00C9E10B /* PostTableViewCell.swift in Sources */,
