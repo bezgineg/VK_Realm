@@ -2,19 +2,32 @@ import UIKit
 
 final class ProfileHeaderView: UIView {
     
-    var onlogOutButtonTap: (() -> Void)?
+    // MARK: - Public Properties
     
-     lazy var avatarImageView: UIImageView = {
+    public var onlogOutButtonTap: (() -> Void)?
+    public var avatarImageSize = CGSize(width: 100, height: 100)
+    
+    public lazy var avatarImageView: UIImageView = {
         let avatarImageView = UIImageView()
         avatarImageView.translatesAutoresizingMaskIntoConstraints = false
         avatarImageView.contentMode = .scaleAspectFill
-        avatarImageView.layer.borderColor = UIColor.createColor(lightMode: Colors.white, darkMode: Colors.black).cgColor
+        avatarImageView.layer.borderColor = UIColor.createColor(
+            lightMode: Colors.white,
+            darkMode: Colors.black
+        ).cgColor
         avatarImageView.layer.borderWidth = 3
         avatarImageView.layer.masksToBounds = true
-        avatarImageView.layer.cornerRadius = avatarImageSize.height/2
+        avatarImageView.layer.cornerRadius = avatarImageSize.height / 2
         avatarImageView.clipsToBounds = true
+        let tapAvatarGestureRecognizer = UITapGestureRecognizer(target: self, action: #selector(avatarTapped))
+        avatarImageView.isUserInteractionEnabled = true
+        avatarImageView.addGestureRecognizer(tapAvatarGestureRecognizer)
         return avatarImageView
     }()
+    
+    // MARK: - Private Properties
+    
+    private var statusText = ""
 
     private let fullNameLabel: UILabel = {
         let fullNameLabel = UILabel()
@@ -40,8 +53,13 @@ final class ProfileHeaderView: UIView {
         statusTextField.textColor = UIColor.createColor(lightMode: Colors.black, darkMode: Colors.white)
         statusTextField.font = UIFont.systemFont(ofSize: 15, weight: .regular)
         statusTextField.layer.borderWidth = 1
-        statusTextField.layer.borderColor = UIColor.createColor(lightMode: Colors.black, darkMode: Colors.white).cgColor
-        statusTextField.leftView = UIView(frame: CGRect(x: 0, y: 0, width: 10, height: statusTextField.frame.height))
+        statusTextField.layer.borderColor = UIColor.createColor(
+            lightMode: Colors.black,
+            darkMode: Colors.white
+        ).cgColor
+        statusTextField.leftView = UIView(
+            frame: CGRect(x: 0, y: 0, width: 10, height: statusTextField.frame.height)
+        )
         statusTextField.leftViewMode = .always
         return statusTextField
     }()
@@ -70,22 +88,12 @@ final class ProfileHeaderView: UIView {
         return setStatusButton
     }()
     
-    private var statusText: String = ""
-
-    var avatarImageSize: CGSize {
-        return CGSize(width: 100, height: 100)
-    }
+    // MARK: - Initializers
     
     override init(frame: CGRect) {
         super.init(frame: frame)
         
-        addSubview(avatarImageView)
-        addSubview(fullNameLabel)
-        addSubview(statusLabel)
-        addSubview(statusTextField)
-        addSubview(setStatusButton)
-        addSubview(logOutButton)
-        
+        addSubviews()
         setupLayout()
     }
     
@@ -93,17 +101,17 @@ final class ProfileHeaderView: UIView {
         fatalError("init(coder:) has not been implemented")
     }
     
-    func configure(with viewModel: ProfileTableHeaderViewModel) {
+    // MARK: - Public Methods
+    
+    public func configure(with viewModel: ProfileTableHeaderViewModel) {
         avatarImageView.image = viewModel.avatarImage
         fullNameLabel.text = viewModel.fullNameLabel
         statusLabel.text = viewModel.statusLabel
         statusTextField.placeholder = viewModel.statusPlaceholder
         statusTextField.text = viewModel.statusText
     }
-    override func layoutSubviews() {
-        super.layoutSubviews()
     
-    }
+    // MARK: - Private Methods
     
     @objc private func buttonPressed() {
         statusLabel.text = statusTextField.text
@@ -113,37 +121,43 @@ final class ProfileHeaderView: UIView {
         onlogOutButtonTap?()
     }
     
+    private func addSubviews() {
+        addSubview(avatarImageView)
+        addSubview(fullNameLabel)
+        addSubview(statusLabel)
+        addSubview(statusTextField)
+        addSubview(setStatusButton)
+        addSubview(logOutButton)
+    }
+    
     private func setupLayout() {
         let constraints = [
-            avatarImageView.topAnchor.constraint(equalTo: self.safeAreaLayoutGuide.topAnchor, constant: 16),
-            avatarImageView.leadingAnchor.constraint(equalTo: self.safeAreaLayoutGuide.leadingAnchor, constant: 16),
+            avatarImageView.topAnchor.constraint(equalTo: safeAreaLayoutGuide.topAnchor, constant: 16),
+            avatarImageView.leadingAnchor.constraint(equalTo: safeAreaLayoutGuide.leadingAnchor, constant: 16),
             avatarImageView.widthAnchor.constraint(equalToConstant: 100),
             avatarImageView.heightAnchor.constraint(equalToConstant: 100),
             
-            fullNameLabel.topAnchor.constraint(equalTo: self.safeAreaLayoutGuide.topAnchor, constant: 27),
-            fullNameLabel.leadingAnchor.constraint(equalTo: self.safeAreaLayoutGuide.leadingAnchor, constant: 132),
+            fullNameLabel.topAnchor.constraint(equalTo: safeAreaLayoutGuide.topAnchor, constant: 27),
+            fullNameLabel.leadingAnchor.constraint(equalTo: safeAreaLayoutGuide.leadingAnchor, constant: 132),
             fullNameLabel.widthAnchor.constraint(equalToConstant: 100),
-    
             
             statusLabel.topAnchor.constraint(equalTo: fullNameLabel.bottomAnchor, constant: 25),
-            statusLabel.leadingAnchor.constraint(equalTo: self.safeAreaLayoutGuide.leadingAnchor, constant: 132),
-            statusLabel.trailingAnchor.constraint(equalTo: self.safeAreaLayoutGuide.trailingAnchor, constant: -16),
+            statusLabel.leadingAnchor.constraint(equalTo: safeAreaLayoutGuide.leadingAnchor, constant: 132),
+            statusLabel.trailingAnchor.constraint(equalTo: safeAreaLayoutGuide.trailingAnchor, constant: -16),
 
-            
             statusTextField.topAnchor.constraint(equalTo: statusLabel.bottomAnchor, constant: 5),
-            statusTextField.leadingAnchor.constraint(equalTo: self.safeAreaLayoutGuide.leadingAnchor, constant: 132),
-            statusTextField.trailingAnchor.constraint(equalTo: self.safeAreaLayoutGuide.trailingAnchor, constant: -16),
+            statusTextField.leadingAnchor.constraint(equalTo: safeAreaLayoutGuide.leadingAnchor, constant: 132),
+            statusTextField.trailingAnchor.constraint(equalTo: safeAreaLayoutGuide.trailingAnchor, constant: -16),
             statusTextField.heightAnchor.constraint(equalToConstant: 40),
             
             setStatusButton.topAnchor.constraint(equalTo: statusTextField.bottomAnchor, constant: 10),
-            setStatusButton.leadingAnchor.constraint(equalTo: self.safeAreaLayoutGuide.leadingAnchor, constant: 16),
-            setStatusButton.trailingAnchor.constraint(equalTo: self.safeAreaLayoutGuide.trailingAnchor, constant: -16),
+            setStatusButton.leadingAnchor.constraint(equalTo: safeAreaLayoutGuide.leadingAnchor, constant: 16),
+            setStatusButton.trailingAnchor.constraint(equalTo: safeAreaLayoutGuide.trailingAnchor, constant: -16),
             setStatusButton.heightAnchor.constraint(equalToConstant: 50),
-            setStatusButton.bottomAnchor.constraint(equalTo: self.safeAreaLayoutGuide.bottomAnchor, constant: -16),
+            setStatusButton.bottomAnchor.constraint(equalTo: safeAreaLayoutGuide.bottomAnchor, constant: -16),
             
-            logOutButton.topAnchor.constraint(equalTo: self.safeAreaLayoutGuide.topAnchor, constant: 27),
-            logOutButton.trailingAnchor.constraint(equalTo: self.safeAreaLayoutGuide.trailingAnchor, constant: -16),
-
+            logOutButton.topAnchor.constraint(equalTo: safeAreaLayoutGuide.topAnchor, constant: 27),
+            logOutButton.trailingAnchor.constraint(equalTo: safeAreaLayoutGuide.trailingAnchor, constant: -16),
         ]
         
         NSLayoutConstraint.activate(constraints)

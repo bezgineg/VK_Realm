@@ -1,12 +1,17 @@
 import UIKit
 
 struct ProfileTableHeaderViewModel {
-    let avatarImage: UIImage?
-    let fullNameLabel: String
-    let statusLabel: String
-    let statusPlaceholder: String
-    let statusText: String
+    
+    // MARK: - Public Properties
+    
+    public let avatarImage: UIImage?
+    public let fullNameLabel: String
+    public let statusLabel: String
+    public let statusPlaceholder: String
+    public let statusText: String
 
+    // MARK: - Initializers
+    
     init() {
         self.avatarImage = #imageLiteral(resourceName: "4")
         self.fullNameLabel = ProfileFlowLocalization.fullName.localizedValue

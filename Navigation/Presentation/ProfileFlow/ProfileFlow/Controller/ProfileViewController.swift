@@ -1,39 +1,32 @@
 
 import UIKit
 
-class ProfileViewController: UIViewController {
+final class ProfileViewController: UIViewController {
     
-    var coordinator: ProfileCoordinator?
+    // MARK: - Public Properties
+    
+    public weak var coordinator: ProfileCoordinator?
+    
+    // MARK: - Private Properties
+    
     private var favoritePost: Post?
-    private let tableView = UITableView(frame: .zero, style: .grouped)
+    private let mainView = ProfileView()
     private let headerView = ProfileHeaderView()
     private let tableHeaderViewModel: ProfileTableHeaderViewModel
+    private let photosViewModel: PhotosTableViewCellViewModel
+    private let storageManager: DataStorageProtocol
     private let photoView = UIView()
     
+    // MARK: - Initializers
     
-    private var cancelAnimationButton: UIButton = {
-        let button = UIButton(type: .system)
-        button.toAutoLayout()
-        button.backgroundColor = UIColor.white.withAlphaComponent(0)
-        button.setTitleColor(UIColor.createColor(lightMode: Colors.black, darkMode: Colors.white), for: .normal)
-        button.setTitle("X", for: .normal)
-        button.titleLabel?.font = UIFont.systemFont(ofSize: 24, weight: .bold)
-        button.alpha = 0
-        button.translatesAutoresizingMaskIntoConstraints = true
-        button.addTarget(self, action: #selector(cancelAnimationButtonTapped), for: .touchUpInside)
-        return button
-    }()
-    
-    private var reuseID: String {
-        return String(describing: PostTableViewCell.self)
-    }
-    
-    private var photosReuseID: String {
-        return String(describing: PhotosTableViewCell.self)
-    }
-    
-    init(tableHeaderViewModel: ProfileTableHeaderViewModel)  {
+    init(
+        tableHeaderViewModel: ProfileTableHeaderViewModel,
+        storageManager: DataStorageProtocol = CoreDataManager.manager,
+        photosViewModel: PhotosTableViewCellViewModel
+    )  {
+        self.storageManager = storageManager
         self.tableHeaderViewModel = tableHeaderViewModel
+        self.photosViewModel = photosViewModel
         super.init(nibName: nil, bundle: nil)
     }
     
@@ -41,21 +34,24 @@ class ProfileViewController: UIViewController {
         fatalError("init(coder:) has not been implemented")
     }
     
+    // MARK: - Life cycle
+    
+    override func loadView() {
+         view = mainView
+    }
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        setupLayout()
-        setupTableView()
+        setDelegates()
         createTimer()
-        avatarAnimate()
         logOutButtonOnTapSetup()
-        
     }
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         
-        self.navigationController?.navigationBar.isHidden = true
+        navigationController?.navigationBar.isHidden = true
     }
     
     override func viewWillDisappear(_ animated: Bool) {
@@ -63,76 +59,59 @@ class ProfileViewController: UIViewController {
         coordinator?.didFinishProfile()
     }
     
-    private func setupTableView() {
-        tableView.translatesAutoresizingMaskIntoConstraints = false
-        tableView.dragInteractionEnabled = true
-        tableView.dragDelegate = self
-        tableView.dropDelegate = self
-        tableView.dataSource = self
-        tableView.delegate = self
-        tableView.register(PostTableViewCell.self, forCellReuseIdentifier: reuseID)
-        tableView.register(PhotosTableViewCell.self, forCellReuseIdentifier: photosReuseID)
-        
+    // MARK: - Private Methods
+    
+    private func setDelegates() {
+        mainView.tableView.dragDelegate = self
+        mainView.tableView.dropDelegate = self
+        mainView.tableView.dataSource = self
+        mainView.tableView.delegate = self
     }
     
     private func logOutButtonOnTapSetup() {
         headerView.onlogOutButtonTap = { [weak self] in
-            self?.coordinator?.logOut()
+            guard let self = self else { return }
+            self.coordinator?.logOut()
         }
     }
     
-    func createTimer() {
-        let timer = Timer.scheduledTimer(timeInterval: 1.0, target: self, selector: #selector(updateCell), userInfo: nil, repeats: true)
+    private func createTimer() {
+        let timer = Timer.scheduledTimer(
+            timeInterval: 1.0,
+            target: self,
+            selector: #selector(updateCell),
+            userInfo: nil,
+            repeats: true
+        )
         timer.tolerance = 0.1
         RunLoop.current.add(timer, forMode: .common)
     }
     
     @objc func updateCell() {
-        guard let visibleRows = tableView.indexPathsForVisibleRows else { return }
+        guard let visibleRows = mainView.tableView.indexPathsForVisibleRows else { return }
         
         for indexPath in visibleRows {
-            if let cell = tableView.cellForRow(at: indexPath) as? PhotosTableViewCell {
+            if let cell = mainView.tableView.cellForRow(at: indexPath) as? PhotosTableViewCell {
                 cell.updateReloadingInfo()
             }
         }
-    }
-        
-    private func setupLayout() {
-        view.addSubview(tableView)
-        let constratints = [
-            tableView.topAnchor.constraint(equalTo: view.topAnchor),
-            tableView.leadingAnchor.constraint(equalTo: view.leadingAnchor),
-            tableView.trailingAnchor.constraint(equalTo: view.trailingAnchor),
-            tableView.bottomAnchor.constraint(equalTo: view.bottomAnchor),
-        ]
-        
-        NSLayoutConstraint.activate(constratints)
-
     }
     
     @objc private func cellTapped() {
         guard let post = favoritePost else { return }
         getCoreData(post)
         coordinator?.showAlert(with: AlertLocalization.profileAlertTitle.localizedValue, with: "")
-
     }
     
     private func getCoreData(_ post: Post) {
-        let context = CoreDataManager.manager.getBackgroundContext()
-        let favoritePost = CoreDataManager.manager.createObject(from: FavoritePost.self, context: context)
+        let context = storageManager.getBackgroundContext()
+        let favoritePost = storageManager.createObject(from: FavoritePost.self, context: context)
         favoritePost.author = post.author
         favoritePost.descript = post.description
         favoritePost.image = post.image?.pngData()
         favoritePost.likes = Int64(post.likes)
         favoritePost.views = Int64(post.view)
-        
-        CoreDataManager.manager.save(context: context)
-    }
-    
-    private func avatarAnimate() {
-        let tapAvatarGestureRecognizer = UITapGestureRecognizer(target: self, action: #selector(avatarTapped))
-        headerView.avatarImageView.isUserInteractionEnabled = true
-        headerView.avatarImageView.addGestureRecognizer(tapAvatarGestureRecognizer)
+        storageManager.save(context: context)
     }
 
     @objc private func avatarTapped() {
@@ -191,6 +170,8 @@ class ProfileViewController: UIViewController {
     }
 }
 
+// MARK: - UITableViewDataSource
+
 extension ProfileViewController: UITableViewDataSource {
     
     func numberOfSections(in tableView: UITableView) -> Int {
@@ -203,19 +184,28 @@ extension ProfileViewController: UITableViewDataSource {
 
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         if indexPath.section == 0 {
-            let photosCell: PhotosTableViewCell = tableView.dequeueReusableCell(withIdentifier: photosReuseID, for: indexPath) as! PhotosTableViewCell
-            photosCell.configure(with: PhotosTableViewCellViewModel())
+            guard let photosCell: PhotosTableViewCell = tableView.dequeueReusableCell(
+                withIdentifier: String(describing: PhotosTableViewCell.self),
+                for: indexPath
+            ) as? PhotosTableViewCell else { return UITableViewCell() }
+            photosCell.configure(with: photosViewModel)
             return photosCell
         } else {
-            let postCell: PostTableViewCell = tableView.dequeueReusableCell(withIdentifier: reuseID, for: indexPath) as! PostTableViewCell
+            guard let postCell: PostTableViewCell = tableView.dequeueReusableCell(
+                withIdentifier: String(describing: PostTableViewCell.self),
+                for: indexPath
+            ) as? PostTableViewCell else { return UITableViewCell() }
             
             let post: Post = PostStorage.posts[indexPath.section][indexPath.row]
-            postCell.configure(with: PostTableViewCellViewModel(with: post))
+            let viewModel = PostTableViewCellViewModel(with: post)
+            postCell.configure(with: viewModel)
             postCell.delegate = self
             return postCell
         }
     }
 }
+
+// MARK: - UITableViewDelegate
 
 extension ProfileViewController: UITableViewDelegate {
     
@@ -254,6 +244,8 @@ extension ProfileViewController: UITableViewDelegate {
         return 8
     }
 }
+
+// MARK: - PostTableViewCellDelegate
 
 extension ProfileViewController: PostTableViewCellDelegate {
     func showDataNotFoundAlert(with title: String, with message: String) {
@@ -302,7 +294,6 @@ extension ProfileViewController: UITableViewDropDelegate {
         let dropProposal = UITableViewDropProposal(operation: .copy, intent: .insertAtDestinationIndexPath)
         return dropProposal
     }
-    
     
     func tableView(_ tableView: UITableView, performDropWith coordinator: UITableViewDropCoordinator) {
         let destinationIndexPath: IndexPath

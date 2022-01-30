@@ -1,8 +1,10 @@
 import UIKit
 
-class PhotosTableViewCell: UITableViewCell {
+final class PhotosTableViewCell: UITableViewCell {
     
-    var counter = 10
+    // MARK: - Private Properties
+    
+    private var counter = 10
     
     private let titleLabel: UILabel = {
         let label = UILabel()
@@ -76,6 +78,8 @@ class PhotosTableViewCell: UITableViewCell {
         let imageWidth = (screenSize.width - 48) / 4
         return imageWidth
     }()
+    
+    // MARK: - Initializers
 
     override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {
         super.init(style: style, reuseIdentifier: reuseIdentifier)
@@ -87,18 +91,25 @@ class PhotosTableViewCell: UITableViewCell {
         fatalError("init(coder:) has not been implemented")
     }
     
-    func updateReloadingInfo() {
+    // MARK: - Public Methods
+    
+    public func updateReloadingInfo() {
         counter -= 1
         timerLabel.text = "\(ProfileFlowLocalization.timerLabel.localizedValue) \(counter) \(ProfileFlowLocalization.seconds.localizedValue)"
 
         if counter == 1 {
             counter = 11
         } else if counter == 10 {
-            titleLabel.textColor = UIColor(red: .random(in: 0...1), green: .random(in: 0...1), blue: .random(in: 0...1), alpha: 1)
+            titleLabel.textColor = UIColor(
+                red: .random(in: 0...1),
+                green: .random(in: 0...1),
+                blue: .random(in: 0...1),
+                alpha: 1
+            )
         }
     }
     
-    func configure(with viewModel: PhotosTableViewCellViewModel) {
+    public func configure(with viewModel: PhotosTableViewCellViewModel) {
         titleLabel.text = viewModel.titleLabel
         arrowLabel.text = viewModel.arrowLabel
         firstImage.image = viewModel.firstImage
@@ -112,10 +123,11 @@ class PhotosTableViewCell: UITableViewCell {
         let photosQueue = DispatchQueue(label: "photosQueue", qos: .unspecified, attributes: .concurrent)
         
         photosQueue.async { [weak self] in
+            guard let self = self else { return }
             if let secondImage = model.secondImage { 
                 model.useColorInvertFilter(image: secondImage) { image in
                     DispatchQueue.main.async {
-                        self?.secondImage.image = image
+                        self.secondImage.image = image
                     }
                 }
             }
@@ -123,7 +135,7 @@ class PhotosTableViewCell: UITableViewCell {
             if let firstImage = model.firstImage {
                 model.useNoirFilter(image: firstImage) { image in
                     DispatchQueue.main.async {
-                        self?.firstImage.image = image
+                        self.firstImage.image = image
                     }
                 }
             }
@@ -131,7 +143,7 @@ class PhotosTableViewCell: UITableViewCell {
             if let thirdImage = model.thirdImage {
                 model.useFadeFilter(image: thirdImage) { image in
                     DispatchQueue.main.async {
-                        self?.thirdImage.image = image
+                        self.thirdImage.image = image
                     }
                 }
             }
@@ -139,7 +151,7 @@ class PhotosTableViewCell: UITableViewCell {
             if let fourthImage = model.fourthImage {
                 model.useChromeFilter(image: fourthImage) { image in
                     DispatchQueue.main.async {
-                        self?.fourthImage.image = image
+                        self.fourthImage.image = image
                     }
                 }
             }

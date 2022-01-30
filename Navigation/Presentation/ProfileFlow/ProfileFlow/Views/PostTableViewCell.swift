@@ -6,7 +6,7 @@ protocol PostTableViewCellDelegate: AnyObject {
     func showNetworkConnectionProblemAlert(with title: String, with message: String)
 }
 
-class PostTableViewCell: UITableViewCell {
+final class PostTableViewCell: UITableViewCell {
     
     weak var delegate: PostTableViewCellDelegate?
     
