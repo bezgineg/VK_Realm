@@ -1,13 +1,8 @@
 import UIKit
 
-protocol FavoritePostTableViewCellDelegate: AnyObject {
-    func showDataNotFoundAlert(with title: String, with message: String)
-    func showNetworkConnectionProblemAlert(with title: String, with message: String)
-}
-
-class FavoritePostTableViewCell: UITableViewCell {
+final class FavoritePostTableViewCell: UITableViewCell {
     
-    weak var delegate: FavoritePostTableViewCellDelegate?
+    // MARK: - Private Properties
     
     private let authorName: UILabel = {
         let label = UILabel()
@@ -52,6 +47,8 @@ class FavoritePostTableViewCell: UITableViewCell {
         return label
     }()
     
+    // MARK: - Initializers
+    
     override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {
         super.init(style: style, reuseIdentifier: reuseIdentifier)
         
@@ -62,40 +59,9 @@ class FavoritePostTableViewCell: UITableViewCell {
         fatalError("init(coder:) has not been implemented")
     }
     
-    private func loadImage(urlImage: String) {
-        guard let url = URL(string: urlImage) else { return }
-        let dataTask = URLSession.shared.dataTask(with: url) { [weak self] (data, responce, error) in
-            if error != nil {
-                DispatchQueue.main.async {
-                    self?.alertError(error: .networkConnectionProblem)
-                    self?.postImageView.image = nil
-                }
-                
-            } else if let data = data, let image = UIImage(data: data) {
-                DispatchQueue.main.async {
-                    self?.postImageView.image = image
-                }
-            }
-        }
-        
-        dataTask.resume()
-    }
+    // MARK: - Public Methods
     
-    private func alertError(error: ApiError) {
-        switch  error {
-        case .dataNotFound:
-            let title = ApiErrorLocalization.dataNotFoundTitle.localizedValue
-            let message = ApiErrorLocalization.dataNotFoundMessage.localizedValue
-            delegate?.showDataNotFoundAlert(with: title, with: message)
-        case .networkConnectionProblem:
-            let title = ApiErrorLocalization.networkConnectionProblemTitle.localizedValue
-            let message = ApiErrorLocalization.networkConnectionProblemMessage.localizedValue
-            delegate?.showNetworkConnectionProblemAlert(with: title, with: message)
-            
-        }
-    }
-    
-    func configure(with object: FavoritePost) {
+    public func configure(with object: FavoritePost) {
         authorName.text = object.author
         descriptionLabel.text = object.descript
         likesLabel.text = "\(localizeLikes(count: UInt(object.likes))): \(object.likes)"
@@ -105,12 +71,15 @@ class FavoritePostTableViewCell: UITableViewCell {
         }
     }
     
+    // MARK: - Private Methods
+    
     private func localizeViews(count: UInt) -> String {
         let formatString: String = NSLocalizedString("views count", comment: "views count title")
         let resultString: String = String.localizedStringWithFormat(formatString, count)
         return resultString
         
     }
+    
     private func localizeLikes(count: UInt) -> String {
         let formatString: String = NSLocalizedString("likes count", comment: "likes count title")
         let resultString: String = String.localizedStringWithFormat(formatString, count)
@@ -126,7 +95,6 @@ class FavoritePostTableViewCell: UITableViewCell {
         contentView.addSubview(viewsLabel)
 
         let constraints = [
-            
             authorName.topAnchor.constraint(equalTo: contentView.topAnchor, constant: 16),
             authorName.leadingAnchor.constraint(equalTo: contentView.leadingAnchor, constant: 16),
             authorName.trailingAnchor.constraint(equalTo: contentView.trailingAnchor, constant: -16),
@@ -146,11 +114,7 @@ class FavoritePostTableViewCell: UITableViewCell {
             viewsLabel.topAnchor.constraint(equalTo: descriptionLabel.bottomAnchor, constant: 16),
             viewsLabel.trailingAnchor.constraint(equalTo: contentView.trailingAnchor, constant: -16),
             viewsLabel.bottomAnchor.constraint(equalTo: contentView.bottomAnchor, constant: -16)
-
         ]
-        
         NSLayoutConstraint.activate(constraints)
     }
-    
 }
-
