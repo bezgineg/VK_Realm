@@ -15,7 +15,6 @@ final class ProfileViewController: UIViewController {
     private let tableHeaderViewModel: ProfileTableHeaderViewModel
     private let photosViewModel: PhotosTableViewCellViewModel
     private let storageManager: DataStorageProtocol
-    private let photoView = UIView()
     
     // MARK: - Initializers
     
@@ -45,7 +44,7 @@ final class ProfileViewController: UIViewController {
         
         setDelegates()
         createTimer()
-        logOutButtonOnTapSetup()
+        setupCallbacks()
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -68,10 +67,20 @@ final class ProfileViewController: UIViewController {
         mainView.tableView.delegate = self
     }
     
-    private func logOutButtonOnTapSetup() {
+    private func setupCallbacks() {
         headerView.onlogOutButtonTap = { [weak self] in
             guard let self = self else { return }
             self.coordinator?.logOut()
+        }
+        
+        headerView.onAvatarTap = { [weak self] image in
+            guard let self = self else { return }
+            self.mainView.addAvatar(image: image)
+        }
+        
+        mainView.onCancelAnimationTap = { [weak self] in
+            guard let self = self else { return }
+            self.headerView.addAvatar()
         }
     }
     
@@ -113,61 +122,6 @@ final class ProfileViewController: UIViewController {
         favoritePost.views = Int64(post.view)
         storageManager.save(context: context)
     }
-
-    @objc private func avatarTapped() {
-        self.view.addSubview(self.photoView)
-    
-        UIView.animate(withDuration: 0.5, animations: {
-            
-            self.photoView.frame = UIScreen.main.bounds
-            self.photoView.backgroundColor = UIColor.gray.withAlphaComponent(0.5)
-            
-            self.photoView.addSubview(self.headerView.avatarImageView)
-            self.headerView.avatarImageView.translatesAutoresizingMaskIntoConstraints = true
-            
-            self.headerView.avatarImageView.frame.origin.x = (self.photoView.frame.width - self.headerView.avatarImageView.frame.width) / 2
-            self.headerView.avatarImageView.frame.origin.y = (self.photoView.frame.height - self.view.safeAreaInsets.top - self.headerView.avatarImageView.frame.height) / 2
-            
-            self.headerView.avatarImageView.layer.cornerRadius = 0
-            self.headerView.avatarImageView.layer.borderWidth = 0
-            
-            self.headerView.avatarImageView.transform = CGAffineTransform(scaleX: self.photoView.frame.width / self.headerView.avatarImageView.frame.width,
-            y: self.photoView.frame.width / self.headerView.avatarImageView.frame.width)
-        }, completion: { finished in
-            if finished {
-                self.photoView.addSubview(self.cancelAnimationButton)
-                self.cancelAnimationButton.frame = .init(x: self.photoView.frame.maxX - 40, y: 40, width: 40, height: 40)
-                UIView.animate(withDuration: 0.3, animations: {
-                    self.cancelAnimationButton.alpha = 1
-
-                })
-            }
-        })
-    }
-    
-    @objc private func cancelAnimationButtonTapped() {
-        UIView.animate(withDuration: 0.3, animations: {
-            
-            self.cancelAnimationButton.alpha = 0
-            
-        }, completion: { finished in
-            if finished {
-                UIView.animate(withDuration: 0.5, animations: {
-                    self.headerView.avatarImageView.transform = .identity
-                    self.headerView.avatarImageView.layer.cornerRadius = self.headerView.avatarImageSize.height / 2
-                    self.headerView.avatarImageView.layer.borderWidth = 3
-                    
-                    self.headerView.addSubview(self.headerView.avatarImageView)
-                    self.headerView.avatarImageView.translatesAutoresizingMaskIntoConstraints = false
-                    
-                    self.headerView.avatarImageView.leadingAnchor.constraint(equalTo: self.headerView.leadingAnchor, constant: 16).isActive = true
-                    self.headerView.avatarImageView.topAnchor.constraint(equalTo: self.headerView.topAnchor, constant: 16).isActive = true
-                    
-                    self.photoView.removeFromSuperview()
-                })
-            }
-        })
-    }
 }
 
 // MARK: - UITableViewDataSource
@@ -199,7 +153,6 @@ extension ProfileViewController: UITableViewDataSource {
             let post: Post = PostStorage.posts[indexPath.section][indexPath.row]
             let viewModel = PostTableViewCellViewModel(with: post)
             postCell.configure(with: viewModel)
-            postCell.delegate = self
             return postCell
         }
     }
@@ -243,19 +196,6 @@ extension ProfileViewController: UITableViewDelegate {
         guard section == 0 else { return .zero }
         return 8
     }
-}
-
-// MARK: - PostTableViewCellDelegate
-
-extension ProfileViewController: PostTableViewCellDelegate {
-    func showDataNotFoundAlert(with title: String, with message: String) {
-        coordinator?.showAlert(with: title, with: message)
-    }
-    
-    func showNetworkConnectionProblemAlert(with title: String, with message: String) {
-        coordinator?.showAlert(with: title, with: message)
-    }
-    
 }
 
 // MARK: - UITableViewDragDelegate

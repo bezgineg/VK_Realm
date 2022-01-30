@@ -5,6 +5,7 @@ final class ProfileHeaderView: UIView {
     // MARK: - Public Properties
     
     public var onlogOutButtonTap: (() -> Void)?
+    public var onAvatarTap: ((UIImage?) -> Void)?
     public var avatarImageSize = CGSize(width: 100, height: 100)
     
     public lazy var avatarImageView: UIImageView = {
@@ -19,7 +20,10 @@ final class ProfileHeaderView: UIView {
         avatarImageView.layer.masksToBounds = true
         avatarImageView.layer.cornerRadius = avatarImageSize.height / 2
         avatarImageView.clipsToBounds = true
-        let tapAvatarGestureRecognizer = UITapGestureRecognizer(target: self, action: #selector(avatarTapped))
+        let tapAvatarGestureRecognizer = UITapGestureRecognizer(
+            target: self,
+            action: #selector(avatarTapped)
+        )
         avatarImageView.isUserInteractionEnabled = true
         avatarImageView.addGestureRecognizer(tapAvatarGestureRecognizer)
         return avatarImageView
@@ -93,6 +97,7 @@ final class ProfileHeaderView: UIView {
     override init(frame: CGRect) {
         super.init(frame: frame)
         
+        addAvatar()
         addSubviews()
         setupLayout()
     }
@@ -111,7 +116,25 @@ final class ProfileHeaderView: UIView {
         statusTextField.text = viewModel.statusText
     }
     
+    public func addAvatar() {
+        addSubview(avatarImageView)
+        
+        let constraints = [
+            avatarImageView.topAnchor.constraint(equalTo: safeAreaLayoutGuide.topAnchor, constant: 16),
+            avatarImageView.leadingAnchor.constraint(equalTo: safeAreaLayoutGuide.leadingAnchor, constant: 16),
+            avatarImageView.widthAnchor.constraint(equalToConstant: 100),
+            avatarImageView.heightAnchor.constraint(equalToConstant: 100)
+        ]
+        
+        NSLayoutConstraint.activate(constraints)
+    }
+    
     // MARK: - Private Methods
+    
+    @objc private func avatarTapped() {
+        avatarImageView.removeFromSuperview()
+        onAvatarTap?(avatarImageView.image)
+    }
     
     @objc private func buttonPressed() {
         statusLabel.text = statusTextField.text
@@ -122,7 +145,6 @@ final class ProfileHeaderView: UIView {
     }
     
     private func addSubviews() {
-        addSubview(avatarImageView)
         addSubview(fullNameLabel)
         addSubview(statusLabel)
         addSubview(statusTextField)
@@ -132,11 +154,6 @@ final class ProfileHeaderView: UIView {
     
     private func setupLayout() {
         let constraints = [
-            avatarImageView.topAnchor.constraint(equalTo: safeAreaLayoutGuide.topAnchor, constant: 16),
-            avatarImageView.leadingAnchor.constraint(equalTo: safeAreaLayoutGuide.leadingAnchor, constant: 16),
-            avatarImageView.widthAnchor.constraint(equalToConstant: 100),
-            avatarImageView.heightAnchor.constraint(equalToConstant: 100),
-            
             fullNameLabel.topAnchor.constraint(equalTo: safeAreaLayoutGuide.topAnchor, constant: 27),
             fullNameLabel.leadingAnchor.constraint(equalTo: safeAreaLayoutGuide.leadingAnchor, constant: 132),
             fullNameLabel.widthAnchor.constraint(equalToConstant: 100),

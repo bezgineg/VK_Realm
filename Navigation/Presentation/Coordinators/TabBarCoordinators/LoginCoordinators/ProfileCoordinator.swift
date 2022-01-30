@@ -19,7 +19,11 @@ final class ProfileCoordinator: Coordinator {
     
     public func start() {
         let tableHeaderViewModel = ProfileTableHeaderViewModel()
-        let profileViewController = ProfileViewController(tableHeaderViewModel: tableHeaderViewModel)
+        let photosViewModel = PhotosTableViewCellViewModel()
+        let profileViewController = ProfileViewController(
+            tableHeaderViewModel: tableHeaderViewModel,
+            photosViewModel: photosViewModel
+        )
         profileViewController.coordinator = self
         navigationController.show(profileViewController, sender: self)
     }

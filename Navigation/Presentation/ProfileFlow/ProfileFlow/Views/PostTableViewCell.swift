@@ -1,14 +1,9 @@
 
 import UIKit
 
-protocol PostTableViewCellDelegate: AnyObject {
-    func showDataNotFoundAlert(with title: String, with message: String)
-    func showNetworkConnectionProblemAlert(with title: String, with message: String)
-}
-
 final class PostTableViewCell: UITableViewCell {
     
-    weak var delegate: PostTableViewCellDelegate?
+    // MARK: - Private Properties
     
     private let authorName: UILabel = {
         let label = UILabel()
@@ -53,6 +48,8 @@ final class PostTableViewCell: UITableViewCell {
         return label
     }()
     
+    // MARK: - Initializers
+    
     override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {
         super.init(style: style, reuseIdentifier: reuseIdentifier)
         
@@ -63,45 +60,17 @@ final class PostTableViewCell: UITableViewCell {
         fatalError("init(coder:) has not been implemented")
     }
     
-    private func loadImage(urlImage: String) {
-        guard let url = URL(string: urlImage) else { return }
-        let dataTask = URLSession.shared.dataTask(with: url) { [weak self] (data, responce, error) in
-            if error != nil {
-                DispatchQueue.main.async {
-                    self?.alertError(error: .networkConnectionProblem)
-                    self?.postImageView.image = nil
-                }
-                
-            } else if let data = data, let image = UIImage(data: data) {
-                DispatchQueue.main.async {
-                    self?.postImageView.image = image
-                }
-            }
-        }
-        
-        dataTask.resume()
-    }
+    // MARK: - Public Methods
     
-    private func alertError(error: ApiError) {
-        switch  error {
-        case .dataNotFound:
-            let title = ApiErrorLocalization.dataNotFoundTitle.localizedValue
-            let message = ApiErrorLocalization.dataNotFoundMessage.localizedValue
-            delegate?.showDataNotFoundAlert(with: title, with: message)
-        case .networkConnectionProblem:
-            let title = ApiErrorLocalization.networkConnectionProblemTitle.localizedValue
-            let message = ApiErrorLocalization.networkConnectionProblemMessage.localizedValue
-            delegate?.showNetworkConnectionProblemAlert(with: title, with: message)
-        }
-    }
-    
-    func configure(with viewModel: PostTableViewCellViewModel) {
+    public func configure(with viewModel: PostTableViewCellViewModel) {
         authorName.text = viewModel.author
         descriptionLabel.text = viewModel.description
         likesLabel.text = "\(localizeLikes(count: UInt(viewModel.likes))): \(viewModel.likes)"
         viewsLabel.text = "\(localizeViews(count: UInt(viewModel.view))): \(viewModel.view)"
         postImageView.image = viewModel.image
     }
+    
+    // MARK: - Private Methods
     
     private func localizeViews(count: UInt) -> String {
         let formatString: String = NSLocalizedString("views count", comment: "views count title")
