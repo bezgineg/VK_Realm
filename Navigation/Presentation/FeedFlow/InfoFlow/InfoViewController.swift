@@ -26,7 +26,7 @@ class InfoViewController: UIViewController {
     private let alertButton: UIButton = {
         let button = UIButton(type: .system)
         button.toAutoLayout()
-        button.setTitle(FeedFlowLocalization.infoAlertButton.localizedValue, for: .normal)
+        //button.setTitle(FeedFlowLocalization.infoAlertButton.localizedValue, for: .normal)
         button.setTitleColor(.systemBlue, for: .normal)
         button.addTarget(self, action: #selector(showAlert), for: .touchUpInside)
         return button

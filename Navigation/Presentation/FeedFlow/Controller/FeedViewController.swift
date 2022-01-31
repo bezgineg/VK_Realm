@@ -10,6 +10,18 @@ final class FeedViewController: UIViewController {
     // MARK: - Private Properties
     
     private let mainView = FeedView()
+    private let storageManager: DataStorageProtocol
+    
+    // MARK: - Initializers
+    
+    init(storageManager: DataStorageProtocol = CoreDataManager.manager)  {
+        self.storageManager = storageManager
+        super.init(nibName: nil, bundle: nil)
+    }
+    
+    required init?(coder: NSCoder) {
+        fatalError("init(coder:) has not been implemented")
+    }
     
     // MARK: - Life cycle
     
@@ -30,6 +42,34 @@ final class FeedViewController: UIViewController {
         mainView.tableView.delegate = self
         mainView.tableView.dataSource = self
     }
+    
+    private func addPostToFavorites(post: Post) {
+        let context = storageManager.getBackgroundContext()
+        let favoritePost = storageManager.createObject(from: FavoritePost.self, context: context)
+        favoritePost.author = post.author
+        favoritePost.descript = post.description
+        favoritePost.image = post.image?.pngData()
+        favoritePost.likes = Int64(post.likes)
+        favoritePost.views = Int64(post.view)
+        storageManager.save(context: context)
+    }
+    
+    private func showMoreInfoScreen(post: Post, button: UIButton) {
+        let moreInfoViewController = MoreInfoViewController(post: post)
+        moreInfoViewController.delegate = self
+        guard let vc = moreInfoViewController.popoverPresentationController else { return }
+        vc.sourceView = button
+        vc.delegate = self
+        vc.permittedArrowDirections = .init(rawValue: 0)
+        let position = CGRect(
+            x: button.bounds.origin.x,
+            y: button.bounds.origin.y + 80,
+            width: 80,
+            height: 80
+        )
+        vc.sourceRect = position
+        present(moreInfoViewController, animated: true, completion: nil)
+    }
 }
 
 // MARK: - UITableViewDataSource
@@ -47,6 +87,7 @@ extension FeedViewController: UITableViewDataSource {
         ) as? FeedTableViewCell else { return UITableViewCell() }
         let post = FeedStorage.feed[indexPath.row]
         cell.configure(with: post, index: indexPath.row)
+        cell.delegate = self
         return cell
     }
 }
@@ -56,5 +97,43 @@ extension FeedViewController: UITableViewDataSource {
 extension FeedViewController: UITableViewDelegate {
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         print(indexPath.row)
+    }
+}
+
+// MARK: - FeedTableViewCellDelegate
+
+extension FeedViewController: FeedTableViewCellDelegate {
+    func feedTableViewCell(
+        _ feedTableViewCell: FeedTableViewCell,
+        addButtonTappedByIndex index: Int,
+        button: UIButton
+    ) {
+        let post = FeedStorage.feed[index]
+        showMoreInfoScreen(post: post, button: button)
+    }
+}
+
+// MARK: - UIPopoverPresentationControllerDelegate
+
+extension FeedViewController: UIPopoverPresentationControllerDelegate {
+    func adaptivePresentationStyle(for controller: UIPresentationController) -> UIModalPresentationStyle {
+        return .none
+    }
+}
+
+// MARK: - MoreInfoViewControllerDelegate
+
+extension FeedViewController: MoreInfoViewControllerDelegate {
+    func moreInfoViewController(_ moreInfoViewController: MoreInfoViewController, hidePost post: Post?) {
+        if let index = FeedStorage.feed.firstIndex(where: { $0.author == post?.author }) {
+            FeedStorage.feed.remove(at: index)
+            mainView.tableView.reloadData()
+        }
+    }
+    
+    func moreInfoViewController(_ moreInfoViewController: MoreInfoViewController, addPost post: Post?) {
+        guard let post = post else { return }
+        addPostToFavorites(post: post)
+        coordinator?.showAlert(with: AlertLocalization.profileAlertTitle.localizedValue, with: "")
     }
 }

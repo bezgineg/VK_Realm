@@ -43,4 +43,11 @@ final class FeedCoordinator: Coordinator {
             }
         }
     }
+    
+    public func showAlert(with title: String, with message: String) {
+        let alertController = UIAlertController(title: title, message: message, preferredStyle: .alert)
+        let okAction = UIAlertAction(title: "OK", style: .cancel, handler: nil)
+        alertController.addAction(okAction)
+        navigationController.present(alertController, animated: false, completion: nil)
+    }
 }

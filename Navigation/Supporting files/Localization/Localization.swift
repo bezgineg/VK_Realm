@@ -116,20 +116,15 @@ enum LoginFlowLocalization {
 }
 
 enum FeedFlowLocalization {
-    case firstPostButton, secondPostButton
-    case postTitle
-    case infoAlertButton
+    case hideTitle
+    case addTitle
     
     var localizedValue: String {
         switch  self {
-        case .firstPostButton:
-            return NSLocalizedString("firstPostButton", comment: "firstPostButton title")
-        case .secondPostButton:
-            return NSLocalizedString("secondPostButton", comment: "secondPostButton title")
-        case .postTitle:
-            return NSLocalizedString("postTitle", comment: "post title")
-        case .infoAlertButton:
-            return NSLocalizedString("infoAlertButton", comment: "infoAlertButton title")
+        case .hideTitle:
+            return NSLocalizedString("hideTitle", comment: "hide title")
+        case .addTitle:
+            return NSLocalizedString("addTitle", comment: "add title")
         }
     }
 }

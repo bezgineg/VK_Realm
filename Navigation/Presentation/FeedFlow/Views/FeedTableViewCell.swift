@@ -8,7 +8,19 @@
 
 import UIKit
 
+protocol FeedTableViewCellDelegate: AnyObject {
+    func feedTableViewCell(
+        _ feedTableViewCell: FeedTableViewCell,
+        addButtonTappedByIndex index: Int,
+        button: UIButton
+    )
+}
+
 final class FeedTableViewCell: UITableViewCell {
+    
+    // MARK: - Public Properties
+    
+    public weak var delegate: FeedTableViewCellDelegate?
     
     // MARK: - Private Properties
     
@@ -63,7 +75,7 @@ final class FeedTableViewCell: UITableViewCell {
         button.backgroundColor = UIColor.white.withAlphaComponent(0)
         button.setImage(UIImage(named: "add"), for: .normal)
         button.translatesAutoresizingMaskIntoConstraints = false
-        button.addTarget(self, action: #selector(addButtonTapped), for: .touchUpInside)
+        button.addTarget(self, action: #selector(addButtonTapped(_:)), for: .touchUpInside)
         return button
     }()
     
@@ -92,8 +104,8 @@ final class FeedTableViewCell: UITableViewCell {
     
     // MARK: - Private Methods
     
-    @objc private func addButtonTapped() {
-        print(currentIndex)
+    @objc private func addButtonTapped(_ button: UIButton) {
+        delegate?.feedTableViewCell(self, addButtonTappedByIndex: currentIndex, button: button)
     }
     
     private func localizeViews(count: UInt) -> String {

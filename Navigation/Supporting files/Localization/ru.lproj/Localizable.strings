@@ -1,8 +1,6 @@
 // Feed Flow Localization
-"firstPostButton" = "Открыть первый пост";
-"secondPostButton" = "Открыть второй пост";
-"postTitle" = "Пост";
-"infoAlertButton" = "Показать предупреждение";
+"hideTitle" = "Cкрыть";
+"addTitle" = "Добавить";
 
 // Alert Localization
 "infoAlertTitle" = "Удалить пост?";
