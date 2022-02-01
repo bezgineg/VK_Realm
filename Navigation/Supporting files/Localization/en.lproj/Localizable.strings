@@ -1,6 +1,7 @@
 // Feed Flow Localization
 "hideTitle" = "Hide";
 "addTitle" = "Add";
+"mainLabel" = "Other author's post";
 
 // Alert Localization
 "infoAlertTitle" = "Delete post?";

@@ -9,26 +9,23 @@ final class PostCoordinator: Coordinator {
     public var childCoordinators =  [Coordinator]()
     public var navigationController: UINavigationController
     
+    // MARK: - Private Properties
+    
+    private let author: Author
+    
     // MARK: - Initializers
     
-    init(navigationController: UINavigationController) {
+    init(navigationController: UINavigationController, author: Author) {
         self.navigationController = navigationController
+        self.author = author
     }
     
     // MARK: - Public Methods
     
     public func start() {
-        let postViewController = PostViewController()
+        let postViewController = PostViewController(author: author)
         postViewController.coordinator = self
         navigationController.show(postViewController, sender: self)
-    }
-    
-    public func present() {
-        let infoCoordinator = InfoCoordinator(navigationController: navigationController)
-        infoCoordinator.navigationController = navigationController
-        childCoordinators.append(infoCoordinator)
-        infoCoordinator.parentCoordinator = self
-        infoCoordinator.start()
     }
     
     public func didFinishPost() {

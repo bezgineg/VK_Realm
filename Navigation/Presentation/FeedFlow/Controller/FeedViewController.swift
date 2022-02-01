@@ -53,23 +53,6 @@ final class FeedViewController: UIViewController {
         favoritePost.views = Int64(post.view)
         storageManager.save(context: context)
     }
-    
-    private func showMoreInfoScreen(post: Post, button: UIButton) {
-        let moreInfoViewController = MoreInfoViewController(post: post)
-        moreInfoViewController.delegate = self
-        guard let vc = moreInfoViewController.popoverPresentationController else { return }
-        vc.sourceView = button
-        vc.delegate = self
-        vc.permittedArrowDirections = .init(rawValue: 0)
-        let position = CGRect(
-            x: button.bounds.origin.x,
-            y: button.bounds.origin.y + 80,
-            width: 80,
-            height: 80
-        )
-        vc.sourceRect = position
-        present(moreInfoViewController, animated: true, completion: nil)
-    }
 }
 
 // MARK: - UITableViewDataSource
@@ -96,7 +79,7 @@ extension FeedViewController: UITableViewDataSource {
 
 extension FeedViewController: UITableViewDelegate {
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        print(indexPath.row)
+        coordinator?.pushPostVC(author: AuthorStorage.authors[indexPath.row])
     }
 }
 
@@ -109,7 +92,7 @@ extension FeedViewController: FeedTableViewCellDelegate {
         button: UIButton
     ) {
         let post = FeedStorage.feed[index]
-        showMoreInfoScreen(post: post, button: button)
+        coordinator?.showMoreInfoScreen(post: post, button: button, delegate: self)
     }
 }
 

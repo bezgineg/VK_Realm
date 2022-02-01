@@ -1,6 +1,7 @@
 // Feed Flow Localization
 "hideTitle" = "Cкрыть";
 "addTitle" = "Добавить";
+"mainLabel" = "Другие посты этого автора";
 
 // Alert Localization
 "infoAlertTitle" = "Удалить пост?";

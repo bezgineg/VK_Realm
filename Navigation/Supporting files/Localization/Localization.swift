@@ -118,6 +118,7 @@ enum LoginFlowLocalization {
 enum FeedFlowLocalization {
     case hideTitle
     case addTitle
+    case mainLabel
     
     var localizedValue: String {
         switch  self {
@@ -125,6 +126,8 @@ enum FeedFlowLocalization {
             return NSLocalizedString("hideTitle", comment: "hide title")
         case .addTitle:
             return NSLocalizedString("addTitle", comment: "add title")
+        case .mainLabel:
+            return NSLocalizedString("mainLabel", comment: "main label")
         }
     }
 }
