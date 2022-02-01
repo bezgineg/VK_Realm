@@ -110,6 +110,7 @@ extension FeedViewController: MoreInfoViewControllerDelegate {
     func moreInfoViewController(_ moreInfoViewController: MoreInfoViewController, hidePost post: Post?) {
         if let index = FeedStorage.feed.firstIndex(where: { $0.author == post?.author }) {
             FeedStorage.feed.remove(at: index)
+            AuthorStorage.authors.remove(at: index)
             mainView.tableView.reloadData()
         }
     }
