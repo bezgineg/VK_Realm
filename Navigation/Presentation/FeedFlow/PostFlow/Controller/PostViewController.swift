@@ -11,6 +11,7 @@ final class PostViewController: UIViewController {
     
     private let author: Author
     private let mainView = PostView()
+    private let baseInset: CGFloat = 16
     
     // MARK: - Initializers
     
@@ -65,9 +66,9 @@ extension PostViewController: UICollectionViewDelegateFlowLayout {
     ) -> UIEdgeInsets {
         return UIEdgeInsets(
             top: UIDevice.hasNotch ? 85 : 105,
-            left: 16,
+            left: baseInset,
             bottom: UIDevice.hasNotch ? 80 : 113,
-            right: 16
+            right: baseInset
         )
     }
 }
@@ -76,7 +77,6 @@ extension PostViewController: UICollectionViewDelegateFlowLayout {
 
 extension PostViewController: UICollectionViewDataSource {
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        print(author.urlStrings.count)
         return author.urlStrings.count
     }
     
@@ -98,7 +98,7 @@ extension PostViewController: UICollectionViewDataSource {
         layout collectionViewLayout: UICollectionViewLayout,
         sizeForItemAt indexPath: IndexPath
     ) -> CGSize {
-        let size = (view.bounds.width - (16 * 3)) / 2
+        let size = (view.bounds.width - (baseInset * 3)) / 2
         return CGSize(width: size, height: size)
     }
     
@@ -107,7 +107,7 @@ extension PostViewController: UICollectionViewDataSource {
         layout collectionViewLayout: UICollectionViewLayout,
         minimumInteritemSpacingForSectionAt section: Int
     ) -> CGFloat {
-        return 16
+        return baseInset
     }
     
     func collectionView(
@@ -115,7 +115,7 @@ extension PostViewController: UICollectionViewDataSource {
         layout collectionViewLayout: UICollectionViewLayout,
         minimumLineSpacingForSectionAt section: Int
     ) -> CGFloat {
-        return 16
+        return baseInset
     }
 }
 
