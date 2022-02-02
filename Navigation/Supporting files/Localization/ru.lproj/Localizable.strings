@@ -2,6 +2,7 @@
 "hideTitle" = "Cкрыть";
 "addTitle" = "Добавить";
 "mainLabel" = "Другие посты этого автора";
+"shareButton" = "Поделиться";
 
 // Alert Localization
 "infoAlertTitle" = "Удалить пост?";

@@ -32,6 +32,18 @@ final class PostCoordinator: Coordinator {
         parentCoordinator?.childDidiFinish(self)
     }
     
+    public func openBrowser(urlString: String) {
+        guard let url = URL(string: urlString) else { return }
+        UIApplication.shared.open(url)
+    }
+    
+    public func openShareScreen(url: String, description: String) {
+        var items = [Any]()
+        items = [url, description]
+        let activityVC = UIActivityViewController(activityItems: items, applicationActivities: nil)
+        navigationController.present(activityVC, animated: true, completion: nil)
+    }
+    
     public func childDidiFinish(_ child: Coordinator?) {
         for (index, coordinator) in childCoordinators.enumerated() {
             if coordinator === child {

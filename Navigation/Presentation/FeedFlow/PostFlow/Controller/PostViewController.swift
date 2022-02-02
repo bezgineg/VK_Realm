@@ -56,7 +56,7 @@ extension PostViewController: UICollectionViewDelegateFlowLayout {
     
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
         let urlString = author.urlStrings[indexPath.item]
-        print(urlString)
+        coordinator?.openBrowser(urlString: urlString)
     }
     
     func collectionView(
@@ -67,7 +67,7 @@ extension PostViewController: UICollectionViewDelegateFlowLayout {
         return UIEdgeInsets(
             top: UIDevice.hasNotch ? 85 : 105,
             left: baseInset,
-            bottom: UIDevice.hasNotch ? 80 : 113,
+            bottom: UIDevice.hasNotch ? 20 : 23,
             right: baseInset
         )
     }
@@ -123,6 +123,6 @@ extension PostViewController: UICollectionViewDataSource {
 
 extension PostViewController: PostCollectionViewCellDelegate {
     func postCollectionViewCell(_ postCollectionViewCell: PostCollectionViewCell, showMoreButtonTappedAt index: Int) {
-        print(index)
+        coordinator?.openShareScreen(url: author.urlStrings[index], description: author.descriptions[index])
     }
 }

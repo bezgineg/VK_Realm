@@ -35,7 +35,11 @@ final class PostCollectionViewCell: UICollectionViewCell {
     private lazy var showMoreButton: UIButton = {
         let button = UIButton()
         button.translatesAutoresizingMaskIntoConstraints = false
-        button.backgroundColor = .blue
+        button.setBackgroundImage(#imageLiteral(resourceName: "blue_pixel"), for: .normal)
+        button.setBackgroundImage(#imageLiteral(resourceName: "blue_pixel").alpha(0.2), for: .disabled)
+        button.setBackgroundImage(#imageLiteral(resourceName: "blue_pixel").alpha(0.8), for: .selected)
+        button.setBackgroundImage(#imageLiteral(resourceName: "blue_pixel").alpha(0.8), for: .highlighted)
+        button.setTitle(FeedFlowLocalization.shareButton.localizedValue, for: .normal)
         button.addTarget(self, action: #selector(showMoreButtonTapped), for: .touchUpInside)
         button.isExclusiveTouch = true
         button.clipsToBounds = true
@@ -91,8 +95,8 @@ final class PostCollectionViewCell: UICollectionViewCell {
             
             showMoreButton.topAnchor.constraint(equalTo: backgroundImageView.topAnchor, constant: 8),
             showMoreButton.trailingAnchor.constraint(equalTo: backgroundImageView.trailingAnchor, constant: -8),
-            showMoreButton.widthAnchor.constraint(equalToConstant: 48),
-            showMoreButton.heightAnchor.constraint(equalToConstant: 40)
+            showMoreButton.heightAnchor.constraint(equalToConstant: 30),
+            showMoreButton.widthAnchor.constraint(equalToConstant: 120)
         ]
         NSLayoutConstraint.activate(constraints)
     }

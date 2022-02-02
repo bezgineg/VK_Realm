@@ -20,6 +20,7 @@ final class PostView: UIView {
             forCellWithReuseIdentifier: String(describing: PostCollectionViewCell.self)
         )
         cv.toAutoLayout()
+        cv.showsVerticalScrollIndicator = false
         return cv
     }()
     

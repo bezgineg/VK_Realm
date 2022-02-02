@@ -2,6 +2,7 @@
 "hideTitle" = "Hide";
 "addTitle" = "Add";
 "mainLabel" = "Other author's post";
+"shareButton" = "Share";
 
 // Alert Localization
 "infoAlertTitle" = "Delete post?";
