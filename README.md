@@ -5,7 +5,7 @@
 *  Работа с основными элементами UI
 *  Realm, CoreData, Keychain, NotificationCenter
 *  Работа с сетью через URLSession
-*  Работа с GDC
+*  Работа с GCD
 *  Coordinators pattern, MVC/MVVM
 *  AutoLayout
 *  Swift Package Manager
